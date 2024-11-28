@@ -26,7 +26,7 @@ const ProductList = () => {
                     <span className="font-semibold">$49</span>
                 </div>
                 <div className="text-sm text-gray-500">My Description</div>
-                <button className="rounded-2xl ring-1 ring-bwcred text-bwcred w-max py-2 px-4 text-xs hover:bg-bwcred hover:text-white">Add to Cart</button>
+                <button className="rounded-2xl ring-1 ring-primary text-primary w-max py-2 px-4 text-xs hover:bg-primary hover:text-white">Add to Cart</button>
             </Link>
             <Link href="/test" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
                 <div className="relative w-full h-80">
@@ -50,7 +50,7 @@ const ProductList = () => {
                     <span className="font-semibold">$49</span>
                 </div>
                 <div className="text-sm text-gray-500">My Description</div>
-                <button className="rounded-2xl ring-1 ring-bwcred text-bwcred w-max py-2 px-4 text-xs hover:bg-bwcred hover:text-white">Add to Cart</button>
+                <button className="rounded-2xl ring-1 ring-primary text-primary w-max py-2 px-4 text-xs hover:bg-primary hover:text-white">Add to Cart</button>
             </Link>
             <Link href="/test" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
                 <div className="relative w-full h-80">
@@ -74,7 +74,7 @@ const ProductList = () => {
                     <span className="font-semibold">$49</span>
                 </div>
                 <div className="text-sm text-gray-500">My Description</div>
-                <button className="rounded-2xl ring-1 ring-bwcred text-bwcred w-max py-2 px-4 text-xs hover:bg-bwcred hover:text-white">Add to Cart</button>
+                <button className="rounded-2xl ring-1 ring-primary text-primary w-max py-2 px-4 text-xs hover:bg-primary hover:text-white">Add to Cart</button>
             </Link>
             <Link href="/test" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
                 <div className="relative w-full h-80">
@@ -98,7 +98,7 @@ const ProductList = () => {
                     <span className="font-semibold">$49</span>
                 </div>
                 <div className="text-sm text-gray-500">My Description</div>
-                <button className="rounded-2xl ring-1 ring-bwcred text-bwcred w-max py-2 px-4 text-xs hover:bg-bwcred hover:text-white">Add to Cart</button>
+                <button className="rounded-2xl ring-1 ring-primary text-primary w-max py-2 px-4 text-xs hover:bg-primary hover:text-white">Add to Cart</button>
             </Link>
         </div>
     )

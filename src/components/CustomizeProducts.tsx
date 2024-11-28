@@ -13,10 +13,10 @@ const CustomizeProducts = () => {
             </ul>
             <h4 className="font-medium">Choose a size</h4>
             <ul className="flex items-center gap-3">
-                <li className="ring-1 ring-bwcred text-bwcred rounded-md py-1 px-4 text-sm cursor-pointer">
+                <li className="ring-1 ring-primary text-primary rounded-md py-1 px-4 text-sm cursor-pointer">
                     Small
                 </li>
-                <li className="ring-1 ring-bwcred text-white bg-bwcred rounded-md py-1 px-4 text-sm cursor-pointer">
+                <li className="ring-1 ring-primary text-white bg-primary rounded-md py-1 px-4 text-sm cursor-pointer">
                     Medium
                 </li>
                 <li className="ring-1 ring-pink-200 text-white bg-pink-200 rounded-md py-1 px-4 text-sm cursor-not-allowed">

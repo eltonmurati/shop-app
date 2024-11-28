@@ -8,12 +8,12 @@ const CategoryNavbar = () => {
 
     const [tabId, setTabId] = useState(0);
 
-    const highlighted = "w-full h-full px-1 flex items-center justify-center text-center bg-white text-bwcred z-20";
+    const highlighted = "w-full h-full px-1 flex items-center justify-center text-center bg-white text-primary z-20";
     const notHighlighted = "w-full h-full px-1 flex items-center justify-center text-center";
 
     return (
         <div className="" onMouseLeave={()=>setTabId(0)}>
-            <div className="hidden xl:flex h-16 bg-bwcred font-semibold text-white">
+            <div className="hidden xl:flex h-16 bg-primary font-semibold text-white">
                 <Link href="/" className={tabId === 1 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(1)}>Boilers</Link>
                 <Link href="/" className={tabId === 2 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(2)}>Flues & Accessories</Link>
                 <Link href="/" className={tabId === 3 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(3)}>Heating</Link>
@@ -25,7 +25,7 @@ const CategoryNavbar = () => {
                 <Link href="/" className={tabId === 9 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(9)}>Fires</Link>
                 <Link href="/" className={tabId === 10 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(10)}>Essentials</Link>
                 <Link href="/" className={tabId === 11 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(11)}>Renewables</Link>
-                <Link href="/" className="w-full h-full px-4 flex items-center justify-center text-center hover:bg-white hover:text-bwcred hover:z-20" onMouseEnter={()=>setTabId(0)}>Clearance</Link>
+                <Link href="/" className="w-full h-full px-1 flex items-center justify-center text-center hover:bg-white hover:text-primary hover:z-20" onMouseEnter={()=>setTabId(0)}>Clearance</Link>
             </div>
             {tabId > 0 && (<SubcategoryMenu tabId={tabId}/>)}
         </div>
