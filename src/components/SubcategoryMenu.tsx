@@ -10,7 +10,7 @@ const menus = [
     [
         {title: "All", link: "/"}, {title: "Flues", link: "/"}, {title: "Accessories", link: "/"}, {title: "Ariston", link: "/"},
         {title: "Baxi", link: "/"}, {title: "Bosch", link: "/"}, {title: "Glowworm", link: "/"}, {title: "Grant", link: "/"},
-        {title: "Heatline", link: "/"}, {title: "Heatrae", link: "/"}, {title: "Ideal Heating", link: "/"}, {title: "Keston", link: "/"},
+        {title: "Heatline", link: "/"}, {title: "Heatrae Sadia", link: "/"}, {title: "Ideal Heating", link: "/"}, {title: "Keston", link: "/"},
         {title: "Vaillant", link: "/"}, {title: "Viessmann", link: "/"}, {title: "Worcester Bosch", link: "/"}
     ],
     [
@@ -46,7 +46,7 @@ const menus = [
     ],
     [
         {title: "All", link: "/"}, {title: "Electric Fires", link: "/"}, {title: "Gas Fires", link: "/"}, {title: "Stoves", link: "/"},
-        {title: "Suites & Surroundings", link: "/"}, {title: "Crystal", link: "/"}, {title: "Dimplex", link: "/"}, {title: "Flavel", link: "/"},
+        {title: "Suites & Surroundings", link: "/"}, {title: "Crystal Fires", link: "/"}, {title: "Dimplex", link: "/"}, {title: "Flavel", link: "/"},
         {title: "Valor", link: "/"}, {title: "Be Modern", link: "/"}, {title: "Broseley", link: "/"}, {title: "Burley", link: "/"},
         {title: "AGA", link: "/"}, {title: "Adam", link: "/"}, {title: "Aurora", link: "/"}
     ],
@@ -67,7 +67,7 @@ const SubcategoryMenu = ({tabId} : any) => {
     return (
         <div className="absolute z-10 top-36 bg-white flex flex-wrap w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
             {menus[tabId-1].map((option,i)=>(
-                <Link href={option.link} key={i} className="w-1/12 h-16 px-1 hover:bg-gray-100 flex items-center justify-center text-center">{option.title}</Link>
+                <Link href={option.link} key={i} className="w-1/12 h-16 px-1 hover:bg-gray-100 flex items-center justify-center text-center leading-tight">{option.title}</Link>
             ))}
         </div>
     )

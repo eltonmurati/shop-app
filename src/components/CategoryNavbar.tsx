@@ -8,8 +8,8 @@ const CategoryNavbar = () => {
 
     const [tabId, setTabId] = useState(0);
 
-    const highlighted = "w-full h-full px-1 flex items-center justify-center text-center bg-white text-primary z-20";
-    const notHighlighted = "w-full h-full px-1 flex items-center justify-center text-center";
+    const highlighted = "w-full h-full px-1 flex items-center justify-center text-center bg-white text-primary z-20 leading-tight";
+    const notHighlighted = "w-full h-full px-1 flex items-center justify-center text-center leading-tight";
 
     return (
         <div className="" onMouseLeave={()=>setTabId(0)}>
@@ -26,7 +26,7 @@ const CategoryNavbar = () => {
                 <Link href="/" className={tabId === 9 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(9)}>Fires</Link>
                 <Link href="/" className={tabId === 10 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(10)}>Essentials</Link>
                 <Link href="/" className={tabId === 11 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(11)}>Renewables</Link>
-                <Link href="/" className="w-full h-full px-1 flex items-center justify-center text-center hover:bg-white hover:text-primary hover:z-20" onMouseEnter={()=>setTabId(0)}>Clearance</Link>
+                <Link href="/" className="w-full h-full px-1 flex items-center justify-center text-center leading-tight hover:bg-white hover:text-primary hover:z-20" onMouseEnter={()=>setTabId(0)}>Clearance</Link>
             </div>
             {tabId > 0 && (<SubcategoryMenu tabId={tabId}/>)}
         </div>

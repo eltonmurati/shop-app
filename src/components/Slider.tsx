@@ -44,7 +44,7 @@ const Slider = () => {
     },[]);
 
     return (
-        <div className="h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] overflow-hidden">
+        <div className="h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] overflow-hidden relative">
             <div className="w-max h-full flex transition-all ease-in-out duration-1000" style={{transform:`translateX(-${current * 100}vw)`}}>
                 {slides.map(slide=>(
                     <div className={`${slide.bg} w-screen h-full flex flex-col xl:flex-row`} key={slide.id}>
@@ -63,7 +63,7 @@ const Slider = () => {
                     </div>
                 ))}
             </div>
-            <div className="absolute m-auto left-1/2 bottom-8 flex transform -translate-x-1/2 gap-4">
+            <div className="absolute m-auto bottom-8 left-1/2 flex transform -translate-x-1/2 gap-4">
                 {slides.map((slide,index)=>(
                     <div 
                         className={`w-3 h-3 rounded-full ring-1 ring-gray-600 cursor-pointer flex items-center justify-center ${current === index ? "scale-150" : ""}`} 
