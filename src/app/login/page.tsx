@@ -28,50 +28,80 @@ const LoginPage = () => {
         <div className='min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex items-center justify-center'>
             <form className="flex flex-col gap-8 py-8">
                 <h1 className="text-2xl font-semibold">{formTitle}</h1>
-                {mode === MODE.REGISTER ? (
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm text-gray-700">Name</label>
-                        <input type="text" name="name" placeholder="Enter your name" className="ring-2 ring-gray-300 rounded-md p-4"/>
-                    </div>
-                ) : null}
-                {mode !== MODE.EMAIL_VERIFICATION ? (
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm text-gray-700">E-mail</label>
-                        <input type="email" name="email" placeholder="example@domain.com" className="ring-2 ring-gray-300 rounded-md p-4"/>
-                    </div>
+                {mode !== MODE.REGISTER ? (
+                    <>
+                        {mode !== MODE.EMAIL_VERIFICATION ? (
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm text-gray-700">E-mail</label>
+                                <input type="email" name="email" placeholder="example@domain.com" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                            </div>
+                        ) : (
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm text-gray-700">Verification Code</label>
+                                <input type="text" name="emailCode" placeholder="Code" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                            </div>
+                        )}
+                        {mode === MODE.LOGIN ? (
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm text-gray-700">Password</label>
+                                <input type="password" name="password" placeholder="Enter your password" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                            </div>
+                        ) : null}
+                        {mode === MODE.LOGIN && <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.RESET_PASSWORD)}>Forgot password?</div>}
+                        <button className="bg-primary text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
+                            {isLoading ? "Loading..." : buttonTitle}
+                        </button>
+                        {error && <div className="text-red-600">{error}</div>}
+                        {mode === MODE.LOGIN && (
+                            <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.REGISTER)}>{"Don't"} have an account?</div>
+                        )}
+                        {mode === MODE.RESET_PASSWORD && (
+                            <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.LOGIN)}>Go back to Login</div>
+                        )}
+                        {message && <div className="text-green-600 text-sm">{message}</div>}
+                    </>
                 ) : (
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm text-gray-700">Verification Code</label>
-                        <input type="text" name="emailCode" placeholder="Code" className="ring-2 ring-gray-300 rounded-md p-4"/>
-                    </div>
+                    <>
+                        <div className="flex flex-col md:flex-row gap-8">
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm text-gray-700">First name</label>
+                                <input type="text" name="first" placeholder="John" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm text-gray-700">Last name</label>
+                                <input type="text" name="last" placeholder="Smith" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <label className="text-sm text-gray-700">Company name <span className="text-gray-400 text-xs">(optional)</span></label>
+                            <input type="text" name="company" placeholder="BWC Merchants" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                        </div>
+                        <div className="flex flex-col md:flex-row gap-8">
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm text-gray-700">E-mail</label>
+                                <input type="email" name="email" placeholder="example@domain.com" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm text-gray-700">Phone number</label>
+                                <input type="text" name="number" placeholder="07469285005" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                            </div>
+                        </div>
+                        <div className="flex flex-col md:flex-row gap-8">
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm text-gray-700">Password</label>
+                                <input type="password" name="password" placeholder="Enter your password" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm text-gray-700">Confirm password</label>
+                                <input type="password" name="confirm" placeholder="Confirm your password" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                            </div>
+                        </div>
+                        <button className="bg-primary text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
+                            {isLoading ? "Loading..." : buttonTitle}
+                        </button>
+                        <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.LOGIN)}>Already have an account?</div>
+                    </>
                 )}
-                {mode === MODE.LOGIN || mode === MODE.REGISTER ? (
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm text-gray-700">Password</label>
-                        <input type="password" name="password" placeholder="Enter your password" className="ring-2 ring-gray-300 rounded-md p-4"/>
-                    </div>
-                ) : null}
-                {mode === MODE.REGISTER ? (
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm text-gray-700">Re-enter password</label>
-                        <input type="password" name="password2" placeholder="Re-enter your password" className="ring-2 ring-gray-300 rounded-md p-4"/>
-                    </div>
-                ) : null}
-                {mode === MODE.LOGIN && <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.RESET_PASSWORD)}>Forgot password?</div>}
-                <button className="bg-primary text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
-                    {isLoading ? "Loading..." : buttonTitle}
-                </button>
-                {error && <div className="text-red-600">{error}</div>}
-                {mode === MODE.LOGIN && (
-                    <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.REGISTER)}>{"Don't"} have an account?</div>
-                )}
-                {mode === MODE.REGISTER && (
-                    <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.LOGIN)}>Already have an account?</div>
-                )}
-                {mode === MODE.RESET_PASSWORD && (
-                    <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.LOGIN)}>Go back to Login</div>
-                )}
-                {message && <div className="text-green-600 text-sm">{message}</div>}
             </form>
         </div>
     );
