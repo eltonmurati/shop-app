@@ -4,7 +4,7 @@ import ProductImages from "@/components/ProductImages"
 
 const SinglePage = () => {
     return (
-        <div className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative flex flex-col lg:flex-row gap-8 xl:gap-16 xl:mt-4'>
+        <div className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative flex flex-col lg:flex-row gap-8 xl:gap-16 md:mt-4 xl:mt-8'>
             {/* IMAGES */}
             <div className="w-full lg:w-1/2 lg:sticky top-4 h-max">
                 <ProductImages/>

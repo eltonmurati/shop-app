@@ -38,7 +38,7 @@ const LoginPage = () => {
                         ) : (
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Verification Code</label>
-                                <input type="text" name="emailCode" placeholder="Code" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="text" name="verify" placeholder="Code" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         )}
                         {mode === MODE.LOGIN ? (
