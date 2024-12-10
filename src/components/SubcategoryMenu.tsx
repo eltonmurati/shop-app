@@ -65,7 +65,7 @@ const menus = [
 
 const SubcategoryMenu = ({tabId} : any) => {
     return (
-        <div className="absolute z-10 top-36 bg-white flex flex-wrap w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <div className="absolute z-10 bg-white flex flex-wrap w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
             {menus[tabId-1].map((option,i)=>(
                 <Link href={option.link} key={i} className="w-1/12 h-16 px-1 hover:bg-gray-100 flex items-center justify-center text-center leading-tight">{option.title}</Link>
             ))}

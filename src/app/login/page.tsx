@@ -12,6 +12,10 @@ enum MODE {
 const LoginPage = () => {
 
     const [mode,setMode] = useState(MODE.LOGIN);
+    const [company,setCompany] = useState(false);
+
+    const selected = "bg-bwcred_disabled w-full p-2 hover:cursor-default";
+    const notSelected = "bg-bwcred w-full p-2 hover:cursor-pointer";
 
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
@@ -48,7 +52,7 @@ const LoginPage = () => {
                             </div>
                         ) : null}
                         {mode === MODE.LOGIN && <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.RESET_PASSWORD)}>Forgot password?</div>}
-                        <button className="bg-primary text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
+                        <button className="bg-bwcred text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
                             {isLoading ? "Loading..." : buttonTitle}
                         </button>
                         {error && <div className="text-red-600">{error}</div>}
@@ -62,20 +66,39 @@ const LoginPage = () => {
                     </>
                 ) : (
                     <>
-                        <div className="flex flex-col md:flex-row gap-8">
-                            <div className="flex flex-col gap-2">
-                                <label className="text-sm text-gray-700">First name</label>
-                                <input type="text" name="first" placeholder="John" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
-                            </div>
-                            <div className="flex flex-col gap-2">
-                                <label className="text-sm text-gray-700">Last name</label>
-                                <input type="text" name="last" placeholder="Smith" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
-                            </div>
+                        <div className="flex flex-row text-white">
+                            <button 
+                                className="rounded-l-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled disabled:cursor-not-allowed" 
+                                disabled={company ? false : true}
+                                onClick={()=>setCompany(false)}
+                            >
+                                Personal
+                            </button>
+                            <button 
+                                className="rounded-r-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled disabled:cursor-not-allowed" 
+                                disabled={company ? true : false}
+                                onClick={()=>setCompany(true)}
+                            >
+                                Company
+                            </button>
                         </div>
-                        <div className="flex flex-col gap-2">
-                            <label className="text-sm text-gray-700">Company name <span className="text-gray-400 text-xs">(optional)</span></label>
-                            <input type="text" name="company" placeholder="BWC Merchants" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
-                        </div>
+                        {company ? (
+                            <div className="flex flex-col gap-2">
+                                <label className="text-sm text-gray-700">Company name</label>
+                                <input type="text" name="company" placeholder="BWC Merchants" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                            </div>
+                        ) : (
+                            <div className="flex flex-col md:flex-row gap-8">
+                                <div className="flex flex-col gap-2">
+                                    <label className="text-sm text-gray-700">First name</label>
+                                    <input type="text" name="first" placeholder="John" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label className="text-sm text-gray-700">Last name</label>
+                                    <input type="text" name="last" placeholder="Smith" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                </div>
+                            </div>
+                        )}
                         <div className="flex flex-col md:flex-row gap-8">
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">E-mail</label>
@@ -96,7 +119,7 @@ const LoginPage = () => {
                                 <input type="password" name="confirm" placeholder="Confirm your password" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         </div>
-                        <button className="bg-primary text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
+                        <button className="bg-bwcred text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
                             {isLoading ? "Loading..." : buttonTitle}
                         </button>
                         <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.LOGIN)}>Already have an account?</div>

@@ -34,7 +34,7 @@ const CartModel = () => {
                                 {/* BOTTOM */}
                                 <div className="flex justify-between text-sm">
                                     <span className="text-gray-500">Qty. 2</span>
-                                    <span className="text-primary">Remove</span>
+                                    <span className="text-bwcred">Remove</span>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@ const CartModel = () => {
                                 {/* BOTTOM */}
                                 <div className="flex justify-between text-sm">
                                     <span className="text-gray-500">Qty. 2</span>
-                                    <span className="text-primary">Remove</span>
+                                    <span className="text-bwcred">Remove</span>
                                 </div>
                             </div>
                         </div>
