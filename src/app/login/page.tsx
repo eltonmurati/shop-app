@@ -12,7 +12,7 @@ enum MODE {
 const LoginPage = () => {
 
     const [mode,setMode] = useState(MODE.LOGIN);
-    const [company,setCompany] = useState(false);
+    const [isCompany,setIsCompany] = useState(false);
 
     const selected = "bg-bwcred_disabled w-full p-2 hover:cursor-default";
     const notSelected = "bg-bwcred w-full p-2 hover:cursor-pointer";
@@ -68,21 +68,21 @@ const LoginPage = () => {
                     <>
                         <div className="flex flex-row text-white">
                             <button 
-                                className="rounded-l-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled disabled:cursor-not-allowed" 
-                                disabled={company ? false : true}
-                                onClick={()=>setCompany(false)}
+                                className="rounded-l-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled" 
+                                disabled={isCompany ? false : true}
+                                onClick={()=>setIsCompany(false)}
                             >
                                 Personal
                             </button>
                             <button 
-                                className="rounded-r-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled disabled:cursor-not-allowed" 
-                                disabled={company ? true : false}
-                                onClick={()=>setCompany(true)}
+                                className="rounded-r-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled" 
+                                disabled={isCompany ? true : false}
+                                onClick={()=>setIsCompany(true)}
                             >
                                 Company
                             </button>
                         </div>
-                        {company ? (
+                        {isCompany ? (
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Company name</label>
                                 <input type="text" name="company" placeholder="BWC Merchants" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
