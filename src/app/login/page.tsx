@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useActionState } from "react";
+import { authenticate } from "@/app/lib/actions";
 
 enum MODE {
     LOGIN="LOGIN",
@@ -11,11 +13,10 @@ enum MODE {
 
 const LoginPage = () => {
 
+    const [formAction] = useActionState(authenticate, undefined);
+
     const [mode,setMode] = useState(MODE.LOGIN);
     const [isCompany,setIsCompany] = useState(false);
-
-    const selected = "bg-bwcred_disabled w-full p-2 hover:cursor-default";
-    const notSelected = "bg-bwcred w-full p-2 hover:cursor-pointer";
 
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
@@ -30,7 +31,7 @@ const LoginPage = () => {
 
     return (
         <div className='min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex items-center justify-center'>
-            <form className="flex flex-col gap-8 py-8">
+            <form className="flex flex-col gap-8 py-8" action={formAction}>
                 <h1 className="text-2xl font-semibold">{formTitle}</h1>
                 {mode !== MODE.REGISTER ? (
                     <>
@@ -68,14 +69,14 @@ const LoginPage = () => {
                     <>
                         <div className="flex flex-row text-white">
                             <button 
-                                className="rounded-l-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled" 
+                                className="rounded-l-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled disabled:cursor-not-allowed" 
                                 disabled={isCompany ? false : true}
                                 onClick={()=>setIsCompany(false)}
                             >
                                 Personal
                             </button>
                             <button 
-                                className="rounded-r-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled" 
+                                className="rounded-r-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled disabled:cursor-not-allowed" 
                                 disabled={isCompany ? true : false}
                                 onClick={()=>setIsCompany(true)}
                             >
