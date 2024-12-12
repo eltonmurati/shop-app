@@ -13,7 +13,7 @@ async function getUser(email: string): Promise<User | undefined> {
         
     }
 }
-
+*/
 export const { auth, signIn, signOut } = NextAuth({
     ...authConfig,
     providers: [
@@ -22,15 +22,15 @@ export const { auth, signIn, signOut } = NextAuth({
                 const parsedCredentials = z
                     .object({email: z.string().email(), password: z.string().min(6)})
                     .safeParse(credentials);
-
+                /*
                 if (parsedCredentials.success) {
                     const {} = parsedCredentials.data;
                     const user = await getUser(email);
                     if (!user) return null;
                 }
-
+                */
                 return null;
             },
         }),
     ],
-});*/
+});
