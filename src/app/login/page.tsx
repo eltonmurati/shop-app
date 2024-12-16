@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useActionState } from "react";
-import { authenticate } from "@/app/lib/actions";
 
 enum MODE {
     LOGIN="LOGIN",
@@ -12,8 +10,6 @@ enum MODE {
 };
 
 const LoginPage = () => {
-
-    const [formAction] = useActionState(authenticate, undefined);
 
     const [mode,setMode] = useState(MODE.LOGIN);
     const [isCompany,setIsCompany] = useState(false);
@@ -31,7 +27,7 @@ const LoginPage = () => {
 
     return (
         <div className='min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex items-center justify-center'>
-            <form className="flex flex-col gap-8 py-8" action={formAction}>
+            <form className="flex flex-col gap-8 py-8">
                 <h1 className="text-2xl font-semibold">{formTitle}</h1>
                 {mode !== MODE.REGISTER ? (
                     <>
@@ -67,16 +63,16 @@ const LoginPage = () => {
                     </>
                 ) : (
                     <>
-                        <div className="flex flex-row text-white">
+                        <div className="flex flex-row">
                             <button 
-                                className="rounded-l-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled disabled:cursor-not-allowed" 
+                                className="rounded-l-md bg-bwcred w-full p-2 text-white disabled:bg-bwcred_disabled" 
                                 disabled={isCompany ? false : true}
                                 onClick={()=>setIsCompany(false)}
                             >
                                 Personal
                             </button>
                             <button 
-                                className="rounded-r-md bg-bwcred w-full p-2 disabled:bg-bwcred_disabled disabled:cursor-not-allowed" 
+                                className="rounded-r-md bg-bwcred w-full p-2 text-white disabled:bg-bwcred_disabled" 
                                 disabled={isCompany ? true : false}
                                 onClick={()=>setIsCompany(true)}
                             >
@@ -113,11 +109,11 @@ const LoginPage = () => {
                         <div className="flex flex-col md:flex-row gap-8">
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Password</label>
-                                <input type="password" name="password" placeholder="Enter your password" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="password" name="password" placeholder="••••••••" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Confirm password</label>
-                                <input type="password" name="confirm" placeholder="Confirm your password" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="password" name="confirm" placeholder="••••••••" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         </div>
                         <button className="bg-bwcred text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
