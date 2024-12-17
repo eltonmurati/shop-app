@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { authenticate } from "@/app/api/auth/[...nextauth]/helpers";
+import { useActionState } from "react";
 
 enum MODE {
     LOGIN="LOGIN",
@@ -11,14 +13,16 @@ enum MODE {
 
 const LoginPage = () => {
 
+    const [errorMessage, formAction, isPending] = useActionState(authenticate, undefined);
+
     const [mode,setMode] = useState(MODE.LOGIN);
     const [isCompany,setIsCompany] = useState(false);
 
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [emailCode,setEmailCode] = useState("");
-    const [isLoading,setIsLoading] = useState(false);
-    const [error,setError] = useState("");
+    //const [isLoading,setIsLoading] = useState(false);
+    //const [error,setError] = useState("");
     const [message,setMessage] = useState("");
 
     const formTitle = mode===MODE.LOGIN ? "Log In" : mode===MODE.REGISTER ? "Register" : mode===MODE.RESET_PASSWORD ? "Reset Your Password" : "Verify Your Email";
@@ -27,7 +31,7 @@ const LoginPage = () => {
 
     return (
         <div className='min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex items-center justify-center'>
-            <form className="flex flex-col gap-8 py-8">
+            <form className="flex flex-col gap-8 py-8" action={formAction}>
                 <h1 className="text-2xl font-semibold">{formTitle}</h1>
                 {mode !== MODE.REGISTER ? (
                     <>
@@ -39,20 +43,26 @@ const LoginPage = () => {
                         ) : (
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Verification Code</label>
-                                <input type="text" name="verify" placeholder="Code" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="text" name="verify" placeholder="" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         )}
                         {mode === MODE.LOGIN ? (
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Password</label>
-                                <input type="password" name="password" placeholder="Enter your password" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="password" name="password" placeholder="••••••••" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         ) : null}
                         {mode === MODE.LOGIN && <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.RESET_PASSWORD)}>Forgot password?</div>}
-                        <button className="bg-bwcred text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
+                        {/*<button 
+                            className="bg-bwcblue text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" 
+                            disabled={isLoading}
+                        >
                             {isLoading ? "Loading..." : buttonTitle}
                         </button>
-                        {error && <div className="text-red-600">{error}</div>}
+                        {error && <div className="text-blue-600">{error}</div>}*/}
+                        <button className="bg-bwcblue text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed">
+                            {buttonTitle}
+                        </button>
                         {mode === MODE.LOGIN && (
                             <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.REGISTER)}>{"Don't"} have an account?</div>
                         )}
@@ -65,14 +75,14 @@ const LoginPage = () => {
                     <>
                         <div className="flex flex-row">
                             <button 
-                                className="rounded-l-md bg-bwcred w-full p-2 text-white disabled:bg-bwcred_disabled" 
+                                className="rounded-l-md bg-bwcblue w-full p-2 text-white disabled:bg-bwcblue_disabled" 
                                 disabled={isCompany ? false : true}
                                 onClick={()=>setIsCompany(false)}
                             >
                                 Personal
                             </button>
                             <button 
-                                className="rounded-r-md bg-bwcred w-full p-2 text-white disabled:bg-bwcred_disabled" 
+                                className="rounded-r-md bg-bwcblue w-full p-2 text-white disabled:bg-bwcblue_disabled" 
                                 disabled={isCompany ? true : false}
                                 onClick={()=>setIsCompany(true)}
                             >
@@ -116,8 +126,11 @@ const LoginPage = () => {
                                 <input type="password" name="confirm" placeholder="••••••••" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         </div>
-                        <button className="bg-bwcred text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
+                        {/*<button className="bg-bwcblue text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
                             {isLoading ? "Loading..." : buttonTitle}
+                        </button>*/}
+                        <button className="bg-bwcblue text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed">
+                            {buttonTitle}
                         </button>
                         <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.LOGIN)}>Already have an account?</div>
                     </>
