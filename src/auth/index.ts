@@ -1,35 +1,35 @@
+import { postgres } from "@/app/lib/postgresClient";
 import NextAuth, { User, NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+
+async function getUser(email: string) {
+    let { data: user, error } = await postgres.from('user').select('*').eq('email_address', email);
+    if (error) { throw error; }
+    else { 
+        if (user) { return user[0]; }
+        else { return null; }
+    }
+};
 
 export const BASE_PATH = '/api/auth';
 
 const authOptions: NextAuthConfig = {
     providers: [
         Credentials({
-            name: "Credentials",
-            credentials: {
-                email: { label: "E-mail", type: "text", placeholder: "example@domain.com" },
-                password: { label: "Password", type: "password" },
-            },
             async authorize(credentials): Promise<User | null> {
-                const users = [
-                    {
-                        id: "1",
-                        name: "Elton Murati",
-                        email: "elton9996@gmail.com",
-                        password: "password",
-                    },
-                    {
-                        id: "2",
-                        name: "BWC Merchants",
-                        email: "info@bwcmerchants.co.uk",
-                        password: "newadmin22",
-                    },
-                ];
+                const user = await getUser(credentials.email as string);
 
-                const user = users.find( (user) => user.email === credentials.email && user.password === credentials.password );
-
-                return user ? user : null;
+                if (user) {
+                    if (user.password_hash === credentials.password) {
+                        return { email: user.email_address };
+                    }
+                    else {
+                        return null;
+                    }
+                }
+                else {
+                    return null;
+                }
             },
         })
     ],

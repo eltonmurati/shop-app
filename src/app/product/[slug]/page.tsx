@@ -1,8 +1,17 @@
+import { postgres } from "@/app/lib/postgresClient";
 import Add from "@/components/Add"
 import CustomizeProducts from "@/components/CustomizeProducts"
 import ProductImages from "@/components/ProductImages"
 
-const SinglePage = () => {
+const SinglePage = async () => {
+
+    let { data: product, error } = await postgres.from('product').select('*').eq('id', 1);
+
+    let productName = "Product Name";
+    if (product) {
+        productName = product[0].name;
+    }
+    
     return (
         <div className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative flex flex-col lg:flex-row gap-8 xl:gap-16 md:mt-4 lg:mt-8'>
             {/* IMAGES */}
@@ -11,7 +20,7 @@ const SinglePage = () => {
             </div>
             {/* TEXTS */}
             <div className="w-full lg:w-1/2 flex flex-col gap-6">
-                <h1 className="text-4xl font-medium">Product Name</h1>
+                <h1 className="text-4xl font-medium">{productName}</h1>
                 <p className="text-gray-500">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                     Alias, quasi saepe neque deleniti dolor sed fugiat quos, sunt, 

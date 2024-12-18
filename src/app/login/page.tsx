@@ -21,8 +21,6 @@ const LoginPage = () => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [emailCode,setEmailCode] = useState("");
-    //const [isLoading,setIsLoading] = useState(false);
-    //const [error,setError] = useState("");
     const [message,setMessage] = useState("");
 
     const formTitle = mode===MODE.LOGIN ? "Log In" : mode===MODE.REGISTER ? "Register" : mode===MODE.RESET_PASSWORD ? "Reset Your Password" : "Verify Your Email";
@@ -35,6 +33,7 @@ const LoginPage = () => {
                 <h1 className="text-2xl font-semibold">{formTitle}</h1>
                 {mode !== MODE.REGISTER ? (
                     <>
+                        {errorMessage && <div className="text-bwcred">{errorMessage}</div>}
                         {mode !== MODE.EMAIL_VERIFICATION ? (
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">E-mail</label>
@@ -52,19 +51,17 @@ const LoginPage = () => {
                                 <input type="password" name="password" placeholder="••••••••" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         ) : null}
-                        {mode === MODE.LOGIN && <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.RESET_PASSWORD)}>Forgot password?</div>}
-                        {/*<button 
-                            className="bg-bwcblue text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" 
-                            disabled={isLoading}
+                        <button 
+                            className="bg-bwcblue text-white p-2 rounded-md disabled:bg-bwcblue_disabled" 
+                            disabled={isPending}
                         >
-                            {isLoading ? "Loading..." : buttonTitle}
-                        </button>
-                        {error && <div className="text-blue-600">{error}</div>}*/}
-                        <button className="bg-bwcblue text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed">
-                            {buttonTitle}
+                            {isPending ? "Loading..." : buttonTitle}
                         </button>
                         {mode === MODE.LOGIN && (
-                            <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.REGISTER)}>{"Don't"} have an account?</div>
+                            <div className="flex flex-col gap-2">
+                                <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.RESET_PASSWORD)}>Forgot password?</div>
+                                <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.REGISTER)}>{"Don't"} have an account?</div>
+                            </div>
                         )}
                         {mode === MODE.RESET_PASSWORD && (
                             <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.LOGIN)}>Go back to Login</div>
@@ -126,11 +123,8 @@ const LoginPage = () => {
                                 <input type="password" name="confirm" placeholder="••••••••" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         </div>
-                        {/*<button className="bg-bwcblue text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed" disabled={isLoading}>
-                            {isLoading ? "Loading..." : buttonTitle}
-                        </button>*/}
-                        <button className="bg-bwcblue text-white p-2 rounded-md disabled:bg-pink-200 disabled:cursor-not-allowed">
-                            {buttonTitle}
+                        <button className="bg-bwcblue text-white p-2 rounded-md disabled:bg-bwcblue_disabled" disabled={isPending}>
+                            {isPending ? "Loading..." : buttonTitle}
                         </button>
                         <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.LOGIN)}>Already have an account?</div>
                     </>
