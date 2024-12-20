@@ -2,12 +2,9 @@
 
 import { useState } from "react";
 
-const Add = () => {
+const Add = ({stock}: {stock:number}) => {
 
     const [quantity,setQuantity] = useState(1);
-
-    // TEMPORARY
-    const stock = 4;
 
     const handleQuantity = (type: "i" | "d") => {
         if (type === "d" && quantity > 1) {
@@ -29,7 +26,7 @@ const Add = () => {
                         <button className="cursor-pointer text-xl" onClick={()=>handleQuantity("i")}>+</button>
                     </div>
                     <div className="text-xs">
-                        Only <span className="text-orange-500">4 items</span> left!
+                        Only <span className="text-orange-500">{stock} items</span> left!
                         <br/> {"Don't"} miss it
                     </div>
                 </div>

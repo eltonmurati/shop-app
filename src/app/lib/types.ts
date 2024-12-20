@@ -69,7 +69,9 @@ export type Database = {
           brand: number
           category: number
           created_at: string
+          depth: number
           description: string | null
+          height: number
           id: number
           image_url: string | null
           last_purchased: string | null
@@ -77,13 +79,18 @@ export type Database = {
           price: number
           quantity: number
           sku: string
-          specs: Json | null
+          specifications: Json | null
+          viewed: number
+          weight: number
+          width: number
         }
         Insert: {
           brand: number
           category: number
           created_at: string
+          depth: number
           description?: string | null
+          height: number
           id?: number
           image_url?: string | null
           last_purchased?: string | null
@@ -91,13 +98,18 @@ export type Database = {
           price: number
           quantity: number
           sku: string
-          specs?: Json | null
+          specifications?: Json | null
+          viewed?: number
+          weight: number
+          width: number
         }
         Update: {
           brand?: number
           category?: number
           created_at?: string
+          depth?: number
           description?: string | null
+          height?: number
           id?: number
           image_url?: string | null
           last_purchased?: string | null
@@ -105,7 +117,10 @@ export type Database = {
           price?: number
           quantity?: number
           sku?: string
-          specs?: Json | null
+          specifications?: Json | null
+          viewed?: number
+          weight?: number
+          width?: number
         }
         Relationships: []
       }

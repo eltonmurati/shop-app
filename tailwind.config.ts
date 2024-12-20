@@ -18,6 +18,8 @@ const config: Config = {
         bwcred_disabled: "#fbcfe8",
         bwcblue: "#2b298f",
         bwcblue_disabled: "#b3bdff",
+        bwcgreen: "#6bc99f",
+        bwcgreen_disabled: "##c7ffe6",
         bwcgray: "#EBEDED",
       }
     },

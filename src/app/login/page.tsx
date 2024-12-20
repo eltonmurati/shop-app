@@ -110,7 +110,7 @@ const LoginPage = () => {
                             </div>
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Phone number</label>
-                                <input type="text" name="number" placeholder="07469285005" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="tel" name="number" placeholder="07469285005" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row gap-8">
