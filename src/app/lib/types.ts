@@ -67,57 +67,63 @@ export type Database = {
       product: {
         Row: {
           brand: number
-          category: number
+          categories: number[]
           created_at: string
           depth: number
           description: string | null
+          discounted_price: number | null
           height: number
           id: number
-          image_url: string | null
+          image_urls: string[] | null
           last_purchased: string | null
           name: string
           price: number
           quantity: number
           sku: string
           specifications: Json | null
+          variants: Json | null
           viewed: number
           weight: number
           width: number
         }
         Insert: {
           brand: number
-          category: number
+          categories: number[]
           created_at: string
           depth: number
           description?: string | null
+          discounted_price?: number | null
           height: number
           id?: number
-          image_url?: string | null
+          image_urls?: string[] | null
           last_purchased?: string | null
           name: string
           price: number
           quantity: number
           sku: string
           specifications?: Json | null
+          variants?: Json | null
           viewed?: number
           weight: number
           width: number
         }
         Update: {
           brand?: number
-          category?: number
+          categories?: number[]
           created_at?: string
           depth?: number
           description?: string | null
+          discounted_price?: number | null
           height?: number
           id?: number
-          image_url?: string | null
+          image_urls?: string[] | null
           last_purchased?: string | null
           name?: string
           price?: number
           quantity?: number
           sku?: string
           specifications?: Json | null
+          variants?: Json | null
           viewed?: number
           weight?: number
           width?: number
