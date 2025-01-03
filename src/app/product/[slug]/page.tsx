@@ -2,11 +2,17 @@ import { postgres } from "@/app/lib/postgresClient";
 import Add from "@/components/Add"
 import CustomizeProducts from "@/components/CustomizeProducts"
 import ProductImages from "@/components/ProductImages"
+import { notFound } from "next/navigation";
 
-const SinglePage = async () => {
+const SinglePage = async ({params}:{params:{slug:string}}) => {
 
-    let { data: product, error } = await postgres.from('product').select('*').eq('id', 1);
+    const {slug} = await params;
 
+    let { data: product, error } = await postgres.from('product').select('*').eq('id', slug);
+
+    if (!product) { return notFound(); }
+
+    let id = null;
     let name = "Product Name";
     let desc = null
     let price = "0";
@@ -24,6 +30,10 @@ const SinglePage = async () => {
     let variants = null;
 
     if (product) {
+
+        if (!product[0]) { return notFound(); }
+
+        id = product[0].id;
         name = product[0].name;
         desc = product[0].description;
         price = product[0].price.toLocaleString();
@@ -41,24 +51,12 @@ const SinglePage = async () => {
         variants = product[0].variants;
     }
 
-    let specEntries = null;
-    specEntries = specs ? Object.entries(specs) : null;
-
-    let variantEntries = null;
-    let variantKeys = null;
-
-    if (variants) {
-        variantEntries = Object.entries(variants);
-        variantKeys = Object.keys(variants);
-    }
-
-    console.log(variants?["type"]);
+    let specEntries = specs ? Object.entries(specs) : null;
 
     return (
-        <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
-            <div className='flex flex-col lg:flex-row gap-8 xl:gap-16 md:mt-4 lg:mt-8'>
+        <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex flex-col lg:flex-row gap-8 xl:gap-16 md:mt-4 lg:mt-8">
                 {/* IMAGES */}
-                <div className="w-full lg:w-1/2 top-4 h-max">
+                <div className="w-full lg:w-1/2 lg:sticky top-4 h-max">
                     <ProductImages images={images}/>
                 </div>
                 {/* TEXTS */}
@@ -76,28 +74,24 @@ const SinglePage = async () => {
                         <h2 className="font-medium text-2xl">£{price}</h2>
                     )}
                     <div className="h-[2px] bg-gray-100"/>
-                    <CustomizeProducts/>
+                    <CustomizeProducts variants={variants} id={id}/>
                     <Add stock={stock} />
-                    <div className="lg:hidden h-[2px] bg-gray-100"/>
-                </div>
-            </div>
-            <div className="mt-8">
-                <h2 className="text-2xl pb-4">Specifications</h2>
-                <div className="h-[2px] bg-gray-100"/>
-                {specEntries && (
-                    <>
-                        {specEntries.map((entry,i)=>(
-                            <div className="text-sm" key={i}>
-                                <div className="flex flec-col py-4 justify-between">
-                                    <h4 className="text-xl">{entry[0]}</h4>
-                                    <p className="text-xl">{entry[1]}</p>
+                    {specEntries && (
+                        <div>
+                            <h2 className="text-2xl pt-8 pb-2">Specifications</h2>
+                            <div className="h-[2px] bg-gray-100"/>
+                            {specEntries.map((entry,i)=>(
+                                <div className="text-sm" key={i}>
+                                    <div className="flex flec-col justify-between py-2">
+                                        <h3 className="text-lg font-semibold">{entry[0]}</h3>
+                                        <h3 className="text-lg font-semibold">{entry[1]}</h3>
+                                    </div>
+                                    <div className="h-[2px] bg-gray-100"/>
                                 </div>
-                                <div className="h-[2px] bg-gray-100"/>
-                            </div>
-                        ))}
-                    </>
-                )}
-            </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
         </div>
     )
 }

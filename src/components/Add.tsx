@@ -25,14 +25,13 @@ const Add = ({stock}: {stock:number}) => {
                         {quantity}
                         <button className="cursor-pointer text-xl" onClick={()=>handleQuantity("i")}>+</button>
                     </div>
-                    <div className="text-xs">
-                        Only <span className="text-orange-500">{stock} items</span> left!
-                        <br/> {"Don't"} miss it
+                    <div className="text-sm text-bwcgreen font-medium">
+                        {stock} In Stock
                     </div>
                 </div>
-                <button className="w-36 text-sm rounded-3xl ring-1 ring-bwcred text-bwcred py-2 px-4 
-                    hover:bg-bwcred hover:text-white 
-                    disabled:cursor-not-allowed disabled:bg-pink-200 disabled:text-white disabled:ring-none"
+                <button className="w-36 text-sm rounded-3xl ring-1 ring-bwcblue text-bwcblue py-2 px-4 
+                    hover:bg-bwcblue hover:text-white 
+                    disabled:cursor-not-allowed disabled:bg-bwcblue_disabled disabled:text-white disabled:ring-none"
                 >
                     Add to Cart
                 </button>

@@ -4,7 +4,7 @@ import Link from "next/link";
 const ProductList = () => {
     return (
         <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
-            <Link href="/product/test" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
+            <Link href="/product/1" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
                 <div className="relative w-full h-80">
                     <Image 
                         src="https://images.pexels.com/photos/2088210/pexels-photo-2088210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
@@ -26,9 +26,9 @@ const ProductList = () => {
                     <span className="font-semibold">£49</span>
                 </div>
                 <div className="text-sm text-gray-500">My Description</div>
-                <button className="rounded-2xl ring-1 ring-bwcred text-bwcred w-max py-2 px-4 text-xs hover:bg-bwcred hover:text-white">Add to Cart</button>
+                <button className="rounded-2xl ring-1 ring-bwcblue text-bwcblue w-max py-2 px-4 text-xs hover:bg-bwcblue hover:text-white">Add to Cart</button>
             </Link>
-            <Link href="/product/test" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
+            <Link href="/product/1" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
                 <div className="relative w-full h-80">
                     <Image 
                         src="https://images.pexels.com/photos/2088210/pexels-photo-2088210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
@@ -50,9 +50,9 @@ const ProductList = () => {
                     <span className="font-semibold">$49</span>
                 </div>
                 <div className="text-sm text-gray-500">My Description</div>
-                <button className="rounded-2xl ring-1 ring-bwcred text-bwcred w-max py-2 px-4 text-xs hover:bg-bwcred hover:text-white">Add to Cart</button>
+                <button className="rounded-2xl ring-1 ring-bwcblue text-bwcblue w-max py-2 px-4 text-xs hover:bg-bwcblue hover:text-white">Add to Cart</button>
             </Link>
-            <Link href="/product/test" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
+            <Link href="/product/1" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
                 <div className="relative w-full h-80">
                     <Image 
                         src="https://images.pexels.com/photos/2088210/pexels-photo-2088210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
@@ -74,9 +74,9 @@ const ProductList = () => {
                     <span className="font-semibold">$49</span>
                 </div>
                 <div className="text-sm text-gray-500">My Description</div>
-                <button className="rounded-2xl ring-1 ring-bwcred text-bwcred w-max py-2 px-4 text-xs hover:bg-bwcred hover:text-white">Add to Cart</button>
+                <button className="rounded-2xl ring-1 ring-bwcblue text-bwcblue w-max py-2 px-4 text-xs hover:bg-bwcblue hover:text-white">Add to Cart</button>
             </Link>
-            <Link href="/product/test" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
+            <Link href="/product/1" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
                 <div className="relative w-full h-80">
                     <Image 
                         src="https://images.pexels.com/photos/2088210/pexels-photo-2088210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
@@ -98,7 +98,7 @@ const ProductList = () => {
                     <span className="font-semibold">$49</span>
                 </div>
                 <div className="text-sm text-gray-500">My Description</div>
-                <button className="rounded-2xl ring-1 ring-bwcred text-bwcred w-max py-2 px-4 text-xs hover:bg-bwcred hover:text-white">Add to Cart</button>
+                <button className="rounded-2xl ring-1 ring-bwcblue text-bwcblue w-max py-2 px-4 text-xs hover:bg-bwcblue hover:text-white">Add to Cart</button>
             </Link>
         </div>
     )

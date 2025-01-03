@@ -9,7 +9,7 @@ const ProductImages = ({images}:{images:string[]}) => {
 
     return (
         <div className="">
-            <div className="h-[500px] relative">
+            <div className="h-[600px] relative">
                 <Image 
                     src={images[index]}
                     alt="" 
