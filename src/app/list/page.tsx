@@ -19,7 +19,7 @@ const ListPage = () => {
             <Filter/>
             {/* PRODUCTS */}
             <h1 className="mt-12 text-xl font-semibold">Boilers For You!</h1>
-            <ProductList/>
+            <ProductList categoryId={1} limit={4} />
         </div>
     )
 }

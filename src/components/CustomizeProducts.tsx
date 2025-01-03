@@ -4,7 +4,7 @@ import { postgres } from "@/app/lib/postgresClient";
 import { Json } from "@/app/lib/types";
 import Link from "next/link";
 
-const CustomizeProducts = ({variants, id}:{variants:Json | null, id:number | null}) => {
+const CustomizeProducts = ({variants, id}:{variants:Json | null; id:number | null;}) => {
 
     const selected = "ring-1 ring-bwcblue text-bwcblue rounded-md py-1 px-4 text-sm cursor-pointer";
     const variant = "ring-1 ring-bwcblue text-white bg-bwcblue rounded-md py-1 px-4 text-sm cursor-pointer";
