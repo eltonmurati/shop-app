@@ -8,7 +8,7 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
 
     const {slug} = await params;
 
-    let { data: product, error } = await postgres.from('product').select('*').eq('id', slug);
+    let { data: product, error } = await postgres.from('product').select(`*, brand(*)`).eq('id', slug);
 
     if (!product) { return notFound(); }
 
@@ -25,9 +25,9 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
     let depth = "0";
     let weight = "0";
     let images: string[] = [];
-    let categories: number[] = [];
     let brand = null;
     let variants = null;
+    let category = null;
 
     if (product) {
 
@@ -46,8 +46,7 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
         depth = product[0].depth.toString() + "mm";
         weight = product[0].weight.toString() + "kg";
         images = product[0].image_urls ? product[0].image_urls : [];
-        categories = product[0].categories;
-        brand = product[0].brand;
+        brand = product[0].brand["name" as keyof typeof brand];
         variants = product[0].variants;
     }
 
@@ -76,21 +75,58 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
                     <div className="h-[2px] bg-gray-100"/>
                     <CustomizeProducts variants={variants} id={id}/>
                     <Add stock={stock} />
-                    {specEntries && (
-                        <div>
-                            <h2 className="text-2xl pt-8 pb-2">Specifications</h2>
+                    <div>
+                        <h2 className="text-2xl pt-8 pb-2 font-medium">Specifications</h2>
+                        <div className="h-[2px] bg-gray-100"/>
+                        <div className="text-sm">
+                            <div className="flex flec-col justify-between py-2">
+                                <h3 className="text-lg">Brand</h3>
+                                <h3 className="text-lg">{brand as unknown as string}</h3>
+                            </div>
                             <div className="h-[2px] bg-gray-100"/>
-                            {specEntries.map((entry,i)=>(
-                                <div className="text-sm" key={i}>
-                                    <div className="flex flec-col justify-between py-2">
-                                        <h3 className="text-lg font-semibold">{entry[0]}</h3>
-                                        <h3 className="text-lg font-semibold">{entry[1]}</h3>
-                                    </div>
-                                    <div className="h-[2px] bg-gray-100"/>
-                                </div>
-                            ))}
                         </div>
-                    )}
+                        {specEntries && (
+                            <>
+                                {specEntries.map((entry,i)=>(
+                                    <div className="text-sm" key={i}>
+                                        <div className="flex flec-col justify-between py-2">
+                                            <h3 className="text-lg">{entry[0]}</h3>
+                                            <h3 className="text-lg">{entry[1]}</h3>
+                                        </div>
+                                        <div className="h-[2px] bg-gray-100"/>
+                                    </div>
+                                ))}
+                            </>
+                        )}
+                        <div className="text-sm">
+                            <div className="flex flec-col justify-between py-2">
+                                <h3 className="text-lg">Width</h3>
+                                <h3 className="text-lg">{width}</h3>
+                            </div>
+                            <div className="h-[2px] bg-gray-100"/>
+                        </div>
+                        <div className="text-sm">
+                            <div className="flex flec-col justify-between py-2">
+                                <h3 className="text-lg">Height</h3>
+                                <h3 className="text-lg">{height}</h3>
+                            </div>
+                            <div className="h-[2px] bg-gray-100"/>
+                        </div>
+                        <div className="text-sm">
+                            <div className="flex flec-col justify-between py-2">
+                                <h3 className="text-lg">Depth</h3>
+                                <h3 className="text-lg">{depth}</h3>
+                            </div>
+                            <div className="h-[2px] bg-gray-100"/>
+                        </div>
+                        <div className="text-sm">
+                            <div className="flex flec-col justify-between py-2">
+                                <h3 className="text-lg">Weight</h3>
+                                <h3 className="text-lg">{weight}</h3>
+                            </div>
+                            <div className="h-[2px] bg-gray-100"/>
+                        </div>
+                    </div>
                 </div>
         </div>
     )

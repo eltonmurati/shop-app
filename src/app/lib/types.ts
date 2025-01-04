@@ -67,8 +67,6 @@ export type Database = {
       product: {
         Row: {
           brand: number
-          categories: number[]
-          created_at: string
           depth: number
           description: string | null
           discounted_price: number | null
@@ -88,8 +86,6 @@ export type Database = {
         }
         Insert: {
           brand: number
-          categories: number[]
-          created_at: string
           depth: number
           description?: string | null
           discounted_price?: number | null
@@ -103,14 +99,12 @@ export type Database = {
           sku: string
           specifications?: Json | null
           variants?: Json | null
-          viewed?: number
+          viewed: number
           weight: number
           width: number
         }
         Update: {
           brand?: number
-          categories?: number[]
-          created_at?: string
           depth?: number
           description?: string | null
           discounted_price?: number | null
@@ -128,7 +122,45 @@ export type Database = {
           weight?: number
           width?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "product_brand_fkey"
+            columns: ["brand"]
+            isOneToOne: false
+            referencedRelation: "brand"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_category: {
+        Row: {
+          category_id: number
+          product_id: number
+        }
+        Insert: {
+          category_id: number
+          product_id: number
+        }
+        Update: {
+          category_id?: number
+          product_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_category_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "category"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "product_category_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "product"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user: {
         Row: {

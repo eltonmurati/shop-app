@@ -4,10 +4,10 @@ import Link from "next/link";
 
 const ProductList = async ({categoryId, limit}:{categoryId:number; limit:number;}) => {
 
-    let { data: product, error } = await postgres.from('product').select('*').contains('categories', [1]);
+    let { data: product, error } = await postgres.from('product').select('*').contains('categories', [categoryId]);
 
     return (
-        <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
+        <div className="flex gap-x-8 gap-y-16 justify-between flex-wrap">
             <Link href="/product/1" className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]">
                 <div className="relative w-full h-80">
                     <Image 

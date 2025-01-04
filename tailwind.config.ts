@@ -14,9 +14,9 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors:{
-        bwcblue: "#2b298f",
-        bwcblue_disabled: "#b3bdff",
-        bwcred:"#F35C7A",
+        bwcblue: "#0464bf",
+        bwcblue_disabled: "#9cc0ff",
+        bwcred: "#F35C7A",
         bwcgreen: "#6bc99f",
         bwcgray: "#EBEDED",
       }
