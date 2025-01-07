@@ -14,7 +14,7 @@ const CategoryNavbar = () => {
     return (
         <div className="relative" onMouseLeave={()=>setTabId(0)}>
             {/* BIGGER SCREENS */}
-            <div className="hidden xl:flex h-16 bg-bwcblue font-semibold text-white">
+            <div className="hidden xl:flex h-16 bg-bwcblue font-medium text-white">
                 <Link href="/" className={tabId === 1 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(1)}>Boilers</Link>
                 <Link href="/" className={tabId === 2 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(2)}>Flues & Accessories</Link>
                 <Link href="/" className={tabId === 3 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(3)}>Heating</Link>

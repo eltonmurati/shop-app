@@ -1,13 +1,11 @@
-"use client"
-
 import { postgres } from "@/app/lib/postgresClient";
 import { Json } from "@/app/lib/types";
 import Link from "next/link";
 
-const CustomizeProducts = ({variants, id}:{variants:Json | null; id:number | null;}) => {
+const CustomizeProducts = ({variants, productId}:{variants:Json; productId:number;}) => {
 
     const selected = "ring-1 ring-bwcblue text-bwcblue rounded-md py-1 px-4 text-sm cursor-pointer";
-    const variant = "ring-1 ring-bwcblue text-white bg-bwcblue rounded-md py-1 px-4 text-sm cursor-pointer";
+    const available = "ring-1 ring-bwcblue text-white bg-bwcblue rounded-md py-1 px-4 text-sm cursor-pointer";
     const disabled = "ring-1 ring-bwcblue_disabled text-white bg-bwcblue_disabled rounded-md py-1 px-4 text-sm cursor-not-allowed";
 
     //async function getProduct(id: number) {
@@ -16,24 +14,24 @@ const CustomizeProducts = ({variants, id}:{variants:Json | null; id:number | nul
     //    else { return null; }
     //}
 
+    // https://stackoverflow.com/questions/76479239/running-an-async-function-in-a-react-return
+
     return (
         <>
-            {variants && (
-                <>
-                    {Object.entries(variants).map(([k,v],i)=>(
-                        <div className="flex flex-col gap-6" key={i}>
-                            <h4 className="font-medium">Choose a {k.toLowerCase()}</h4>
-                            <ul className="flex items-center gap-3 flex-wrap">
-                                {Object.entries(v).map(([kk,vv],j)=>(
-                                    <Link href={`/product/${vv}`} className={vv === id ? selected : variant} key={j}>
-                                        {kk}
-                                    </Link>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </>
-            )}
+            {Object.entries(variants!).map(([key,value])=>(
+                <div className="flex flex-col gap-6" key={key}>
+                    <h4 className="font-medium">Choose a {key.toLowerCase()}</h4>
+                    <ul className="flex items-center gap-3 flex-wrap">
+                        {Object.entries(value).map(([variant,id])=>(
+                            <Link href={`/product/${id}`} className={id === productId ? selected : available} key={variant}>
+                                {variant}
+                            </Link>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+
+            {/* DO NOT REMOVE - USE FOR COLOURS */}
 
             {/*<h4 className="font-medium">Choose a size</h4>
             <ul className="flex items-center gap-3">

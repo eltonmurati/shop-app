@@ -15,7 +15,7 @@ const config: Config = {
       },
       colors:{
         bwcblue: "#0464bf",
-        bwcblue_disabled: "#9cc0ff",
+        bwcblue_disabled: "#d4e4ff",
         bwcred: "#F35C7A",
         bwcgreen: "#6bc99f",
         bwcgray: "#EBEDED",

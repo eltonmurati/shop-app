@@ -39,56 +39,58 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
                         <h2 className="font-medium text-2xl">£{product.price.toLocaleString()}</h2>
                     )}
                     <div className="h-[2px] bg-gray-100"/>
-                    <CustomizeProducts variants={product.variants} id={product.id}/>
-                    <Add stock={product.quantity} />
+                    {product.variants && (
+                        <CustomizeProducts variants={product.variants} productId={product.id} />
+                    )}
+                    <Add stock={product.quantity} productId={product.id}/>
                     <div>
-                        <h2 className="text-2xl pt-8 pb-2 font-medium">Specifications</h2>
+                        <h2 className="text-xl pt-8 pb-2 font-medium">Specifications</h2>
                         <div className="h-[2px] bg-gray-100"/>
-                        <div className="text-sm">
+                        <div className="">
                             <div className="flex flec-col justify-between py-2">
-                                <h3 className="text-lg">Brand</h3>
-                                <h3 className="text-lg">{product.brand["name" as keyof (Number & { id: number; name: string; })] as string}</h3>
+                                <h3 className="">Brand</h3>
+                                <h3 className="">{product.brand["name" as keyof (Number & { id: number; name: string; })] as string}</h3>
                             </div>
                             <div className="h-[2px] bg-gray-100"/>
                         </div>
                         {specEntries && (
                             <>
-                                {specEntries.map((entry,i)=>(
-                                    <div className="text-sm" key={i}>
+                                {specEntries.map((entry)=>(
+                                    <div className="" key={entry[0]}>
                                         <div className="flex flec-col justify-between py-2">
-                                            <h3 className="text-lg">{entry[0]}</h3>
-                                            <h3 className="text-lg">{entry[1]}</h3>
+                                            <h3 className="">{entry[0]}</h3>
+                                            <h3 className="">{entry[1]}</h3>
                                         </div>
                                         <div className="h-[2px] bg-gray-100"/>
                                     </div>
                                 ))}
                             </>
                         )}
-                        <div className="text-sm">
+                        <div className="">
                             <div className="flex flec-col justify-between py-2">
-                                <h3 className="text-lg">Width</h3>
-                                <h3 className="text-lg">{product.width.toString() + "mm"}</h3>
+                                <h3 className="">Width</h3>
+                                <h3 className="">{product.width.toString() + "mm"}</h3>
                             </div>
                             <div className="h-[2px] bg-gray-100"/>
                         </div>
-                        <div className="text-sm">
+                        <div className="">
                             <div className="flex flec-col justify-between py-2">
-                                <h3 className="text-lg">Height</h3>
-                                <h3 className="text-lg">{product.height.toString() + "mm"}</h3>
+                                <h3 className="">Height</h3>
+                                <h3 className="">{product.height.toString() + "mm"}</h3>
                             </div>
                             <div className="h-[2px] bg-gray-100"/>
                         </div>
-                        <div className="text-sm">
+                        <div className="">
                             <div className="flex flec-col justify-between py-2">
-                                <h3 className="text-lg">Depth</h3>
-                                <h3 className="text-lg">{product.depth.toString() + "mm"}</h3>
+                                <h3 className="">Depth</h3>
+                                <h3 className="">{product.depth.toString() + "mm"}</h3>
                             </div>
                             <div className="h-[2px] bg-gray-100"/>
                         </div>
-                        <div className="text-sm">
+                        <div className="">
                             <div className="flex flec-col justify-between py-2">
-                                <h3 className="text-lg">Weight</h3>
-                                <h3 className="text-lg">{product.weight.toString() + "kg"}</h3>
+                                <h3 className="">Weight</h3>
+                                <h3 className="">{product.weight.toString() + "kg"}</h3>
                             </div>
                             <div className="h-[2px] bg-gray-100"/>
                         </div>

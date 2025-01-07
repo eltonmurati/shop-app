@@ -1,9 +1,20 @@
 import Filter from "@/components/Filter"
 import ProductList from "@/components/ProductList"
 import Image from "next/image"
+import { postgres } from "../lib/postgresClient"
+import { notFound } from "next/navigation"
 import { Suspense } from "react"
 
-const ListPage = () => {
+const ListPage = async ({searchParams}:{searchParams:any}) => {
+
+    const params = await searchParams;
+
+    let { data: category } = await postgres.from('category').select('*').eq('id', Number(params['cat'])).limit(1).single();
+
+    if (!category) {
+        return notFound();
+    }
+
     return (
         <div className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative'>
             {/* CAMPAIGN */}
@@ -21,7 +32,7 @@ const ListPage = () => {
             <Filter/>
             {/* PRODUCTS */}
             <Suspense fallback={"Loading..."}>
-                <ProductList categoryId={1} limit={20} />
+                <ProductList categoryId={category.id} limit={20} searchParams={params} />
             </Suspense>
         </div>
     )

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const ProductList = async ({categoryId, limit}:{categoryId:number; limit:number;}) => {
+const ProductList = async ({categoryId, limit, searchParams}:{categoryId:number; limit:number; searchParams?:any;}) => {
 
     let { data: products } = await postgres.from('product').select('*, category!inner(*)').eq('category.id', categoryId).limit(limit);
 
@@ -12,7 +12,7 @@ const ProductList = async ({categoryId, limit}:{categoryId:number; limit:number;
     }
 
     return (
-        <div className="flex gap-x-8 gap-y-16 justify-between flex-wrap">
+        <div className="flex gap-x-8 gap-y-16 flex-wrap">
             {products.map((product)=>(
                 <Link href={"/product/"+product.id} className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]" key={product.id}>
                     <div className="relative w-full h-80">
@@ -52,7 +52,13 @@ const ProductList = async ({categoryId, limit}:{categoryId:number; limit:number;
                             <div className="text-sm text-bwcred font-medium">Out Of Stock</div>
                         )}
                     </div>
-                    <button className="rounded-2xl ring-1 ring-bwcblue text-bwcblue w-max py-2 px-4 text-xs hover:bg-bwcblue hover:text-white">Add to Cart</button>
+                    <button 
+                        className="rounded-2xl ring-1 ring-bwcblue text-bwcblue w-max py-2 px-4 text-xs hover:bg-bwcblue hover:text-white 
+                            disabled:text-white disabled:bg-bwcblue_disabled disabled:ring-bwcblue_disabled disabled:cursor-not-allowed" 
+                        disabled={!(product.quantity > 0)}
+                    >
+                        Add to Cart
+                    </button>
                 </Link>
             ))}
         </div>
