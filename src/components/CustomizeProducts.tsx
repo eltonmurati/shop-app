@@ -1,21 +1,7 @@
-import { postgres } from "@/app/lib/postgresClient";
 import { Json } from "@/app/lib/types";
-import Link from "next/link";
+import VariantTag from "./VariantTag";
 
 const CustomizeProducts = ({variants, productId}:{variants:Json; productId:number;}) => {
-
-    const selected = "ring-1 ring-bwcblue text-bwcblue rounded-md py-1 px-4 text-sm cursor-pointer";
-    const available = "ring-1 ring-bwcblue text-white bg-bwcblue rounded-md py-1 px-4 text-sm cursor-pointer";
-    const disabled = "ring-1 ring-bwcblue_disabled text-white bg-bwcblue_disabled rounded-md py-1 px-4 text-sm cursor-not-allowed";
-
-    //async function getProduct(id: number) {
-    //    let { data: product, error } = await postgres.from('product').select('*').eq('id', id);
-    //    if (product) { return product[0]; }
-    //    else { return null; }
-    //}
-
-    // https://stackoverflow.com/questions/76479239/running-an-async-function-in-a-react-return
-
     return (
         <>
             {Object.entries(variants!).map(([key,value])=>(
@@ -23,9 +9,7 @@ const CustomizeProducts = ({variants, productId}:{variants:Json; productId:numbe
                     <h4 className="font-medium">Choose a {key.toLowerCase()}</h4>
                     <ul className="flex items-center gap-3 flex-wrap">
                         {Object.entries(value).map(([variant,id])=>(
-                            <Link href={`/product/${id}`} className={id === productId ? selected : available} key={variant}>
-                                {variant}
-                            </Link>
+                            <VariantTag variant={variant} productId={id as number} ogProductId={productId} key={variant} />
                         ))}
                     </ul>
                 </div>
