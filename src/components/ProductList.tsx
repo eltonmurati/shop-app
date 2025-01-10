@@ -3,9 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const ProductList = async ({categoryId, limit, searchParams}:{categoryId:number; limit:number; searchParams?:any;}) => {
+const ProductList = async ({categoryId, limit, searchParams}:{categoryId:number; limit?:number; searchParams?:any;}) => {
 
-    let { data: products } = await postgres.from('product').select('*, category!inner(*)').eq('category.id', categoryId).limit(limit);
+    let { data: products } = await postgres
+        .from('product')
+        .select('*, category!inner(*)')
+        .eq('category.id', categoryId)
+        .limit(limit || 20);
 
     if (!products) {
         return notFound();
@@ -17,7 +21,7 @@ const ProductList = async ({categoryId, limit, searchParams}:{categoryId:number;
                 <Link href={"/product/"+product.id} className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]" key={product.id}>
                     <div className="relative w-full h-80">
                         <Image 
-                            src={product.image_urls?.at(0) || "/productImages/noImage.jpg"} 
+                            src={product.image_urls?.at(0) || "/noImage.jpg"} 
                             alt="" 
                             fill 
                             sizes="25vw" 
