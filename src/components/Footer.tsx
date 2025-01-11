@@ -37,11 +37,11 @@ const Footer = () => {
                     <div className="flex flex-col justify-between">
                         <h1 className="font-medium text-lg">SHOP</h1>
                         <div className="flex flex-col gap-6">
-                            <Link href="">New Arrivals</Link>
-                            <Link href="">Accessories</Link>
-                            <Link href="">Men</Link>
-                            <Link href="">Women</Link>
-                            <Link href="">All Products</Link>
+                            <Link href="/list">All Products</Link>
+                            <Link href="/list?cat=95">Featured Products</Link>
+                            <Link href="/list?cat=96">New Products</Link>
+                            <Link href="/list?cat=97">Deals</Link>
+                            <Link href="/list?cat=94">Clearance</Link>
                         </div>
                     </div>
                     <div className="flex flex-col justify-between">

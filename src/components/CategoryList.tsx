@@ -22,8 +22,9 @@ const categories = [
 
 const CategoryList = () => {
     return (
-        <div className="flex px-4 gap-4 md:gap-8 overflow-x-auto pb-4 [&::-webkit-scrollbar]:h-3 [&::-webkit-scrollbar-button:end:increment]:w-4 
-            [&::-webkit-scrollbar-button:start:decrement]:w-4 [&::-webkit-scrollbar-track]:w-16 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300"
+        <div className="flex px-4 md:px-8 gap-4 md:gap-8 overflow-x-auto pb-8 [&::-webkit-scrollbar]:h-4 [&::-webkit-scrollbar-button:end:increment]:w-4 
+            md:[&::-webkit-scrollbar-button:end:increment]:w-8 [&::-webkit-scrollbar-button:start:decrement]:w-4 [&::-webkit-scrollbar-track]:bg-gray-100 
+            md:[&::-webkit-scrollbar-button:start:decrement]:w-8 [&::-webkit-scrollbar-thumb]:bg-gray-300"
         >
             {categories.map((category)=>(
                 <Link href={`/list${category.id === 98 ? "" : "?cat="+category.id.toString()}`} className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 xl:w-1/6" key={category.id}>
