@@ -4,7 +4,6 @@ import Image from "next/image"
 import { postgres } from "../lib/postgresClient"
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
-import DoubleRange from "@/components/DoubleRange"
 
 const ListPage = async ({searchParams}:{searchParams:any}) => {
 
@@ -31,7 +30,6 @@ const ListPage = async ({searchParams}:{searchParams:any}) => {
             <h1 className="mt-8 text-2xl font-semibold">Boilers</h1>
             {/* FILTER */}
             <Filter/>
-            <DoubleRange />
             {/* PRODUCTS */}
             <Suspense fallback={"Loading..."}>
                 <ProductList categoryId={category.id} limit={20} searchParams={params} />
