@@ -3,13 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const ProductList = async ({categoryId, limit, searchParams}:{categoryId:number; limit?:number; searchParams?:any;}) => {
+const ProductList = async ({limit, searchParams}:{limit?:number; searchParams?:any;}) => {
 
     let { data: products } = await postgres
         .from('product')
         .select('*, category!inner(*)')
-        .eq('category.id', categoryId)
         .limit(limit || 20);
+
+    console.log(searchParams);
 
     if (!products) {
         return notFound();

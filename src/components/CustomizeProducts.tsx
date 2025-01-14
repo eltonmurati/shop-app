@@ -5,7 +5,7 @@ const CustomizeProducts = ({variants, productId}:{variants:Json; productId:numbe
     return (
         <>
             {Object.entries(variants!).map(([key,value])=>(
-                <div className="flex flex-col gap-6" key={key}>
+                <div className="flex flex-col gap-4" key={key}>
                     <h4 className="font-medium">Choose a {key.toLowerCase()}</h4>
                     <ul className="flex items-center gap-3 flex-wrap">
                         {Object.entries(value).map(([variant,id])=>(
