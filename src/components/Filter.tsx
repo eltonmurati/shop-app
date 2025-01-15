@@ -12,30 +12,44 @@ const Filter = () => {
     const handleFilterChange = (e:React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
         const {name,value} = e.target;
         const params = new URLSearchParams(searchParams);
-        params.set(name, value);
-        replace(`${pathname}?${params.toString()}`)
+        if (e.target.type === "checkbox") {
+            if (e.target.checked) {
+                params.set(name, "true");
+            } else {
+                params.delete(name);
+            }
+        } else {
+            if (name === "sort") {
+                params.set(name, value);
+            } else {
+                if (!params.has(name, value)) {
+                    params.append(name, value);
+                }
+            }
+        }
+        replace(`${pathname}?${params.toString()}`);
     }
 
     return (
         <div className="py-8 flex justify-between">
             <div className="flex gap-6 flex-wrap">
-                <select name="cat" id="cat" className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer" onChange={handleFilterChange}>
+                <select name="cat" className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer" onChange={handleFilterChange}>
                     <option>Category</option>
                     <option value="cat1">Category 1</option>
                     <option value="cat2">Category 2</option>
                 </select>
-                <select name="brand" id="brand" className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer" onChange={handleFilterChange}>
+                <select name="brand" className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer" onChange={handleFilterChange}>
                     <option>Brand</option>
                     <option value="type1">Brand 1</option>
                     <option value="type2">Brand 2</option>
                 </select>
                 <div className="flex gap-2 items-center bg-bwcgray rounded-full px-4 h-max py-2">
-                    <input type="checkbox" id="stock" name="stock" value="true" className="cursor-pointer" />
-                    <label htmlFor="stock" className="text-xs font-medium cursor-pointer">In Stock</label>
+                    <input type="checkbox" name="stock" onChange={handleFilterChange} />
+                    <label htmlFor="stock" className="text-xs font-medium">In Stock</label>
                 </div>
                 <div className="flex gap-2 items-center bg-bwcgray rounded-full px-4 h-max py-2">
-                    <input type="checkbox" id="sale" name="sale" value="true" className="cursor-pointer" />
-                    <label htmlFor="sale" className="text-xs font-medium cursor-pointer">On Sale</label>
+                    <input type="checkbox" name="sale" onChange={handleFilterChange} />
+                    <label htmlFor="sale" className="text-xs font-medium">On Sale</label>
                 </div>
                 <DoubleRange title={"Price"} measurement={"£"} />
                 <DoubleRange title={"Height"} measurement={"mm"} />
@@ -44,7 +58,7 @@ const Filter = () => {
                 <DoubleRange title={"Weight"} measurement={"kg"} />
             </div>
             <div className="pl-6">
-                <select name="sort" id="sort" className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray outline-none cursor-pointer" onChange={handleFilterChange}>
+                <select name="sort" className="py-2 px-4 rounded-full text-xs font-medium outline-none cursor-pointer ring-1 ring-gray-400 ring-inset" onChange={handleFilterChange}>
                     <option>Sort By</option>
                     <option value="asc price">Price (low to high)</option>
                     <option value="desc price">Price (high to low)</option>
