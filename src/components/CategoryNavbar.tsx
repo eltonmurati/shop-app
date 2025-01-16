@@ -26,10 +26,11 @@ const CategoryNavbar = () => {
                 <Link href="/list?cat=72" className={tabId === 9 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(9)}>Fires</Link>
                 <Link href="/list?cat=77" className={tabId === 10 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(10)}>Essentials</Link>
                 <Link href="/list?cat=87" className={tabId === 11 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(11)}>Renewables</Link>
-                <Link href="/list?cat=94" className="w-full h-full px-1 flex items-center justify-center text-center leading-tight hover:bg-white hover:text-bwcblue" 
+                <Link href="/list?sale=true" 
+                    className="w-full h-full px-1 flex items-center justify-center text-center leading-tight hover:bg-white" 
                     onMouseEnter={()=>setTabId(0)}
                 >
-                    Clearance
+                    <div className="font-semibold tracking-wide rounded-md bg-bwcred py-1 px-2">SALE</div>
                 </Link>
             </div>
             {tabId > 0 && (<SubcategoryMenu tabId={tabId}/>)}

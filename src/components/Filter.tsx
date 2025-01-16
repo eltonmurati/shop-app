@@ -12,21 +12,18 @@ const Filter = () => {
     const handleFilterChange = (e:React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
         const {name,value} = e.target;
         const params = new URLSearchParams(searchParams);
+
         if (e.target.type === "checkbox") {
-            if (e.target.checked) {
-                params.set(name, "true");
-            } else {
-                params.delete(name);
-            }
+            if (e.target.checked) { params.set(name, "true"); } 
+            else { params.delete(name); }
         } else {
-            if (name === "sort") {
-                params.set(name, value);
-            } else {
-                if (!params.has(name, value)) {
-                    params.append(name, value);
-                }
+            if (value === "false") { params.delete(name); }
+            else if (name === "sort") { params.set(name, value); } 
+            else {
+                if (!params.has(name, value)) { params.append(name, value); }
             }
         }
+
         replace(`${pathname}?${params.toString()}`);
     }
 
@@ -59,11 +56,10 @@ const Filter = () => {
             </div>
             <div className="pl-6">
                 <select name="sort" className="py-2 px-4 rounded-full text-xs font-medium outline-none cursor-pointer ring-1 ring-gray-400 ring-inset" onChange={handleFilterChange}>
-                    <option>Sort By</option>
-                    <option value="asc price">Price (low to high)</option>
-                    <option value="desc price">Price (high to low)</option>
-                    <option value="asc lastUpdated">Newest</option>
-                    <option value="desc lastUpdated">Oldest</option>
+                    <option value="false">Sort By</option>
+                    <option value="pop">Popularity</option>
+                    <option value="asc">Price (low to high)</option>
+                    <option value="desc">Price (high to low)</option>
                 </select>
             </div>
         </div>

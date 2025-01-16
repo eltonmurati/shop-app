@@ -8,13 +8,12 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
 
     const {slug} = await params;
 
-    let { data: product } = await postgres.from('product').select(`*, brand(*)`).eq('id', slug).limit(1).single();
+    let { data: product } = await postgres.from('product').select('*, brand(*)').eq('id', slug).limit(1).single();
 
     if (!product) {
         return notFound();
     }
 
-    let discountPrice = product.discounted_price ? product.discounted_price.toLocaleString() : null;
     let images = product.image_urls ? product.image_urls : [];
     let specEntries = product.specifications ? Object.entries(product.specifications) : null;
     
@@ -30,10 +29,16 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
                     <h4 className="">{product.sku}</h4>
                     {product.description && (<p className="text-gray-500">{product.description}</p>)}
                     <div className="h-[2px] bg-gray-100"/>
-                    {discountPrice ? (
+                    {product.on_sale ? (
                         <div className="flex items-center gap-4">
-                            <h2 className="text-xl text-gray-500 line-through">£{product.price.toLocaleString()}</h2>
-                            <h2 className="font-medium text-2xl">£{discountPrice}</h2>
+                            <h2 className="text-xl text-gray-500 line-through">£{product.original_price.toLocaleString()}</h2>
+                            <h2 className="font-medium text-2xl">£{product.price}</h2>
+                            <div className="flex gap-2 items-center">
+                                <div className="text-xs rounded-md bg-bwcred px-2 py-1 text-white font-medium">SALE</div>
+                                <div className="text-xs rounded-md ring-1 ring-bwcred px-2 py-1 text-bwcred ring-inset font-medium">
+                                    {Math.round(100-(product.price/product.original_price)*100)}% OFF
+                                </div>
+                            </div>
                         </div>
                     ) : (
                         <h2 className="font-medium text-2xl">£{product.price.toLocaleString()}</h2>

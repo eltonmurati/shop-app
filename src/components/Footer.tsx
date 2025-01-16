@@ -40,8 +40,8 @@ const Footer = () => {
                             <Link href="/list">All Products</Link>
                             <Link href="/list?cat=95">Featured Products</Link>
                             <Link href="/list?cat=96">New Products</Link>
-                            <Link href="/list?cat=97">Deals</Link>
-                            <Link href="/list?cat=94">Clearance</Link>
+                            <Link href="/list?cat=97">On-Sale Products</Link>
+                            <Link href="">Popular Products</Link>
                         </div>
                     </div>
                     <div className="flex flex-col justify-between">
