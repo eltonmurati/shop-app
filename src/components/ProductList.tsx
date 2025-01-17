@@ -12,7 +12,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
 
     if (searchParams["cat"]) { productQuery = productQuery.in("category.id", Array.isArray(searchParams["cat"]) ? searchParams["cat"] : [searchParams["cat"]] ); }
 
-    if (searchParams["brand"]) { productQuery = productQuery.eq("brand.id", searchParams["brand"]); }
+    if (searchParams["brand"]) { productQuery = productQuery.in("brand.id", Array.isArray(searchParams["brand"]) ? searchParams["brand"] : [searchParams["brand"]] ); }
 
     if (searchParams["stock"]) { productQuery = productQuery.gt("quantity", 0); }
 
@@ -103,7 +103,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                     ))}
                 </div>
             ) : (
-                <div className="text-gray-500 text-center my-8 text-xl font-medium">No products found</div>
+                <div className="text-gray-700 text-center my-8 text-xl font-medium">No products found</div>
             )}
         </>
     )

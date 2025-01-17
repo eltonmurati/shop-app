@@ -35,7 +35,7 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
                             <h2 className="font-medium text-2xl">£{product.price}</h2>
                             <div className="flex gap-2 items-center">
                                 <div className="text-xs rounded-md bg-bwcred px-2 py-1 text-white font-medium">SALE</div>
-                                <div className="text-xs rounded-md ring-1 ring-bwcred px-2 py-1 text-bwcred ring-inset font-medium">
+                                <div className="text-xs rounded-md ring-1 ring-bwcred ring-inset px-2 py-1 text-bwcred font-medium">
                                     {Math.round(100-(product.price/product.original_price)*100)}% OFF
                                 </div>
                             </div>

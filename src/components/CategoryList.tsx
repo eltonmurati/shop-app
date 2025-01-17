@@ -25,13 +25,13 @@ const CategoryList = () => {
     const getLink = (id:number) => {
         switch (id) {
             case 98:
-                return "/list";
+                return "/shop";
             case 97:
-                return "/list?sale=true";
+                return "/shop?sale=true";
             case 0:
-                return "/list?sort=pop";
+                return "/shop?sort=pop";
             default:
-                return "/list?cat=" + id;
+                return "/shop?cat=" + id;
         }
     }
 

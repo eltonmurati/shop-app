@@ -16,10 +16,10 @@ const SearchBar = () => {
         const params = new URLSearchParams(searchParams);
 
         if(search){
-            if (pathname === "/list") {
+            if (pathname === "/shop") {
                 params.set("search", search);
             } else {
-                router.push(`/list?search=${search}`);
+                router.push(`/shop?search=${search}`);
                 return;
             }
         } else {
