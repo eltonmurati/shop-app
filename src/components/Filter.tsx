@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import DoubleRange from "./DoubleRange";
 import FilterTags from "./FilterTags";
+import FilterDropdown from "./FilterDropdown";
 
 const Filter = () => {
 
@@ -36,6 +37,10 @@ const Filter = () => {
         <div className="py-8 flex flex-col gap-4">
             <div className="flex justify-between">
                 <div className="flex gap-6 flex-wrap">
+                    <div className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative">
+                        <p>TEST</p>
+                        <FilterDropdown />
+                    </div>
                     <select name="cat" className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer" onChange={handleFilterChange}>
                         <option>Category</option>
                         <option value="cat1">Category 1</option>

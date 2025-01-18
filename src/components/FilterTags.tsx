@@ -1,6 +1,8 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import FilterTagValue from "./FilterTagValue";
+import { Suspense } from "react";
 
 const FilterTags = () => {
 
@@ -39,11 +41,11 @@ const FilterTags = () => {
         <>
             {tags.length > 0 && (
                 <div className="flex flex-wrap gap-4">
-                    {tags.map((tag,i)=>(
-                        <div className="rounded-full px-3 h-6 ring-1 ring-gray-400 text-xs text-gray-500 flex gap-2 items-center text-gray-400" key={i}>
+                    {tags.map((tag)=>(
+                        <div className="rounded-full px-3 h-6 ring-1 ring-gray-400 text-xs text-gray-500 flex gap-2 items-center text-gray-400" key={tag}>
                             <div className="flex gap-1">
                                 <p className="font-semibold">{renameTag(tag.split(": ")[0])}:</p>
-                                <p className="">{tag.split(": ")[1]}</p>
+                                <FilterTagValue tag={tag} />
                             </div>
                             <button className="text-bwcred font-semibold text-md" onClick={()=>removeFilter(tag)}>X</button>
                         </div>
