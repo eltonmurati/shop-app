@@ -17,7 +17,13 @@ const CartModel = () => {
                     <div className="flex flex-col gap-8">
                         {/* ITEM */}
                         <div className="flex gap-4">
-                            <Image src="https://images.pexels.com/photos/2088210/pexels-photo-2088210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" width={72} height={96} className="object-cover rounded-md"/>
+                            <Image 
+                                src="https://images.pexels.com/photos/2088210/pexels-photo-2088210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                                alt="" 
+                                width={72} 
+                                height={96} 
+                                className="object-cover rounded-md"
+                            />
                             <div className="flex flex-col justify-between w-full">
                                 {/* TOP */}
                                 <div className="">
@@ -40,7 +46,13 @@ const CartModel = () => {
                         </div>
                         {/* ITEM */}
                         <div className="flex gap-4">
-                            <Image src="https://images.pexels.com/photos/2088210/pexels-photo-2088210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" width={72} height={96} className="object-cover rounded-md"/>
+                            <Image 
+                                src="https://images.pexels.com/photos/2088210/pexels-photo-2088210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                                alt="" 
+                                width={72} 
+                                height={96} 
+                                className="object-cover rounded-md"
+                            />
                             <div className="flex flex-col justify-between w-full">
                                 {/* TOP */}
                                 <div className="">

@@ -12,14 +12,14 @@ const FilterTagValue = ({tag}:{tag:string}) => {
             switch (key) {
                 case "cat":
                     await postgres.from("category").select("*").eq("id", name).limit(1).single().then(({data: category}) => {
-                        if (category) setValue(category.name)
-                        setLoading(false)
+                        if (category) { setValue(category.name); }
+                        setLoading(false);
                     });
                     break;
                 case "brand":
                     await postgres.from("brand").select("*").eq("id", name).limit(1).single().then(({data: brand}) => {
-                        if (brand) setValue(brand.name)
-                        setLoading(false)
+                        if (brand) { setValue(brand.name); }
+                        setLoading(false);
                     });
                     break;
                 default:

@@ -4,8 +4,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import DoubleRange from "./DoubleRange";
 import FilterTags from "./FilterTags";
 import FilterDropdown from "./FilterDropdown";
+import { useState } from "react";
 
 const Filter = () => {
+
+    const [categoryOpen, setCategoryOpen] = useState(false);
+    const [brandOpen, setBrandOpen] = useState(false);
 
     const searchParams = useSearchParams();
     const {replace} = useRouter();
@@ -36,34 +40,32 @@ const Filter = () => {
     return (
         <div className="py-8 flex flex-col gap-4">
             <div className="flex justify-between">
-                <div className="flex gap-6 flex-wrap">
-                    <div className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative">
-                        <p>TEST</p>
-                        <FilterDropdown />
+                <div className="flex gap-5 flex-wrap">
+                    <div className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative" onClick={()=>setCategoryOpen(!categoryOpen)}>
+                        <p>Category</p>
+                        {categoryOpen && (
+                            <FilterDropdown table={"category"} name={"cat"} />
+                        )}
                     </div>
-                    <select name="cat" className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer" onChange={handleFilterChange}>
-                        <option>Category</option>
-                        <option value="cat1">Category 1</option>
-                        <option value="cat2">Category 2</option>
-                    </select>
-                    <select name="brand" className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer" onChange={handleFilterChange}>
-                        <option>Brand</option>
-                        <option value="type1">Brand 1</option>
-                        <option value="type2">Brand 2</option>
-                    </select>
-                    <div className="flex gap-2 items-center bg-bwcgray rounded-full px-4 h-max py-2">
-                        <input type="checkbox" name="stock" className="accent-bwcblue" checked={params.has("stock")} onChange={handleFilterChange} />
-                        <label htmlFor="stock" className="text-xs font-medium">In Stock</label>
-                    </div>
-                    <div className="flex gap-2 items-center bg-bwcgray rounded-full px-4 h-max py-2">
-                        <input type="checkbox" name="sale" className="accent-bwcred" checked={params.has("sale")} onChange={handleFilterChange} />
-                        <label htmlFor="sale" className="text-xs font-medium">On Sale</label>
+                    <div className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative" onClick={()=>setBrandOpen(!brandOpen)}>
+                        <p>Brand</p>
+                        {brandOpen && (
+                            <FilterDropdown table={"brand"} name={"brand"} />
+                        )}
                     </div>
                     <DoubleRange title={"Price"} measurement={"£"} />
                     <DoubleRange title={"Height"} measurement={"mm"} />
                     <DoubleRange title={"Width"} measurement={"mm"} />
                     <DoubleRange title={"Depth"} measurement={"mm"} />
                     <DoubleRange title={"Weight"} measurement={"kg"} />
+                    <div className="flex gap-2 items-center bg-bwcgray rounded-full px-4 h-max py-2">
+                        <input type="checkbox" name="stock" className="accent-bwcblue" checked={params.has("stock")} onChange={handleFilterChange} />
+                        <label htmlFor="stock" className="text-xs font-medium">In Stock</label>
+                    </div>
+                    <div className="flex gap-2 items-center bg-bwcgray rounded-full px-4 h-max py-2">
+                        <input type="checkbox" name="sale" className="accent-bwcblue" checked={params.has("sale")} onChange={handleFilterChange} />
+                        <label htmlFor="sale" className="text-xs font-medium">On Sale</label>
+                    </div>
                     {params.size > 0 && !(params.size === 1 && params.get("sort")) && (
                         <button className="rounded-full px-4 py-2 text-xs font-medium bg-bwcblue h-max text-white" onClick={clearFilters}>Clear Filters</button>
                     )}
