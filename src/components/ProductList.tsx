@@ -84,7 +84,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                             </div>
                             <div className="flex items-center justify-between">
                                 <button 
-                                    className="rounded-2xl ring-1 ring-bwcblue text-bwcblue w-max py-2 px-4 text-xs hover:bg-bwcblue hover:text-white 
+                                    className="rounded-2xl ring-1 ring-bwcblue text-bwcblue w-max py-2 px-4 text-xs whitespace-nowrap hover:bg-bwcblue hover:text-white 
                                         disabled:text-white disabled:bg-bwcblue_disabled disabled:ring-bwcblue_disabled disabled:cursor-not-allowed" 
                                     disabled={!(product.quantity > 0)}
                                 >
@@ -93,7 +93,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                                 {product.on_sale && (
                                     <div className="flex gap-2 items-center">
                                         <div className="text-xs rounded-md bg-bwcred px-2 py-1 text-white font-medium">SALE</div>
-                                        <div className="text-xs rounded-md ring-1 ring-bwcred px-2 py-1 text-bwcred ring-inset font-medium">
+                                        <div className="text-xs rounded-md ring-1 ring-bwcred px-2 py-1 text-bwcred ring-inset font-medium whitespace-nowrap">
                                             {Math.round(100-(product.price/product.original_price)*100)}% OFF
                                         </div>
                                     </div>

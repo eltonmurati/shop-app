@@ -38,9 +38,9 @@ const Filter = () => {
     }
 
     return (
-        <div className="py-8 flex flex-col gap-4">
+        <div className="pt-4 pb-6 flex flex-col gap-4">
             <div className="flex justify-between">
-                <div className="flex gap-5 flex-wrap">
+                <div className="flex gap-4 flex-wrap">
                     <div className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative" onClick={()=>setCategoryOpen(!categoryOpen)}>
                         <p>Category</p>
                         {categoryOpen && (
@@ -53,11 +53,11 @@ const Filter = () => {
                             <FilterDropdown table={"brand"} name={"brand"} />
                         )}
                     </div>
-                    <DoubleRange title={"Price"} measurement={"£"} />
-                    <DoubleRange title={"Height"} measurement={"mm"} />
-                    <DoubleRange title={"Width"} measurement={"mm"} />
-                    <DoubleRange title={"Depth"} measurement={"mm"} />
-                    <DoubleRange title={"Weight"} measurement={"kg"} />
+                    <DoubleRange title={"Price"} measurement={"£"} column="price" />
+                    <DoubleRange title={"Height"} measurement={"mm"} column="height" />
+                    <DoubleRange title={"Width"} measurement={"mm"} column="width" />
+                    <DoubleRange title={"Depth"} measurement={"mm"} column="depth" />
+                    <DoubleRange title={"Weight"} measurement={"kg"} column="weight" />
                     <div className="flex gap-2 items-center bg-bwcgray rounded-full px-4 h-max py-2">
                         <input type="checkbox" name="stock" className="accent-bwcblue" checked={params.has("stock")} onChange={handleFilterChange} />
                         <label htmlFor="stock" className="text-xs font-medium">In Stock</label>
