@@ -23,9 +23,7 @@ const ShopPage = async ({searchParams}:{searchParams:any}) => {
                 </div>
             </div> */}
             {/* TITLE */}
-            <Link href="/shop">
-                <h1 className="font-semibold text-2xl mt-8">Shop</h1>
-            </Link>
+            <h1 className="font-semibold text-2xl mt-8">Shop</h1>
             {/* FILTER */}
             <Filter />
             {/* PRODUCTS */}

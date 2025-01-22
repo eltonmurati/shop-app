@@ -4,19 +4,23 @@ import Link from "next/link";
 
 const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:number;}) => {
 
-    let productQuery = postgres
-        .from('product')
-        .select('*, category!inner(*), brand!inner(*)');
+    let productQuery = postgres.from('product').select('*, category!inner(*), brand!inner(*)');
 
     if (searchParams["search"]) { productQuery = productQuery.or(`name.ilike.%${searchParams["search"]}%, sku.ilike.%${searchParams["search"]}%`); }
-
     if (searchParams["cat"]) { productQuery = productQuery.in("category.id", Array.isArray(searchParams["cat"]) ? searchParams["cat"] : [searchParams["cat"]] ); }
-
     if (searchParams["brand"]) { productQuery = productQuery.in("brand.id", Array.isArray(searchParams["brand"]) ? searchParams["brand"] : [searchParams["brand"]] ); }
-
     if (searchParams["stock"]) { productQuery = productQuery.gt("quantity", 0); }
-
     if (searchParams["sale"]) { productQuery = productQuery.eq("on_sale", true); }
+    if (searchParams["minprice"]) { productQuery = productQuery.gte("price", searchParams["minprice"]); }
+    if (searchParams["maxprice"]) { productQuery = productQuery.lte("price", searchParams["maxprice"]); }
+    if (searchParams["minheight"]) { productQuery = productQuery.gte("height", searchParams["minheight"]); }
+    if (searchParams["maxheight"]) { productQuery = productQuery.lte("height", searchParams["maxheight"]); }
+    if (searchParams["minwidth"]) { productQuery = productQuery.gte("width", searchParams["minwidth"]); }
+    if (searchParams["maxwidth"]) { productQuery = productQuery.lte("width", searchParams["maxwidth"]); }
+    if (searchParams["mindepth"]) { productQuery = productQuery.gte("depth", searchParams["mindepth"]); }
+    if (searchParams["maxdepth"]) { productQuery = productQuery.lte("depth", searchParams["maxdepth"]); }
+    if (searchParams["minweight"]) { productQuery = productQuery.gte("weight", searchParams["minweight"]); }
+    if (searchParams["maxweight"]) { productQuery = productQuery.lte("weight", searchParams["maxweight"]); }
 
     if (searchParams["sort"]) { 
         switch (searchParams["sort"]) {
@@ -33,9 +37,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
     }
 
     productQuery = productQuery.limit(limit || 20);
-
     let { data: products } = await productQuery;
-
     let found = true;
     if (!products || products.length < 1) { found = false; }
 

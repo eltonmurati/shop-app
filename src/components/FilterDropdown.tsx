@@ -14,7 +14,7 @@ const FilterDropdown = ({table, name}:{table:"category"|"brand"; name:string;}) 
 
     const handleClick = (value:string) => {
         if (!params.has(name, value)) { params.append(name, value); }
-        replace(`/shop?${params.toString()}`);
+        replace(`/shop?${params}`);
     }
 
     const getTable = async (search?:string) => {

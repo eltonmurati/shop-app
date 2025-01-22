@@ -29,7 +29,7 @@ const Filter = () => {
             }
         }
 
-        replace(`/shop?${params.toString()}`);
+        replace(`/shop?${params}`);
     }
 
     const clearFilters = () => {
@@ -41,16 +41,42 @@ const Filter = () => {
         <div className="pt-4 pb-6 flex flex-col gap-4">
             <div className="flex justify-between">
                 <div className="flex gap-4 flex-wrap">
-                    <div className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative" onClick={()=>setCategoryOpen(!categoryOpen)}>
+                    <div className="py-2 pl-4 pr-2 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative flex gap-2" onClick={()=>setCategoryOpen(!categoryOpen)}>
                         <p>Category</p>
-                        {categoryOpen && (
-                            <FilterDropdown table={"category"} name={"cat"} />
+                        {categoryOpen ? (
+                            <>
+                                <div className="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
+                                        <path fillRule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                                <FilterDropdown table={"category"} name={"cat"} />
+                            </>
+                        ) : (
+                            <div className="">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
+                                    <path fillRule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+                                </svg>
+                            </div>
                         )}
                     </div>
-                    <div className="py-2 px-4 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative" onClick={()=>setBrandOpen(!brandOpen)}>
+                    <div className="py-2 pl-4 pr-2 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative flex gap-2" onClick={()=>setBrandOpen(!brandOpen)}>
                         <p>Brand</p>
-                        {brandOpen && (
-                            <FilterDropdown table={"brand"} name={"brand"} />
+                        {brandOpen ? (
+                            <>
+                                <div className="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
+                                        <path fillRule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                                <FilterDropdown table={"brand"} name={"brand"} />
+                            </>
+                        ) : (
+                            <div className="">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
+                                    <path fillRule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+                                </svg>
+                            </div>
                         )}
                     </div>
                     <DoubleRange title={"Price"} measurement={"£"} column="price" />
@@ -59,11 +85,11 @@ const Filter = () => {
                     <DoubleRange title={"Depth"} measurement={"mm"} column="depth" />
                     <DoubleRange title={"Weight"} measurement={"kg"} column="weight" />
                     <div className="flex gap-2 items-center bg-bwcgray rounded-full px-4 h-max py-2">
-                        <input type="checkbox" name="stock" className="accent-bwcblue" checked={params.has("stock")} onChange={handleFilterChange} />
+                        <input type="checkbox" id="stock" name="stock" className="accent-bwcblue" checked={params.has("stock")} onChange={handleFilterChange} />
                         <label htmlFor="stock" className="text-xs font-medium">In Stock</label>
                     </div>
                     <div className="flex gap-2 items-center bg-bwcgray rounded-full px-4 h-max py-2">
-                        <input type="checkbox" name="sale" className="accent-bwcblue" checked={params.has("sale")} onChange={handleFilterChange} />
+                        <input type="checkbox" id="sale" name="sale" className="accent-bwcblue" checked={params.has("sale")} onChange={handleFilterChange} />
                         <label htmlFor="sale" className="text-xs font-medium">On Sale</label>
                     </div>
                     {params.size > 0 && !(params.size === 1 && params.get("sort")) && (

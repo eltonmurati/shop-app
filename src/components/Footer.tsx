@@ -40,8 +40,8 @@ const Footer = () => {
                             <Link href="/shop">All Products</Link>
                             <Link href="/shop?cat=95">Featured Products</Link>
                             <Link href="/shop?cat=96">New Products</Link>
-                            <Link href="/shop?cat=97">On-Sale Products</Link>
-                            <Link href="">Popular Products</Link>
+                            <Link href="/shop?sale=true">On-Sale Products</Link>
+                            <Link href="/shop?sort=pop">Popular Products</Link>
                         </div>
                     </div>
                     <div className="flex flex-col justify-between">
@@ -60,7 +60,7 @@ const Footer = () => {
                     <h1 className="font-medium text-lg">SUBSCRIBE</h1>
                     <p>Be the first to get the latest news about trends, promotions, and much more!</p>
                     <div className="flex">
-                        <input type="text" placeholder="Email address" className="p-4 w-3/4 outline-none"/>
+                        <input type="text" name="subscribe" placeholder="Email address" className="p-4 w-3/4 outline-none"/>
                         <button className="w-1/4 bg-bwcblue text-white">JOIN</button>
                     </div>
                     <span className="font-semibold">Secure Payments</span>

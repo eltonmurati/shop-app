@@ -10,11 +10,13 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
 
     const [open, setOpen] = useState(false);
     const [min, setMin] = useState(0);
-    const [max, setMax] = useState(1400);
+    const [max, setMax] = useState(1);
     const [minValue, setMinValue] = useState(0);
-    const [maxValue, setMaxValue] = useState(100);
+    const [maxValue, setMaxValue] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [minText, setMinText] = useState("");
+    const [maxText, setMaxText] = useState("");
 
     const searchParams = useSearchParams();
     const {replace} = useRouter();
@@ -24,52 +26,142 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
         const getValues = async () => {
             await postgres.from("product").select("*").order(column, {ascending: false}).then(({data: products})=>{
                 if (products && products.length > 0) {
-                    setMinValue(products[products.length - 1][column]);
-                    setMaxValue(products[0][column]);
-                    setMin(products[products.length - 1][column]);
-                    setMax(products[0][column]);
+                    if (products[0][column] !== products[products.length - 1][column]) {
+                        setMinValue(products[products.length - 1][column]);
+                        setMaxValue(products[0][column]);
+                        if (params.has("min"+column)) { 
+                            setMin(Number(params.get("min"+column)) || products[products.length - 1][column]);
+                            setMinText(params.get("min"+column) || "");
+                        } else { 
+                            setMin(products[products.length - 1][column]);
+                            setMinText(products[products.length - 1][column].toString());
+                        }
+                        if (params.has("max"+column)) { 
+                            setMax(Number(params.get("max"+column)) || products[0][column]);
+                            setMaxText(params.get("max"+column) || "");
+                        } else { 
+                            setMax(products[0][column]);
+                            setMaxText(products[0][column].toString());
+                        }
+                    } else { setError(true); }
                 } else { setError(true); }
                 setLoading(false);
             });
         }
         getValues();
-    },[]);
+    },[searchParams]);
 
-    if (loading) { return(<div className="bg-bwcgray rounded-full text-xs font-medium px-4 py-2 h-max">{title}</div>); }
-    if (error) { return(<div className="bg-bwcgray rounded-full text-xs font-medium px-4 py-2 h-max">{title}</div>); }
+    const handleSlide = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const {name,valueAsNumber} = e.target;
+        if (name === "min") { 
+            if (valueAsNumber > max) { 
+                setMin(max);
+                setMinText(max.toString());
+            } else { 
+                setMin(valueAsNumber);
+                setMinText(valueAsNumber.toString());
+            }
+        } else { 
+            if (valueAsNumber < min) { 
+                setMax(min);
+                setMaxText(min.toString());
+            } else { 
+                setMax(valueAsNumber);
+                setMaxText(valueAsNumber.toString());
+            }
+        }
+    }
+
+    const handleRange = (e:React.PointerEvent<HTMLInputElement> | React.TouchEvent<HTMLInputElement>) => {
+        const {name,value} = e.currentTarget;
+        if (name === "min") {
+            if (value !== minValue.toString() && value !== "") { 
+                params.set(name+column, value); 
+                setMin(Number(value));
+            } else { 
+                params.delete(name+column); 
+                setMin(minValue);
+            }
+        } else {
+            if (value !== maxValue.toString() && value !== "") { 
+                params.set(name+column, value); 
+                setMax(Number(value));
+            } else { 
+                params.delete(name+column); 
+                setMax(maxValue);
+            }
+        }
+        replace(`shop?${params}`);
+    }
+
+    const handleTextEnter = (e:React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            const {name,value} = e.currentTarget;
+            console.log(value);
+            if (name === "min") {
+                if (value !== minValue.toString() && value !== "") { 
+                    params.set(name+column, value); 
+                    setMin(Number(value) || minValue);
+                } else { 
+                    params.delete(name+column); 
+                    setMin(minValue);
+                    setMinText(minValue.toString());
+                }
+            } else {
+                if (value !== maxValue.toString() && value !== "") { 
+                    params.set(name+column, value); 
+                    setMax(Number(value) || maxValue);
+                } else { 
+                    params.delete(name+column);
+                    setMax(maxValue);
+                    setMaxText(maxValue.toString());
+                }
+            }
+            replace(`shop?${params}`);
+        }
+    }
+
+    if (loading) { return(null); }
+    if (error) { return(null); }
 
     return (
         <div className="flex flex-col gap-3 bg-bwcgray rounded-2xl py-2 px-2 h-max cursor-pointer" onClick={()=>setOpen(!open)}>
-            <h3 className="text-xs font-medium text-center px-2">{title}</h3>
+            <p className="text-xs font-medium text-center px-2">{title}</p>
             {open && (
-                <div className="flex flex-col gap-4" onClick={(e)=>e.stopPropagation()}>
+                <div className="flex flex-col gap-4 cursor-default" onClick={(e)=>e.stopPropagation()}>
                     <div className="w-full bg-white h-1.5 relative rounded-full">
-                        <span className="h-full absolute bg-orange-500"></span>
-                        <input type="range" name="min" min={minValue} max={maxValue} value={min} onChange={(e)=>setMin(e.target.valueAsNumber)} onMouseUp={()=>console.log("DONE!")}
-                            className="absolute w-full top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent [&::-webkit-slider-thumb]:appearance-none 
-                                [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white 
-                                [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:ring-1 [&::-webkit-slider-thumb]:ring-gray-400
-                                [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:ring-1 [&::-moz-range-thumb]:ring-gray-400 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 
-                                [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:cursor-pointer
+                        <span className={`h-full absolute bg-bwcblue max-w-full`}></span>
+                        <input type="range" name="min" min={minValue} max={maxValue} value={min} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
+                            className="absolute w-full pr-[21px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent 
+                                [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full 
+                                [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:ring-1
+                                [&::-webkit-slider-thumb]:ring-gray-400 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:ring-1 [&::-moz-range-thumb]:ring-gray-400 
+                                [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white 
+                                [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:cursor-pointer
                             " 
                         />
-                        <input type="range" name="max" min={minValue} max={maxValue} value={max} onChange={(e)=>setMin(e.target.valueAsNumber)} onMouseUp={()=>console.log("DONE!")}
-                            className="absolute w-full top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent [&::-webkit-slider-thumb]:appearance-none 
-                                [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white 
-                                [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:ring-1 [&::-webkit-slider-thumb]:ring-gray-400
-                                [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:ring-1 [&::-moz-range-thumb]:ring-gray-400 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 
-                                [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:cursor-pointer
+                        <input type="range" name="max" min={minValue} max={maxValue} value={max} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
+                            className="absolute w-full pl-[21px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent
+                                [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full 
+                                [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:ring-1
+                                [&::-webkit-slider-thumb]:ring-gray-400 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:ring-1 [&::-moz-range-thumb]:ring-gray-400 
+                                [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white 
+                                [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:cursor-pointer
                             " 
                         />
                     </div>
                     <div className="flex justify-between gap-2">
                         <div className="flex w-20">
                             <div className="bg-bwcgray rounded-l-full py-1 pl-2 pr-2 text-xs font-medium ring-1 ring-gray-400">{measurement}</div>
-                            <input type="text" placeholder="min" name="min" className="w-full rounded-r-full outline-none text-xs px-1 ring-1 ring-gray-400" />
+                            <input type="text" placeholder="min" name="min" value={minText} className="w-full rounded-r-full outline-none text-xs px-1 ring-1 ring-gray-400" 
+                                onChange={(e)=>setMinText(e.target.value)} onKeyDown={handleTextEnter}
+                            />
                         </div>
                         <div className="flex w-20">
                             <div className="bg-bwcgray rounded-l-full py-1 pl-2 pr-2 text-xs font-medium ring-1 ring-gray-400">{measurement}</div>
-                            <input type="text" placeholder="max" name="max" className="w-full rounded-r-full outline-none text-xs px-1 ring-1 ring-gray-400" />
+                            <input type="text" placeholder="max" name="max" value={maxText} className="w-full rounded-r-full outline-none text-xs px-1 ring-1 ring-gray-400" 
+                                onChange={(e)=>setMaxText(e.target.value)} onKeyDown={handleTextEnter}
+                            />
                         </div>
                     </div>
                 </div>
