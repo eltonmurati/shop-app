@@ -22,6 +22,9 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
     const {replace} = useRouter();
     const params = new URLSearchParams(searchParams);
 
+    // (min - minValue) / (maxValue - minValue) * 100
+    // 100 - ((max - minValue) / (maxValue - minValue) * 100)
+
     useEffect(()=>{
         const getValues = async () => {
             await postgres.from("product").select("*").order(column, {ascending: false}).then(({data: products})=>{
@@ -125,12 +128,26 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
     if (error) { return(null); }
 
     return (
-        <div className="flex flex-col gap-3 bg-bwcgray rounded-2xl py-2 px-2 h-max cursor-pointer" onClick={()=>setOpen(!open)}>
-            <p className="text-xs font-medium text-center px-2">{title}</p>
+        <div className="flex flex-col gap-3 bg-bwcgray rounded-2xl py-2 px-2 h-max cursor-pointer items-center" onClick={()=>setOpen(!open)}>
+            {open ? (
+                <p className="text-xs font-medium px-2 w-max relative">
+                    {title}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4 absolute top-0 -right-4">
+                        <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
+                    </svg>
+                </p>
+            ) : (
+                <div className="flex">
+                    <p className="text-xs font-medium px-2 w-max relative">{title}</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
+                        <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+                    </svg>
+                </div>
+            )}
             {open && (
                 <div className="flex flex-col gap-4 cursor-default" onClick={(e)=>e.stopPropagation()}>
                     <div className="w-full bg-white h-1.5 relative rounded-full">
-                        <span className={`h-full absolute bg-bwcblue max-w-full`}></span>
+                        {/* <span className={`h-full absolute bg-bwcblue max-w-full`} /> */}
                         <input type="range" name="min" min={minValue} max={maxValue} value={min} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
                             className="absolute w-full pr-[21px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent 
                                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full 
