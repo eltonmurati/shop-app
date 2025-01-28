@@ -33,12 +33,14 @@ const Filter = () => {
     }
 
     const clearFilters = () => {
-        if (params.get("sort")) { replace(`shop?sort=${params.get("sort")}`); }
+        if (params.get("sort") && params.get("page")) { replace(`shop?sort=${params.get("sort")}&page=${params.get("page")}`); }
+        else if (params.get("sort")) { replace(`shop?sort=${params.get("sort")}`); }
+        else if (params.get("page")) { replace(`shop?page=${params.get("page")}`); }
         else { replace("/shop"); }
     }
 
     return (
-        <div className="pt-4 pb-6 flex flex-col gap-4">
+        <div className="pt-8 pb-10 flex flex-col gap-4">
             <div className="flex justify-between flex-col-reverse md:flex-row gap-4">
                 <div className="flex gap-4 flex-wrap">
                     <div className="py-2 pl-4 pr-2 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative flex gap-2" onClick={()=>setCategoryOpen(!categoryOpen)}>
@@ -84,7 +86,8 @@ const Filter = () => {
                         <input type="checkbox" id="sale" name="sale" className="accent-bwcblue" checked={params.has("sale")} onChange={handleFilterChange} />
                         <label htmlFor="sale" className="text-xs font-medium">On Sale</label>
                     </div>
-                    {params.size > 0 && !(params.size === 1 && params.get("sort")) && (
+                    {params.size > 0 && !(params.size === 1 && params.get("sort")) && !(params.size === 1 && params.get("page")) && 
+                        !(params.size === 2 && params.get("sort") && params.get("page")) && (
                         <button className="rounded-full px-4 py-2 text-xs font-medium bg-bwcblue h-max text-white" onClick={clearFilters}>Clear Filters</button>
                     )}
                 </div>

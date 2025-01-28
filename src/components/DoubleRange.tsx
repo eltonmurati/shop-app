@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 
 const DoubleRange = ({title, measurement, column}:{title:string; measurement:string; column:"price"|"height"|"depth"|"width"|"weight";}) => {
 
-    // https://www.youtube.com/watch?v=ujncLU2bt4k
-
     const [open, setOpen] = useState(false);
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(1);

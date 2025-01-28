@@ -11,7 +11,7 @@ const FilterTags = () => {
 
     let tags: string[] = [];
     const createTags = (value:string, key:string) => {
-        if (!(["stock","sale", "sort", "minprice", "maxprice", "minheight", "maxheight", "minwidth", "maxwidth", "mindepth", "maxdepth", "minweight", "maxweight"].includes(key))) {
+        if (!(["stock","sale", "sort", "minprice", "maxprice", "minheight", "maxheight", "minwidth", "maxwidth", "mindepth", "maxdepth", "minweight", "maxweight", "page"].includes(key))) {
             tags.push(key + ": " + value);
         }
     }
