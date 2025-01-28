@@ -28,7 +28,7 @@ const ShopPage = async ({searchParams}:{searchParams:any}) => {
             <Filter />
             {/* PRODUCTS */}
             <Suspense fallback={"Loading..."}>
-                <ProductList searchParams={params} limit={2} />
+                <ProductList searchParams={params} limit={20} />
             </Suspense>
         </div>
     )
