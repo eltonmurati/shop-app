@@ -53,7 +53,7 @@ const Pagination = ({length, limit, page}:{length:number; limit:number; page:num
                 </svg>
             </button>
             {visiblePages.map((p)=>(
-                <button className={p === Number(page) ? "underline underline-offset-4 decoration-2" : ""} key={p}>{p}</button>
+                <button className={p === Number(page) ? "underline underline-offset-4 decoration-2" : ""} key={p} onClick={()=>changePage(p)}>{p}</button>
             ))}
             <button className={Number(page) === pages ? "text-bwcblue_disabled cursor-not-allowed" : ""} onClick={()=>changePage(Number(page)+1)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
