@@ -1,10 +1,31 @@
-"use client"
+"use client";
 
-import Image from "next/image"
+import Cookies from "js-cookie";
+import CartCard from "./CartCard";
+import { postgres } from "@/app/lib/postgresClient";
+import { useEffect, useState } from "react";
 
 const CartModel = () => {
 
-    const cartItems = true;
+    const [subtotal, setSubtotal] = useState(0);
+
+    let cart = JSON.parse(Cookies.get("cart") || '{}');
+
+    let cartItems = false;
+    if (Object.entries(cart).length > 0) { cartItems = true; }
+
+    let postgresQuery = postgres.from('product').select('price');
+    useEffect(()=>{
+        const getSubtotal =async()=>{
+            for (const [key, value] of Object.entries(cart)) { 
+                const {data: product} = await postgresQuery.eq('id', key).limit(1).single();
+                if (product) {
+                    setSubtotal(subtotal + product.price * (value as number));
+                }
+            }
+        }
+        getSubtotal();
+    },[]);
 
     return (
         <div className="w-max absolute p-4 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-30">
@@ -16,72 +37,19 @@ const CartModel = () => {
                     {/* LIST */}
                     <div className="flex flex-col gap-8">
                         {/* ITEM */}
-                        <div className="flex gap-4">
-                            <Image 
-                                src="https://images.pexels.com/photos/2088210/pexels-photo-2088210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                                alt="" 
-                                width={72} 
-                                height={96} 
-                                className="object-cover rounded-md"
-                            />
-                            <div className="flex flex-col justify-between w-full">
-                                {/* TOP */}
-                                <div className="">
-                                    {/* TITLE */}
-                                    <div className="flex items-center justify-between gap-8">
-                                        <h3 className="font-semibold">Product Name</h3>
-                                        <div className="p-1">$49</div>
-                                    </div>
-                                    {/* DESCRIPTION */}
-                                    <div className="text-sm text-gray-500">
-                                        available
-                                    </div>
-                                </div>
-                                {/* BOTTOM */}
-                                <div className="flex justify-between text-sm">
-                                    <span className="text-gray-500">Qty. 2</span>
-                                    <span className="text-bwcred">Remove</span>
-                                </div>
-                            </div>
-                        </div>
-                        {/* ITEM */}
-                        <div className="flex gap-4">
-                            <Image 
-                                src="https://images.pexels.com/photos/2088210/pexels-photo-2088210.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                                alt="" 
-                                width={72} 
-                                height={96} 
-                                className="object-cover rounded-md"
-                            />
-                            <div className="flex flex-col justify-between w-full">
-                                {/* TOP */}
-                                <div className="">
-                                    {/* TITLE */}
-                                    <div className="flex items-center justify-between gap-8">
-                                        <h3 className="font-semibold">Product Name</h3>
-                                        <div className="p-1">$49</div>
-                                    </div>
-                                    {/* DESCRIPTION */}
-                                    <div className="text-sm text-gray-500">
-                                        available
-                                    </div>
-                                </div>
-                                {/* BOTTOM */}
-                                <div className="flex justify-between text-sm">
-                                    <span className="text-gray-500">Qty. 2</span>
-                                    <span className="text-bwcred">Remove</span>
-                                </div>
-                            </div>
-                        </div>
+                        {Object.entries(cart).map(([key, value])=>(
+                            <CartCard id={Number(key)} quantity={value as number} key={key} />
+                        ))}
                     </div>
                     {/* BOTTOM */}
                     <div className="">
                         <div className="flex items-center justify-between font-semibold">
                             <span className="">Subtotal</span>
-                            <span className="">$49</span>
+                            <span className="">£{subtotal.toLocaleString()}</span>
                         </div>
                         <p className="text-gray-500 text-sm mt-2 mb-4">
-                            Shipping and taxes calculated at checkout.
+                            Shipping calculated at checkout.<br/>
+                            All prices are VAT inclusive.
                         </p>
                         <div className="flex justify-between text-sm">
                             <button className="rounded-md py-3 px-4 ring-1 ring-gray-300">View Cart</button>

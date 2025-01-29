@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 const Add = ({stock, productId}:{stock:number; productId:number;}) => {
 
@@ -14,6 +15,13 @@ const Add = ({stock, productId}:{stock:number; productId:number;}) => {
             setQuantity( (prev) => prev + 1 );
         };
     };
+
+    const addToCart = () => {
+        let cart = JSON.parse(Cookies.get("cart") || '{}');
+        if (cart[`${productId}`]) { cart[`${productId}`] = Math.min(cart[`${productId}`] + quantity, stock); }
+        else { cart[`${productId}`] = quantity; }
+        Cookies.set("cart", JSON.stringify(cart));
+    }
 
     return (
         <div className="flex flex-col gap-4">
@@ -33,6 +41,7 @@ const Add = ({stock, productId}:{stock:number; productId:number;}) => {
                     <button 
                         className="w-36 text-sm rounded-3xl ring-1 ring-bwcblue text-bwcblue py-2 px-4 hover:bg-bwcblue hover:text-white 
                             disabled:cursor-not-allowed disabled:bg-bwcblue_disabled disabled:text-white disabled:ring-bwcblue_disabled"
+                        onClick={addToCart}
                     >
                         Add to Cart
                     </button>
