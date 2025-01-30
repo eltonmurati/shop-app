@@ -1,48 +1,51 @@
 "use client";
 
-import Cookies from "js-cookie";
 import CartCard from "./CartCard";
 import { postgres } from "@/app/lib/postgresClient";
 import { useEffect, useState } from "react";
+import { useCartStore } from "@/hooks/useCartStore";
 
 const CartModel = () => {
 
     const [subtotal, setSubtotal] = useState(0);
 
-    let cart = JSON.parse(Cookies.get("cart") || '{}');
+    const {cart, isLoading} = useCartStore();
 
     let cartItems = false;
     if (Object.entries(cart).length > 0) { cartItems = true; }
 
-    let postgresQuery = postgres.from('product').select('price');
     useEffect(()=>{
         const getSubtotal =async()=>{
+            let total = 0;
             for (const [key, value] of Object.entries(cart)) { 
+                let postgresQuery = postgres.from('product').select('price');
                 const {data: product} = await postgresQuery.eq('id', key).limit(1).single();
+                console.log([key, value]);
                 if (product) {
-                    setSubtotal(subtotal + product.price * (value as number));
+                    total += product.price * (value as number);
                 }
             }
+            setSubtotal(total);
         }
         getSubtotal();
-    },[]);
+    },[cart]);
 
     return (
-        <div className="w-max absolute p-4 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-30">
-            {!cartItems ? (
-                <div className="">Cart is empty</div>
+        <div className="max-w-96 w-max absolute rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-30">
+            {isLoading ? ("Loading...") : !cartItems ? (
+                <div className="p-4">Cart is empty</div>
             ) : (
                 <>
-                    <h2 className="text-xl">Shopping Cart</h2>
+                    <h2 className="text-xl px-4 pt-4">Shopping Cart</h2>
                     {/* LIST */}
-                    <div className="flex flex-col gap-8">
+                    <div className="flex flex-col gap-8 overflow-y-auto max-h-[24.2rem] px-4">
                         {/* ITEM */}
                         {Object.entries(cart).map(([key, value])=>(
                             <CartCard id={Number(key)} quantity={value as number} key={key} />
                         ))}
                     </div>
                     {/* BOTTOM */}
-                    <div className="">
+                    <div className="pb-4 px-4">
                         <div className="flex items-center justify-between font-semibold">
                             <span className="">Subtotal</span>
                             <span className="">£{subtotal.toLocaleString()}</span>

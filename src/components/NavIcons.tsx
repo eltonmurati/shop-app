@@ -3,14 +3,21 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import CartModel from "./CartModel"
 import { logOut } from "@/app/api/auth/[...nextauth]/helpers"
+import { useCartStore } from "@/hooks/useCartStore"
 
 const NavIcons = () => {
 
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
+
+    const {cart,counter,getCart} = useCartStore();
+
+    useEffect(()=>{
+        getCart();
+    },[getCart]);
 
     const router = useRouter();
 
@@ -41,9 +48,11 @@ const NavIcons = () => {
             <Image src="/notification.png" alt="" width={22} height={22} className="cursor-pointer"/>
             <div className="relative cursor-pointer" onClick={()=>setIsCartOpen((prev) => !prev)}>
                 <Image src="/cart.png" alt="" width={22} height={22} />
-                <div className="absolute -top-4 -right-4 w-6 h-6 bg-bwcblue rounded-full text-white text-sm flex items-center justify-center">
-                    2
-                </div>
+                {counter > 0 && (
+                    <div className="absolute -top-4 -right-4 w-6 h-6 bg-bwcblue rounded-full text-white text-sm flex items-center justify-center">
+                        {counter}
+                    </div>
+                )}
             </div>
             {isCartOpen && <CartModel/>}
         </div>

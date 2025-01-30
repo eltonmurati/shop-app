@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const Pagination = ({length, limit, page}:{length:number; limit:number; page:number;}) => {
 
@@ -8,6 +8,7 @@ const Pagination = ({length, limit, page}:{length:number; limit:number; page:num
     const pages = Math.ceil(length / limit);
     let visiblePages = [];
 
+    const pathname = usePathname();
     const searchParams = useSearchParams();
     const {replace} = useRouter();
     const params = new URLSearchParams(searchParams);
@@ -39,6 +40,8 @@ const Pagination = ({length, limit, page}:{length:number; limit:number; page:num
             replace(`/shop?${params}`);
         }
     }
+
+    if (!pathname.startsWith("/shop")) { return null; }
 
     return(
         <div className="mt-16 flex justify-center w-full gap-8 text-bwcblue">
