@@ -38,7 +38,7 @@ const CartModel = () => {
                 <>
                     <h2 className="text-xl px-4 pt-4">Shopping Cart</h2>
                     {/* LIST */}
-                    <div className="flex flex-col gap-8 overflow-y-auto max-h-[24.2rem] px-4">
+                    <div className="flex flex-col gap-8 overflow-y-auto max-h-[30rem] px-4">
                         {/* ITEM */}
                         {Object.entries(cart).map(([key, value])=>(
                             <CartCard id={Number(key)} quantity={value as number} key={key} />
@@ -50,7 +50,7 @@ const CartModel = () => {
                             <span className="">Subtotal</span>
                             <span className="">£{subtotal.toLocaleString()}</span>
                         </div>
-                        <p className="text-gray-500 text-sm mt-2 mb-4">
+                        <p className="text-gray-400 text-sm mt-2 mb-4">
                             Shipping calculated at checkout.<br/>
                             All prices are VAT inclusive.
                         </p>

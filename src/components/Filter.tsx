@@ -43,7 +43,7 @@ const Filter = () => {
         <div className="pt-8 pb-10 flex flex-col gap-4">
             <div className="flex justify-between flex-col-reverse md:flex-row gap-4">
                 <div className="flex gap-4 flex-wrap">
-                    <div className="py-2 pl-4 pr-2 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative flex gap-2" onClick={()=>setCategoryOpen(!categoryOpen)}>
+                    <div className="py-2 pl-4 pr-2 rounded-full text-xs font-medium bg-gray-100 h-max outline-none cursor-pointer relative flex gap-2" onClick={()=>setCategoryOpen(!categoryOpen)}>
                         <p>Category</p>
                         {categoryOpen ? (
                             <>
@@ -58,7 +58,7 @@ const Filter = () => {
                             </svg>
                         )}
                     </div>
-                    <div className="py-2 pl-4 pr-2 rounded-full text-xs font-medium bg-bwcgray h-max outline-none cursor-pointer relative flex gap-2" onClick={()=>setBrandOpen(!brandOpen)}>
+                    <div className="py-2 pl-4 pr-2 rounded-full text-xs font-medium bg-gray-100 h-max outline-none cursor-pointer relative flex gap-2" onClick={()=>setBrandOpen(!brandOpen)}>
                         <p>Brand</p>
                         {brandOpen ? (
                             <>
@@ -78,17 +78,17 @@ const Filter = () => {
                     <DoubleRange title={"Width"} measurement={"mm"} column="width" />
                     <DoubleRange title={"Depth"} measurement={"mm"} column="depth" />
                     <DoubleRange title={"Weight"} measurement={"kg"} column="weight" />
-                    <div className="flex gap-2 items-center bg-bwcgray rounded-full px-4 h-max py-2">
-                        <input type="checkbox" id="stock" name="stock" className="accent-bwcblue" checked={params.has("stock")} onChange={handleFilterChange} />
+                    <div className="flex gap-2 items-center bg-gray-100 rounded-full px-4 h-max py-2">
+                        <input type="checkbox" id="stock" name="stock" className="accent-blue-600" checked={params.has("stock")} onChange={handleFilterChange} />
                         <label htmlFor="stock" className="text-xs font-medium">In Stock</label>
                     </div>
-                    <div className="flex gap-2 items-center bg-bwcgray rounded-full px-4 h-max py-2">
-                        <input type="checkbox" id="sale" name="sale" className="accent-bwcblue" checked={params.has("sale")} onChange={handleFilterChange} />
+                    <div className="flex gap-2 items-center bg-gray-100 rounded-full px-4 h-max py-2">
+                        <input type="checkbox" id="sale" name="sale" className="accent-blue-600" checked={params.has("sale")} onChange={handleFilterChange} />
                         <label htmlFor="sale" className="text-xs font-medium">On Sale</label>
                     </div>
                     {params.size > 0 && !(params.size === 1 && params.get("sort")) && !(params.size === 1 && params.get("page")) && 
                         !(params.size === 2 && params.get("sort") && params.get("page")) && (
-                        <button className="rounded-full px-4 py-2 text-xs font-medium bg-bwcblue h-max text-white" onClick={clearFilters}>Clear Filters</button>
+                        <button className="rounded-full px-4 py-2 text-xs font-medium bg-blue-600 h-max text-white" onClick={clearFilters}>Clear Filters</button>
                     )}
                 </div>
                 <div className="">

@@ -7,7 +7,8 @@ type CartState = {
     counter: number;
     getCart: ()=>void;
     addItem: (itemId:string, quantity:number, stock:number)=>void;
-    removeItem: (itemId:string)=>void;
+    removeItem: (itemId:string, quantity:number)=>void;
+    deleteItem: (itemId:string)=>void;
 }
 
 export const useCartStore = create<CartState>((set)=>({
@@ -26,7 +27,14 @@ export const useCartStore = create<CartState>((set)=>({
         Cookies.set("cart", JSON.stringify(cart));
         set({cart:cart, isLoading:false, counter:Object.entries(cart).length});
     },
-    removeItem: (itemId)=>{
+    removeItem: (itemId, quantity)=>{
+        set((state)=>({...state, isLoading:true}));
+        const cart = JSON.parse(Cookies.get("cart") || "{}");
+        if (cart[itemId]) { cart[itemId] = Math.max(cart[itemId] - quantity, 1); }
+        Cookies.set("cart", JSON.stringify(cart));
+        set({cart:cart, isLoading:false, counter:Object.entries(cart).length});
+    },
+    deleteItem: (itemId)=>{
         set((state)=>({...state, isLoading:true}));
         const cart = JSON.parse(Cookies.get("cart") || "{}");
         if (cart[itemId]) { delete cart[itemId]; }

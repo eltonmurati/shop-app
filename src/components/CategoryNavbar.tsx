@@ -9,16 +9,16 @@ const CategoryNavbar = () => {
     const [tabId, setTabId] = useState(0);
     const [saleHovered, setSaleHovered] = useState(false);
 
-    const sale = "rounded-md px-2 py-1 bg-white text-bwcblue";
-    const saleHover = "rounded-md px-2 py-1 bg-bwcblue";
+    const sale = "rounded-md px-2 py-1 bg-white text-blue-600";
+    const saleHover = "rounded-md px-2 py-1 bg-blue-600";
 
-    const highlighted = "w-full h-full px-1 flex items-center justify-center text-center bg-white text-bwcblue leading-tight z-20";
+    const highlighted = "w-full h-full px-1 flex items-center justify-center text-center bg-white text-blue-600 leading-tight z-20";
     const notHighlighted = "w-full h-full px-1 flex items-center justify-center text-center leading-tight";
 
     return (
         <div className="relative" onMouseLeave={()=>setTabId(0)}>
             {/* BIGGER SCREENS */}
-            <div className="hidden xl:flex h-16 bg-bwcblue font-medium text-white">
+            <div className="hidden xl:flex h-16 bg-blue-600 font-medium text-white">
                 <Link href="/shop?cat=1" className={tabId === 1 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(1)}>Boilers</Link>
                 <Link href="/shop?cat=6" className={tabId === 2 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(2)}>Flues & Accessories</Link>
                 <Link href="/shop?cat=9" className={tabId === 3 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(3)}>Heating</Link>

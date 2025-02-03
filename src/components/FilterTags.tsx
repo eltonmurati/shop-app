@@ -42,13 +42,13 @@ const FilterTags = () => {
             {tags.length > 0 && (
                 <div className="flex flex-wrap gap-3">
                     {tags.map((tag)=>(
-                        <div className="rounded-full pl-2 pr-1 h-6 ring-1 ring-gray-400 text-xs text-gray-500 flex gap-1 items-center text-gray-400" key={tag}>
+                        <div className="rounded-full pl-2 pr-1 h-6 ring-1 ring-gray-400 text-xs text-gray-400 flex gap-1 items-center text-gray-400" key={tag}>
                             <div className="flex gap-1">
                                 <p className="font-semibold">{renameTag(tag.split(": ")[0])}:</p>
                                 <FilterTagValue tag={tag} />
                             </div>
                             <button className="" onClick={()=>removeFilter(tag)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4 text-bwcred">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4 text-red-500">
                                     <path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z" />
                                 </svg>
                             </button>

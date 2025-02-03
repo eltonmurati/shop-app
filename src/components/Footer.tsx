@@ -61,7 +61,7 @@ const Footer = () => {
                     <p>Be the first to get the latest news about trends, promotions, and much more!</p>
                     <div className="flex">
                         <input type="text" name="subscribe" placeholder="Email address" className="p-4 w-3/4 outline-none"/>
-                        <button className="w-1/4 bg-bwcblue text-white">JOIN</button>
+                        <button className="w-1/4 bg-blue-600 text-white">JOIN</button>
                     </div>
                     <span className="font-semibold">Secure Payments</span>
                     <div className="flex justify-between">
@@ -78,11 +78,11 @@ const Footer = () => {
                 <div className="">© 2024 BWC Merchants Ltd</div>
                 <div className="flex flex-col gap-8 md:flex-row">
                     <div className="">
-                        <span className="text-gray-500 mr-4">Language</span>
+                        <span className="text-gray-400 mr-4">Language</span>
                         <span className="font-medium">United Kingdom | English</span>
                     </div>
                     <div className="">
-                        <span className="text-gray-500 mr-4">Currency</span>
+                        <span className="text-gray-400 mr-4">Currency</span>
                         <span className="font-medium">£ GDP</span>
                     </div>
                 </div>

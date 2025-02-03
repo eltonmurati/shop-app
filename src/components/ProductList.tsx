@@ -2,6 +2,7 @@ import { postgres } from "@/app/lib/postgresClient";
 import Image from "next/image";
 import Link from "next/link";
 import Pagination from "./Pagination";
+import QuickAdd from "./QuickAdd";
 
 const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:number;}) => {
 
@@ -57,7 +58,10 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                 <>
                     <div className="flex gap-x-8 gap-y-16 flex-wrap">
                         {products!.map((product)=>(
-                            <Link href={"/product/"+product.id} className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]" key={product.id}>
+                            <Link href={"/product/"+product.id} 
+                                className="w-full flex flex-col gap-4 sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] relative hover:text-blue-600" 
+                                key={product.id}
+                            >
                                 <div className="relative w-full h-80">
                                     <Image 
                                         src={product.image_urls?.at(0) || "/noImage.jpg"} 
@@ -80,36 +84,25 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                                     <h2 className="font-medium line-clamp-2">{product.name}</h2>
                                     {product.on_sale ? (
                                         <div className="flex flex-col text-end">
-                                            <div className="text-gray-500 line-through pl-4">£{product.original_price.toLocaleString()}</div>
-                                            <div className="font-semibold pl-4">£{product.price.toLocaleString()}</div>
+                                            <div className="text-gray-400 line-through pl-4">£{product.original_price.toLocaleString()}</div>
+                                            <div className="font-semibold pl-4 text-black">£{product.price.toLocaleString()}</div>
                                         </div>
                                     ) : (
-                                        <div className="font-semibold pl-4">£{product.price.toLocaleString()}</div>
+                                        <div className="font-semibold pl-4 text-black">£{product.price.toLocaleString()}</div>
                                     )}
                                 </div>
                                 <div className="flex justify-between items-center">
-                                    <h3 className="text-sm text-gray-500 font-normal">{product.sku}</h3>
+                                    <h3 className="text-sm text-gray-400 font-normal">{product.sku}</h3>
                                     {product.quantity > 0 ? (
-                                        <div className="text-sm text-bwcgreen font-medium">{product.quantity + " In Stock"}</div>
+                                        <div className="text-sm text-green-500 font-medium">{product.quantity + " In Stock"}</div>
                                     ) : (
-                                        <div className="text-sm text-bwcred font-medium">Out Of Stock</div>
+                                        <div className="text-sm text-red-500 font-medium">Out Of Stock</div>
                                     )}
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <button 
-                                        className="rounded-2xl ring-1 ring-bwcblue text-bwcblue w-max py-2 px-4 text-xs whitespace-nowrap hover:bg-bwcblue hover:text-white 
-                                            disabled:text-white disabled:bg-bwcblue_disabled disabled:ring-bwcblue_disabled disabled:cursor-not-allowed" 
-                                        disabled={!(product.quantity > 0)}
-                                    >
-                                        Add to Cart
-                                    </button>
+                                    <QuickAdd product={product} />
                                     {product.on_sale && (
-                                        <div className="flex gap-2 items-center">
-                                            <div className="text-xs rounded-md bg-bwcred px-2 py-1 text-white font-medium">SALE</div>
-                                            <div className="text-xs rounded-md ring-1 ring-bwcred px-2 py-1 text-bwcred ring-inset font-medium whitespace-nowrap">
-                                                {Math.round(100-(product.price/product.original_price)*100)}% OFF
-                                            </div>
-                                        </div>
+                                        <div className="text-xs rounded-md bg-red-500 px-2 py-1 text-white font-medium absolute top-2 left-2 z-10">SALE</div>
                                     )}
                                 </div>
                             </Link>

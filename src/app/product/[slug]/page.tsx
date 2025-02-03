@@ -27,18 +27,13 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
                 <div className="w-full lg:w-1/2 flex flex-col gap-6">
                     <h1 className="text-4xl font-medium">{product.name}</h1>
                     <h4 className="">{product.sku}</h4>
-                    {product.description && (<p className="text-gray-500">{product.description}</p>)}
+                    {product.description && (<p className="text-gray-400">{product.description}</p>)}
                     <div className="h-[2px] bg-gray-100"/>
                     {product.on_sale ? (
                         <div className="flex items-center gap-4">
-                            <h2 className="text-xl text-gray-500 line-through">£{product.original_price.toLocaleString()}</h2>
+                            <h2 className="text-xl text-gray-400 line-through">£{product.original_price.toLocaleString()}</h2>
                             <h2 className="font-medium text-2xl">£{product.price.toLocaleString()}</h2>
-                            <div className="flex gap-2 items-center">
-                                <div className="text-xs rounded-md bg-bwcred px-2 py-1 text-white font-medium">SALE</div>
-                                <div className="text-xs rounded-md ring-1 ring-bwcred ring-inset px-2 py-1 text-bwcred font-medium">
-                                    {Math.round(100-(product.price/product.original_price)*100)}% OFF
-                                </div>
-                            </div>
+                            <div className="text-xs rounded-md bg-red-500 px-2 py-1 text-white font-medium">SALE</div>
                         </div>
                     ) : (
                         <h2 className="font-medium text-2xl">£{product.price.toLocaleString()}</h2>
@@ -51,7 +46,7 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
                     <div className="h-[2px] bg-gray-100"/>
                     <div className="">
                         <h2 className="font-medium mb-4">Specifications</h2>
-                        <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm whitespace-nowrap text-gray-500">
+                        <div className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm whitespace-nowrap text-gray-400">
                             <div className="flex flec-col justify-between items-center gap-4">
                                 <p className="w-max">Brand</p>
                                 <p className="w-max">{product.brand["name" as keyof (Number & { id: number; name: string; })] as string}</p>

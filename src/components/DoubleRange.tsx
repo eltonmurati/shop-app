@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 
 const DoubleRange = ({title, measurement, column}:{title:string; measurement:string; column:"price"|"height"|"depth"|"width"|"weight";}) => {
 
-    // https://www.youtube.com/watch?v=G3OyF-lRAWo
-
     const [open, setOpen] = useState(false);
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(1);
@@ -128,7 +126,7 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
     if (error) { return(null); }
 
     return (
-        <div className="flex flex-col gap-3 bg-bwcgray rounded-2xl py-2 px-2 h-max cursor-pointer items-center" onClick={()=>setOpen(!open)}>
+        <div className="flex flex-col gap-3 bg-gray-100 rounded-2xl py-2 px-2 h-max cursor-pointer items-center" onClick={()=>setOpen(!open)}>
             {open ? (
                 <p className="text-xs font-medium px-2 w-max relative">
                     {title}
@@ -147,7 +145,7 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
             {open && (
                 <div className="flex flex-col gap-4 cursor-default" onClick={(e)=>e.stopPropagation()}>
                     <div className="w-full bg-white h-1.5 relative rounded-full">
-                        {/* <span className={`h-full absolute bg-bwcblue max-w-full`} /> */}
+                        {/* <span className={`h-full absolute bg-blue-600 max-w-full`} /> */}
                         <input type="range" name="min" min={minValue} max={maxValue} value={min} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
                             className="absolute w-full pr-[21px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent 
                                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full 
@@ -169,13 +167,13 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
                     </div>
                     <div className="flex justify-between gap-2">
                         <div className="flex w-20">
-                            <div className="bg-bwcgray rounded-l-full py-1 pl-2 pr-2 text-xs font-medium ring-1 ring-gray-400">{measurement}</div>
+                            <div className="bg-gray-100 rounded-l-full py-1 pl-2 pr-2 text-xs font-medium ring-1 ring-gray-400">{measurement}</div>
                             <input type="text" placeholder="min" name="min" value={minText} className="w-full rounded-r-full outline-none text-xs px-1 ring-1 ring-gray-400" 
                                 onChange={(e)=>setMinText(e.target.value)} onKeyDown={handleTextEnter}
                             />
                         </div>
                         <div className="flex w-20">
-                            <div className="bg-bwcgray rounded-l-full py-1 pl-2 pr-2 text-xs font-medium ring-1 ring-gray-400">{measurement}</div>
+                            <div className="bg-gray-100 rounded-l-full py-1 pl-2 pr-2 text-xs font-medium ring-1 ring-gray-400">{measurement}</div>
                             <input type="text" placeholder="max" name="max" value={maxText} className="w-full rounded-r-full outline-none text-xs px-1 ring-1 ring-gray-400" 
                                 onChange={(e)=>setMaxText(e.target.value)} onKeyDown={handleTextEnter}
                             />
