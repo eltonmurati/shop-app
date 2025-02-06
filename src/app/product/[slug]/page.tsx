@@ -18,7 +18,7 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
     let specEntries = product.specifications ? Object.entries(product.specifications) : null;
     
     return (
-        <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex flex-col lg:flex-row gap-8 xl:gap-16 md:mt-4 lg:mt-8">
+        <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex flex-col lg:flex-row gap-8 xl:gap-16 md:mt-4 lg:mt-8 mb-8">
                 {/* IMAGES */}
                 <div className="w-full lg:w-1/2 lg:sticky top-4 h-max">
                     <ProductImages images={images}/>

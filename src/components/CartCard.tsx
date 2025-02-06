@@ -14,7 +14,6 @@ const CartCard = ({id, quantity}:{id:number; quantity:number;}) => {
     const [product, setProduct] = useState<Database['public']['Tables']['product']['Row'] | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [hovering, setHovering] = useState(false);
 
     useEffect(()=>{
         const getProduct = async () => {
@@ -48,7 +47,7 @@ const CartCard = ({id, quantity}:{id:number; quantity:number;}) => {
     return(
         <>
             {product && (
-                <Link href={`/product/${product.id}`} className={`flex gap-4 ${!hovering && "hover:text-blue-600"}`}>
+                <Link href={`/product/${product.id}`} className={`flex gap-4`}>
                     <Image 
                         src={product.image_urls?.at(0) || "/noImage.jpg"} 
                         alt="" 
@@ -78,20 +77,22 @@ const CartCard = ({id, quantity}:{id:number; quantity:number;}) => {
                         </div>
                         {/* BOTTOM */}
                         <div className="flex justify-between text-sm">
-                            <div className="flex items-center gap-1">
+                            <div className="flex gap-1">
                                 <span className="text-gray-400">Qty. {quantity}</span>
-                                <button className="text-gray-400 hover:text-blue-600" onClick={removeOne} onMouseEnter={()=>setHovering(true)} onMouseLeave={()=>setHovering(false)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
-                                        <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
-                                    </svg>
-                                </button>
-                                <button className="text-gray-400 hover:text-blue-600" onClick={addOne} onMouseEnter={()=>setHovering(true)} onMouseLeave={()=>setHovering(false)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
-                                        <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
-                                    </svg>
-                                </button>
+                                <div className="flex items-center">
+                                    <button className="text-gray-400 hover:text-blue-700 w-4 h-4 flex items-center justify-center" onClick={removeOne}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-3">
+                                            <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
+                                        </svg>
+                                    </button>
+                                    <button className="text-gray-400 hover:text-blue-700 w-4 h-4 flex items-center justify-center" onClick={addOne}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-3">
+                                            <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                            <button className="text-red-500 hover:underline" onClick={deleteCard} onMouseEnter={()=>setHovering(true)} onMouseLeave={()=>setHovering(false)}>Remove</button>
+                            <button className="text-red-500" onClick={deleteCard}>Remove</button>
                         </div>
                     </div>
                 </Link>

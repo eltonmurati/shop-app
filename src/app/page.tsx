@@ -6,7 +6,7 @@ import { Suspense } from "react"
 
 const HomePage = () => {
   return (
-    <div className=''>
+    <div className='mb-16'>
       <Slider/>
       <div className="mt-16 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
         <Link href="/shop?cat=95" className="flex gap-2 mb-8 items-center">

@@ -79,16 +79,16 @@ const Filter = () => {
                     <DoubleRange title={"Depth"} measurement={"mm"} column="depth" />
                     <DoubleRange title={"Weight"} measurement={"kg"} column="weight" />
                     <div className="flex gap-2 items-center bg-gray-100 rounded-full px-4 h-max py-2">
-                        <input type="checkbox" id="stock" name="stock" className="accent-blue-600" checked={params.has("stock")} onChange={handleFilterChange} />
+                        <input type="checkbox" id="stock" name="stock" className="accent-blue-700" checked={params.has("stock")} onChange={handleFilterChange} />
                         <label htmlFor="stock" className="text-xs font-medium">In Stock</label>
                     </div>
                     <div className="flex gap-2 items-center bg-gray-100 rounded-full px-4 h-max py-2">
-                        <input type="checkbox" id="sale" name="sale" className="accent-blue-600" checked={params.has("sale")} onChange={handleFilterChange} />
+                        <input type="checkbox" id="sale" name="sale" className="accent-blue-700" checked={params.has("sale")} onChange={handleFilterChange} />
                         <label htmlFor="sale" className="text-xs font-medium">On Sale</label>
                     </div>
                     {params.size > 0 && !(params.size === 1 && params.get("sort")) && !(params.size === 1 && params.get("page")) && 
                         !(params.size === 2 && params.get("sort") && params.get("page")) && (
-                        <button className="rounded-full px-4 py-2 text-xs font-medium bg-blue-600 h-max text-white" onClick={clearFilters}>Clear Filters</button>
+                        <button className="rounded-full px-4 py-2 text-xs font-medium bg-blue-700 h-max text-white" onClick={clearFilters}>Clear Filters</button>
                     )}
                 </div>
                 <div className="">

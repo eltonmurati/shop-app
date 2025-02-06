@@ -34,8 +34,8 @@ const Add = ({stock, productId}:{stock:number; productId:number;}) => {
                         </div>
                     </div>
                     <button 
-                        className="w-36 text-sm rounded-3xl ring-1 ring-blue-600 text-blue-600 py-2 px-4 hover:bg-blue-600 hover:text-white 
-                            disabled:cursor-not-allowed disabled:bg-blue-100 disabled:text-white disabled:ring-blue-100"
+                        className="w-36 text-sm rounded-3xl ring-1 ring-blue-700 text-blue-700 py-2 px-4 hover:bg-blue-700 hover:text-white 
+                            disabled:cursor-not-allowed disabled:bg-indigo-200 disabled:text-white disabled:ring-indigo-200"
                         onClick={()=>addItem(productId.toString(), quantity, stock)}
                     >
                         Add to Cart
@@ -54,8 +54,8 @@ const Add = ({stock, productId}:{stock:number; productId:number;}) => {
                         </div>
                     </div>
                     <button 
-                        className="w-36 text-sm rounded-3xl ring-1 ring-blue-600 text-blue-600 py-2 px-4 hover:bg-blue-600 hover:text-white 
-                            disabled:cursor-not-allowed disabled:bg-blue-100 disabled:text-white disabled:ring-blue-100" 
+                        className="w-36 text-sm rounded-3xl ring-1 ring-blue-700 text-blue-700 py-2 px-4 hover:bg-blue-700 hover:text-white 
+                            disabled:cursor-not-allowed disabled:bg-indigo-200 disabled:text-white disabled:ring-indigo-200" 
                         disabled
                     >
                         Add to Cart

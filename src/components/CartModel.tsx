@@ -9,7 +9,7 @@ const CartModel = () => {
 
     const [subtotal, setSubtotal] = useState(0);
 
-    const {cart, isLoading} = useCartStore();
+    const {cart, clearCart} = useCartStore();
 
     let cartItems = false;
     if (Object.entries(cart).length > 0) { cartItems = true; }
@@ -20,7 +20,6 @@ const CartModel = () => {
             for (const [key, value] of Object.entries(cart)) { 
                 let postgresQuery = postgres.from('product').select('price');
                 const {data: product} = await postgresQuery.eq('id', key).limit(1).single();
-                console.log([key, value]);
                 if (product) {
                     total += product.price * (value as number);
                 }
@@ -32,8 +31,8 @@ const CartModel = () => {
 
     return (
         <div className="max-w-96 w-max absolute rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-30">
-            {isLoading ? ("Loading...") : !cartItems ? (
-                <div className="p-4">Cart is empty</div>
+            {!cartItems ? (
+                <div className="p-4 font-medium">Cart is empty</div>
             ) : (
                 <>
                     <h2 className="text-xl px-4 pt-4">Shopping Cart</h2>
@@ -55,7 +54,7 @@ const CartModel = () => {
                             All prices are VAT inclusive.
                         </p>
                         <div className="flex justify-between text-sm">
-                            <button className="rounded-md py-3 px-4 ring-1 ring-gray-300">View Cart</button>
+                            <button className="rounded-md py-3 px-4 ring-1 ring-inset ring-red-500 text-red-500" onClick={()=>clearCart()}>Clear Cart</button>
                             <button className="rounded-md py-3 px-4 bg-black text-white">Checkout</button>
                         </div>
                     </div>

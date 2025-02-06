@@ -98,7 +98,6 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
     const handleTextEnter = (e:React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             const {name,value} = e.currentTarget;
-            console.log(value);
             if (name === "min") {
                 if (value !== minValue.toString() && value !== "") { 
                     params.set(name+column, value); 
@@ -145,7 +144,7 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
             {open && (
                 <div className="flex flex-col gap-4 cursor-default" onClick={(e)=>e.stopPropagation()}>
                     <div className="w-full bg-white h-1.5 relative rounded-full">
-                        {/* <span className={`h-full absolute bg-blue-600 max-w-full`} /> */}
+                        {/* <span className={`h-full absolute bg-blue-700 max-w-full`} /> */}
                         <input type="range" name="min" min={minValue} max={maxValue} value={min} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
                             className="absolute w-full pr-[21px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent 
                                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full 

@@ -52,7 +52,7 @@ const LoginPage = () => {
                             </div>
                         ) : null}
                         <button 
-                            className="bg-blue-600 text-white p-2 rounded-md disabled:bg-blue-100" 
+                            className="bg-blue-700 text-white p-2 rounded-md disabled:bg-indigo-200" 
                             disabled={isPending}
                         >
                             {isPending ? "Loading..." : buttonTitle}
@@ -72,14 +72,14 @@ const LoginPage = () => {
                     <>
                         <div className="flex flex-row">
                             <button 
-                                className="rounded-l-md bg-blue-600 w-full p-2 text-white disabled:bg-blue-100" 
+                                className="rounded-l-md bg-blue-700 w-full p-2 text-white disabled:bg-indigo-200" 
                                 disabled={isCompany ? false : true}
                                 onClick={()=>setIsCompany(false)}
                             >
                                 Personal
                             </button>
                             <button 
-                                className="rounded-r-md bg-blue-600 w-full p-2 text-white disabled:bg-blue-100" 
+                                className="rounded-r-md bg-blue-700 w-full p-2 text-white disabled:bg-indigo-200" 
                                 disabled={isCompany ? true : false}
                                 onClick={()=>setIsCompany(true)}
                             >
@@ -123,7 +123,7 @@ const LoginPage = () => {
                                 <input type="password" name="confirm" placeholder="••••••••" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         </div>
-                        <button className="bg-blue-600 text-white p-2 rounded-md disabled:bg-blue-100" disabled={isPending}>
+                        <button className="bg-blue-700 text-white p-2 rounded-md disabled:bg-indigo-200" disabled={isPending}>
                             {isPending ? "Loading..." : buttonTitle}
                         </button>
                         <div className="text-sm underline cursor-pointer" onClick={()=>setMode(MODE.LOGIN)}>Already have an account?</div>

@@ -59,7 +59,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                     <div className="flex gap-x-8 gap-y-16 flex-wrap">
                         {products!.map((product)=>(
                             <Link href={"/product/"+product.id} 
-                                className="w-full flex flex-col gap-4 sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] relative hover:text-blue-600" 
+                                className="w-full flex flex-col gap-4 sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] relative" 
                                 key={product.id}
                             >
                                 <div className="relative w-full h-80">
@@ -99,12 +99,10 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                                         <div className="text-sm text-red-500 font-medium">Out Of Stock</div>
                                     )}
                                 </div>
-                                <div className="flex items-center justify-between">
-                                    <QuickAdd product={product} />
-                                    {product.on_sale && (
-                                        <div className="text-xs rounded-md bg-red-500 px-2 py-1 text-white font-medium absolute top-2 left-2 z-10">SALE</div>
-                                    )}
-                                </div>
+                                <QuickAdd product={product} />
+                                {product.on_sale && (
+                                    <div className="text-sm rounded-md bg-red-500 px-2 py-1 text-white font-semibold tracking-wider absolute top-3 left-3 z-10">SALE</div>
+                                )}
                             </Link>
                         ))}
                     </div>

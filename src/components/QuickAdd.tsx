@@ -14,8 +14,8 @@ const QuickAdd = ({product}:{product:Tables<"product">}) => {
 
     return(
         <button 
-            className="rounded-2xl ring-1 ring-blue-600 text-blue-600 w-max py-2 px-4 text-xs whitespace-nowrap hover:bg-blue-600 hover:text-white 
-                disabled:text-white disabled:bg-blue-100 disabled:ring-blue-100 disabled:cursor-not-allowed" 
+            className="rounded-2xl ring-1 ring-blue-700 text-blue-700 w-max py-2 px-4 text-xs whitespace-nowrap hover:bg-blue-700 hover:text-white 
+                disabled:text-white disabled:bg-indigo-200 disabled:ring-indigo-200 disabled:cursor-not-allowed" 
             disabled={!(product.quantity > 0)}
             onClick={addToCart}
         >
