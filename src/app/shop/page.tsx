@@ -1,5 +1,6 @@
 import Filter from "@/components/Filter"
 import ProductList from "@/components/ProductList"
+import SearchBar from "@/components/SearchBar"
 import Image from "next/image"
 import Link from "next/link"
 import { Suspense } from "react"
@@ -23,7 +24,10 @@ const ShopPage = async ({searchParams}:{searchParams:any}) => {
                 </div>
             </div> */}
             {/* TITLE */}
-            <h1 className="font-semibold text-2xl mt-8">Shop</h1>
+            <h1 className="font-semibold text-2xl xl:mt-8">Shop</h1>
+            <div className="md:hidden mt-6">
+                <SearchBar />
+            </div>
             {/* FILTER */}
             <Filter />
             {/* PRODUCTS */}

@@ -30,13 +30,13 @@ const CartPage = () => {
     },[cart]);
 
     return(
-        <div className="w-full flex pb-6 md:pt-4 justify-center">
-            <div className="flex flex-col gap-6">
+        <div className="w-full flex pb-16 pt-4 justify-center">
+            <div className="flex flex-col gap-8">
                 {!cartItems ? (
                     <div className="my-4 font-medium">Cart is empty</div>
                 ) : (
                     <>
-                        <h2 className="text-xl px-4">Shopping Cart</h2>
+                        <h2 className="text-2xl px-4 font-semibold">Shopping Cart</h2>
                         {/* LIST */}
                         <div className="flex flex-col gap-8 px-4">
                             {/* ITEM */}
@@ -50,7 +50,7 @@ const CartPage = () => {
                                 <span className="">Subtotal</span>
                                 <span className="">£{subtotal.toLocaleString()}</span>
                             </div>
-                            <p className="text-gray-400 text-sm mt-2 mb-4">
+                            <p className="text-gray-400 text-sm mt-3 mb-5">
                                 Shipping calculated at checkout.<br/>
                                 All prices are VAT inclusive.
                             </p>

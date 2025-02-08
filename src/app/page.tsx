@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Suspense } from "react"
 
 const HomePage = () => {
+  console.log(process.env.POSTGRES_URL);
   return (
     <div className='mb-16'>
       <Slider/>
