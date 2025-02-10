@@ -2,7 +2,7 @@ import { postgres } from "@/app/lib/postgresClient";
 
 export const stripe = require("stripe")(process.env.STRIPE_SECRET!);
 
-const calculateOrderAmount = async (items:{id:number, quantity:number}[]) => {
+const calculateOrderAmount = async (items:any) => {
     let total = 0;
     for (const item of items) {
         await postgres.from("product").select("price").eq("id", item["id"]).limit(1).single().then(({data: product})=>{
@@ -13,18 +13,18 @@ const calculateOrderAmount = async (items:{id:number, quantity:number}[]) => {
     return total;
 }
 
-export default async function handler(req:any, res:any) {
-    const { items } = req.body;
+export async function POST(req:Request) {
+    const items = req.body;
 
     const paymentIntent = await stripe.paymentIntents.create({
-        amount: await calculateOrderAmount(items),
+        amount: 100000,
         currency: "gbp",
         automatic_payment_methods: {
             enabled: true,
         },
     });
 
-    res.send({
+    return(Response.json({
         clientSecret: paymentIntent.client_secret,
-    });
+    }));
 }
