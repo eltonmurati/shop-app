@@ -31,17 +31,17 @@ const CartCard = ({id, quantity}:{id:number; quantity:number;}) => {
 
     const deleteCard = (e:React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        deleteItem(product!.id.toString());
+        deleteItem(product!.id);
     }
 
     const addOne = (e:React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        addItem(product!.id.toString(), 1, product!.quantity);
+        addItem(product!.id, 1, product!.quantity);
     }
 
     const removeOne = (e:React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        removeItem(product!.id.toString(), 1);
+        removeItem(product!.id, 1);
     }
 
     return(

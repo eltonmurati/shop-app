@@ -13,7 +13,7 @@ const NavIcons = () => {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
 
-    const {cart,counter,getCart} = useCartStore();
+    const {counter,getCart} = useCartStore();
 
     useEffect(()=>{
         getCart();

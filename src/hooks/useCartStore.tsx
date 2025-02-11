@@ -2,43 +2,90 @@ import { create } from 'zustand';
 import Cookies from 'js-cookie';
 
 type CartState = {
-    cart: JSON;
+    cart: {"id":number,"quantity":number}[];
     counter: number;
     getCart: ()=>void;
-    addItem: (itemId:string, quantity:number, stock:number)=>void;
-    removeItem: (itemId:string, quantity:number)=>void;
-    deleteItem: (itemId:string)=>void;
+    addItem: (itemId:number, quantity:number, stock:number)=>void;
+    removeItem: (itemId:number, quantity:number)=>void;
+    deleteItem: (itemId:number)=>void;
     clearCart: ()=>void;
 }
 
 export const useCartStore = create<CartState>((set)=>({
-    cart: JSON.parse("{}"),
+    cart: [],
     counter: 0,
     getCart: ()=>{
-        const cart = JSON.parse(Cookies.get("cart") || "{}");
-        set({cart:(cart || JSON.parse("{}")), counter:Object.entries(cart).length || 0});
+        let cart: {"id":number,"quantity":number}[];
+        try {
+            cart = JSON.parse(Cookies.get("cart") || "[]");
+            set({cart:cart, counter:cart.length});
+        } catch (error) {
+            Cookies.set("cart", "[]");
+            set({cart:[], counter:0});
+        }
     },
     addItem: (itemId, quantity, stock)=>{
-        const cart = JSON.parse(Cookies.get("cart") || "{}");
-        if (cart[itemId]) { cart[itemId] = Math.min(cart[itemId] + quantity, stock); }
-        else { cart[itemId] = quantity; }
+        let cart: {"id":number,"quantity":number}[];
+        try {
+            cart = JSON.parse(Cookies.get("cart") || "[]");
+        } catch (error) {
+            cart = [];
+        }
+
+        let found = false;
+        for (const item of cart) {
+            if (item["id"] === itemId) { 
+                item["quantity"] = Math.min(item["quantity"] + quantity, stock);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            cart.push({"id":itemId,"quantity":quantity});
+        }
+        
         Cookies.set("cart", JSON.stringify(cart));
-        set({cart:cart, counter:Object.entries(cart).length});
+        set({cart:cart, counter:cart.length});
     },
     removeItem: (itemId, quantity)=>{
-        const cart = JSON.parse(Cookies.get("cart") || "{}");
-        if (cart[itemId]) { cart[itemId] = Math.max(cart[itemId] - quantity, 1); }
+        let cart: {"id":number,"quantity":number}[];
+        try {
+            cart = JSON.parse(Cookies.get("cart") || "[]");
+        } catch (error) {
+            cart = [];
+        }
+
+        for (const item of cart) {
+            if (item["id"] === itemId) { 
+                item["quantity"] = Math.max(item["quantity"] - quantity, 1);
+                break;
+            }
+        }
+
         Cookies.set("cart", JSON.stringify(cart));
-        set({cart:cart, counter:Object.entries(cart).length});
+        set({cart:cart, counter:cart.length});
     },
     deleteItem: (itemId)=>{
-        const cart = JSON.parse(Cookies.get("cart") || "{}");
-        if (cart[itemId]) { delete cart[itemId]; }
+        let cart: {"id":number,"quantity":number}[];
+        try {
+            cart = JSON.parse(Cookies.get("cart") || "[]");
+        } catch (error) {
+            cart = [];
+        }
+
+        for (const item of cart) {
+            if (item["id"] === itemId) { 
+                cart.splice(cart.indexOf(item), 1);
+                break;
+            }
+        }
+
         Cookies.set("cart", JSON.stringify(cart));
-        set({cart:cart, counter:Object.entries(cart).length});
+        set({cart:cart, counter:cart.length});
     },
     clearCart: ()=>{
-        Cookies.set("cart", "{}");
-        set({cart:JSON.parse("{}"), counter:0});
+        Cookies.set("cart", "[]");
+        set({cart:[], counter:0});
     },
 }));

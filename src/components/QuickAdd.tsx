@@ -9,7 +9,7 @@ const QuickAdd = ({product}:{product:Tables<"product">}) => {
 
     const addToCart = (e:React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        addItem(product.id.toString(), 1, product.quantity);
+        addItem(product.id, 1, product.quantity);
     }
 
     return(
