@@ -4,6 +4,7 @@ import CartCard from "./CartCard";
 import { postgres } from "@/app/lib/postgresClient";
 import { useEffect, useState } from "react";
 import { useCartStore } from "@/hooks/useCartStore";
+import Link from "next/link";
 
 const CartModel = () => {
 
@@ -12,18 +13,18 @@ const CartModel = () => {
     const {cart, clearCart} = useCartStore();
 
     let cartItems = false;
-    if (Object.entries(cart).length > 0) { cartItems = true; }
+    if (cart.length > 0) { cartItems = true; }
 
     useEffect(()=>{
         const getSubtotal =async()=>{
             let total = 0;
-            // for (const [key, value] of Object.entries(cart)) { 
-            //     let postgresQuery = postgres.from('product').select('price');
-            //     const {data: product} = await postgresQuery.eq('id', key).limit(1).single();
-            //     if (product) {
-            //         total += product.price * (value as number);
-            //     }
-            // }
+            for (const item of cart) {
+                await postgres.from("product").select("price").eq("id", item["id"]).limit(1).single().then(({data: product})=>{
+                    if (product) {
+                        total += product.price * item["quantity"];
+                    }
+                });
+            }
             setSubtotal(total);
         }
         getSubtotal();
@@ -55,7 +56,7 @@ const CartModel = () => {
                         </p>
                         <div className="flex justify-between text-sm">
                             <button className="rounded-md py-3 px-4 ring-1 ring-inset ring-red-500 text-red-500" onClick={()=>clearCart()}>Clear Cart</button>
-                            <button className="rounded-md py-3 px-4 bg-black text-white">Checkout</button>
+                            <Link className="rounded-md py-3 px-4 bg-black text-white" href="/checkout">Checkout</Link>
                         </div>
                     </div>
                 </>

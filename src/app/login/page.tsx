@@ -37,18 +37,18 @@ const LoginPage = () => {
                         {mode !== MODE.EMAIL_VERIFICATION ? (
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">E-mail</label>
-                                <input type="email" name="email" placeholder="example@domain.com" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="email" name="email" placeholder="example@domain.com" className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         ) : (
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Verification Code</label>
-                                <input type="text" name="verify" placeholder="" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="text" name="verify" placeholder="" className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         )}
                         {mode === MODE.LOGIN ? (
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Password</label>
-                                <input type="password" name="password" placeholder="••••••••" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="password" name="password" placeholder="••••••••" className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         ) : null}
                         <button 
@@ -89,38 +89,38 @@ const LoginPage = () => {
                         {isCompany ? (
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Company name</label>
-                                <input type="text" name="company" placeholder="BWC Merchants" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="text" name="company" placeholder="BWC Merchants" className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         ) : (
                             <div className="flex flex-col md:flex-row gap-8">
                                 <div className="flex flex-col gap-2">
                                     <label className="text-sm text-gray-700">First name</label>
-                                    <input type="text" name="first" placeholder="John" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                    <input type="text" name="first" placeholder="John" className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none"/>
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label className="text-sm text-gray-700">Last name</label>
-                                    <input type="text" name="last" placeholder="Smith" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                    <input type="text" name="last" placeholder="Smith" className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none"/>
                                 </div>
                             </div>
                         )}
                         <div className="flex flex-col md:flex-row gap-8">
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">E-mail</label>
-                                <input type="email" name="email" placeholder="example@domain.com" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="email" name="email" placeholder="example@domain.com" className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Phone number</label>
-                                <input type="tel" name="number" placeholder="07469285005" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="tel" name="number" placeholder="07469285005" className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row gap-8">
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Password</label>
-                                <input type="password" name="password" placeholder="••••••••" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="password" name="password" placeholder="••••••••" className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm text-gray-700">Confirm password</label>
-                                <input type="password" name="confirm" placeholder="••••••••" className="ring-2 ring-gray-300 rounded-md p-4 outline-none"/>
+                                <input type="password" name="confirm" placeholder="••••••••" className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none"/>
                             </div>
                         </div>
                         <button className="bg-blue-700 text-white p-2 rounded-md disabled:bg-indigo-200" disabled={isPending}>

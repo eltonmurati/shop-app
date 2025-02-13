@@ -38,13 +38,13 @@ const CheckoutForm = () => {
     }
 
     const paymentElementOptions:StripePaymentElementOptions = { 
-        layout: "accordion",
+        layout: "tabs",
     }
 
     return(
         <form id="payment-form" onSubmit={handleSubmit}>
             <PaymentElement id="payment-element" options={paymentElementOptions} />
-            <button disabled={isLoading || !stripe || !elements} id="submit">
+            <button disabled={isLoading || !stripe || !elements} id="submit" className="w-full bg-blue-700 text-white p-2 rounded-md mt-8 disabled:bg-indigo-200">
                 <span id="button-text">
                     {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
                 </span>
