@@ -6,6 +6,7 @@ import { Elements } from "@stripe/react-stripe-js";
 
 import CheckoutForm from "@/components/CheckoutForm";
 import CompletePage from "@/components/CompletePage";
+import { useCartStore } from "@/hooks/useCartStore";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC!);
 
@@ -13,6 +14,7 @@ const CheckoutPage = () => {
     const [clientSecret, setClientSecret] = useState("");
     const [confirmed, setConfirmed] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const {cart, getCart} = useCartStore();
 
     useEffect(()=>{
         setConfirmed(new URLSearchParams(window.location.search).get(
@@ -21,10 +23,11 @@ const CheckoutPage = () => {
     });
 
     useEffect(()=>{
+        getCart();
         fetch("/api/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ "1": 2 }),
+            body: JSON.stringify({ "cart": cart }),
         }).then((res)=>res.json()).then((data)=>{
             setClientSecret(data.clientSecret);
             setIsLoading(false);

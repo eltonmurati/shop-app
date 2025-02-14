@@ -48,7 +48,7 @@ const CheckoutForm = () => {
                 <span id="button-text">
                     {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
                 </span>
-                {message && <div id="payment-message">{message}</div>}
+                {/* {message && <div id="payment-message">{message}</div>} */}
             </button>
         </form>
     );
