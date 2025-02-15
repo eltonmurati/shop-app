@@ -90,10 +90,11 @@ const CheckoutPage = () => {
             }
         },
     }
+    
     const options:StripeElementsOptions = {
         clientSecret,
         appearance,
-        fonts: [{cssSrc: 'https://fonts.googleapis.com/css?family=Inter'}]
+        fonts: [{cssSrc: 'https://fonts.googleapis.com/css?family=Inter'}],
     }
 
     if (isLoading) {

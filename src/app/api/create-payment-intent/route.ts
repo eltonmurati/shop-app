@@ -7,7 +7,7 @@ export async function POST(req:Request) {
     const verifiedCart = await verifyCart(cart);
 
     const paymentIntent = await stripe.paymentIntents.create({
-        amount: verifiedCart["totalAmount"],
+        amount: verifiedCart["totalAmount"] * 100,
         currency: "gbp",
         automatic_payment_methods: {
             enabled: true,
