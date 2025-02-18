@@ -1,4 +1,4 @@
-import { postgres } from "@/app/lib/postgresClient";
+import { postgres } from "@/lib/postgresClient";
 import Link from "next/link";
 
 const VariantTag = async ({variant, productId, ogProductId}:{variant:string; productId:number; ogProductId:number;}) => {

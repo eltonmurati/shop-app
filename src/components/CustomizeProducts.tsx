@@ -1,4 +1,4 @@
-import { Json } from "@/app/lib/types";
+import { Json } from "@/lib/types";
 import VariantTag from "./VariantTag";
 
 const CustomizeProducts = ({variants, productId}:{variants:Json; productId:number;}) => {

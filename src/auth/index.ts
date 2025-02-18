@@ -1,4 +1,4 @@
-import { postgres } from "@/app/lib/postgresClient";
+import { postgres } from "@/lib/postgresClient";
 import NextAuth, { User, NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 

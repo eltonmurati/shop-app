@@ -1,4 +1,4 @@
-import { postgres } from "@/app/lib/postgresClient";
+import { postgres } from "@/lib/postgresClient";
 import Add from "@/components/Add"
 import CustomizeProducts from "@/components/CustomizeProducts"
 import ProductImages from "@/components/ProductImages"

@@ -1,4 +1,4 @@
-import { postgres } from "@/app/lib/postgresClient";
+import { postgres } from "@/lib/postgresClient";
 import { useEffect, useState } from "react";
 
 const FilterTagValue = ({tag}:{tag:string}) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Tables } from "@/app/lib/types";
+import { Tables } from "@/lib/types";
 import { useCartStore } from "@/hooks/useCartStore";
 
 const QuickAdd = ({product}:{product:Tables<"product">}) => {

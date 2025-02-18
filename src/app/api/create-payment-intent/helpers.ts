@@ -1,6 +1,6 @@
 "use server"
 
-import { postgres } from "@/app/lib/postgresClient";
+import { postgres } from "@/lib/postgresClient";
 
 export const verifyCart = async (cart: { id: number; quantity: number; }[]) => {
     let totalAmount: number = 0;

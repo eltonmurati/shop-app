@@ -1,7 +1,7 @@
 "use client"
 
-import { postgres } from "@/app/lib/postgresClient";
-import { Database } from "@/app/lib/types";
+import { postgres } from "@/lib/postgresClient";
+import { Database } from "@/lib/types";
 import { useCartStore } from "@/hooks/useCartStore";
 import Image from "next/image";
 import Link from "next/link";

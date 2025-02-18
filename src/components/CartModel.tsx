@@ -1,7 +1,7 @@
 "use client";
 
 import CartCard from "./CartCard";
-import { postgres } from "@/app/lib/postgresClient";
+import { postgres } from "@/lib/postgresClient";
 import { useEffect, useState } from "react";
 import { useCartStore } from "@/hooks/useCartStore";
 import Link from "next/link";

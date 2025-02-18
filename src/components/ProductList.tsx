@@ -1,4 +1,4 @@
-import { postgres } from "@/app/lib/postgresClient";
+import { postgres } from "@/lib/postgresClient";
 import Image from "next/image";
 import Link from "next/link";
 import Pagination from "./Pagination";
