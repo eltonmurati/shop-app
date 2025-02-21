@@ -42,7 +42,7 @@ const STATUS_CONTENT_MAP = {
   }
 };
 
-export default async function SuccessPage({ searchParams }) {
+export default async function SuccessPage({searchParams}:{searchParams:any}) {
   const { payment_intent: paymentIntentId } = await searchParams
 
   if (!paymentIntentId) redirect('/')

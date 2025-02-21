@@ -20,7 +20,7 @@ export const useCartStore = create<CartState>((set)=>({
             cart = JSON.parse(Cookies.get("cart") || "[]");
             set({cart:cart, counter:cart.length});
         } catch (error) {
-            Cookies.set("cart", "[]");
+            Cookies.set("cart", "[]", { expires: 30 });
             set({cart:[], counter:0});
         }
     },
@@ -45,7 +45,7 @@ export const useCartStore = create<CartState>((set)=>({
             cart.push({"id":itemId,"quantity":quantity});
         }
         
-        Cookies.set("cart", JSON.stringify(cart));
+        Cookies.set("cart", JSON.stringify(cart), { expires: 30 });
         set({cart:cart, counter:cart.length});
     },
     removeItem: (itemId, quantity)=>{
@@ -63,7 +63,7 @@ export const useCartStore = create<CartState>((set)=>({
             }
         }
 
-        Cookies.set("cart", JSON.stringify(cart));
+        Cookies.set("cart", JSON.stringify(cart), { expires: 30 });
         set({cart:cart, counter:cart.length});
     },
     deleteItem: (itemId)=>{
@@ -81,11 +81,11 @@ export const useCartStore = create<CartState>((set)=>({
             }
         }
 
-        Cookies.set("cart", JSON.stringify(cart));
+        Cookies.set("cart", JSON.stringify(cart), { expires: 30 });
         set({cart:cart, counter:cart.length});
     },
     clearCart: ()=>{
-        Cookies.set("cart", "[]");
+        Cookies.set("cart", "[]", { expires: 30 });
         set({cart:[], counter:0});
     },
 }));

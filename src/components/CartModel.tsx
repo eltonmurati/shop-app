@@ -41,7 +41,7 @@ const CartModel = () => {
                     <div className="flex flex-col gap-8 overflow-y-auto max-h-[30rem] px-4">
                         {/* ITEM */}
                         {cart.map((item)=>(
-                            <CartCard id={item["id"]} quantity={item["quantity"]} key={item["id"]} />
+                            <CartCard id={item["id"]} quantity={item["quantity"]} key={item["id"]} verified={false} />
                         ))}
                     </div>
                     {/* BOTTOM */}
