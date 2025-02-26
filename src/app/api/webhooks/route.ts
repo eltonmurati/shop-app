@@ -10,7 +10,7 @@ export async function POST(req:NextRequest) {
     event = stripe.webhooks.constructEvent(
       await req.text(),
       (await headers()).get('stripe-signature')!,
-      process.env.STRIPE_WEBHOOK_SECRET!
+      process.env.STRIPE_SECRET!
     )
   } catch (err) {
     const errorMessage = (err as Error).message

@@ -16,7 +16,8 @@ export const verifyCart = async (cart: { id: number; quantity: number; }[]) => {
             }
         });
     }
-    return {"cart": verifiedCart, "totalAmount": totalAmount,}
+    const clientSecret = await createPaymentIntent(totalAmount);
+    return {"cart": verifiedCart, "totalAmount": totalAmount, "clientSecret": clientSecret}
 }
 
 export const createPaymentIntent = async (price:number) => {

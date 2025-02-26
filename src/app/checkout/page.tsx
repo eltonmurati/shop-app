@@ -3,7 +3,7 @@
 import CheckoutForm from "@/components/CheckoutForm";
 import { useCartStore } from "@/hooks/useCartStore";
 import { useEffect, useState } from "react";
-import { createPaymentIntent, verifyCart } from "../api/webhooks/helpers";
+import { verifyCart } from "../api/webhooks/helpers";
 import CartCard from "@/components/CartCard";
 import Link from "next/link";
 
@@ -19,18 +19,12 @@ const CheckoutPage = () => {
         getCart();
         const setupCheckout = async () => {
             await verifyCart(cart).then((verifiedCart)=>{
-                SetItems(verifiedCart["cart"]);
-                setPrice(verifiedCart["totalAmount"]);
-                return verifiedCart;
-            }).then(async(verifiedCart)=>{
                 if (verifiedCart["totalAmount"] * 100 >= 50) {
-                    await createPaymentIntent(verifiedCart["totalAmount"] * 100).then((client_secret)=>{
-                        setClientSecret(client_secret);
-                        setIsLoading(false);
-                    });
-                } else {
-                    setIsLoading(false);
+                    SetItems(verifiedCart["cart"]);
+                    setPrice(verifiedCart["totalAmount"]);
+                    setClientSecret(verifiedCart["clientSecret"]);
                 }
+                setIsLoading(false);
             });
         }
         setupCheckout();
@@ -66,7 +60,7 @@ const CheckoutPage = () => {
                             <CartCard id={item["id"]} quantity={item["quantity"]} key={item["id"]} verified={true} />
                         ))}
                     </div>
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
                         <div className="flex items-center justify-between font-semibold">
                             <span className="">Subtotal</span>
                             <span className="">£{price.toLocaleString()}</span>
@@ -75,7 +69,7 @@ const CheckoutPage = () => {
                             <span className="">Shipping</span>
                             <span className="">FREE</span>
                         </div>
-                        <div className="flex items-center justify-between font-semibold text-2xl">
+                        <div className="flex items-center justify-between font-semibold text-xl">
                             <span className="">Total</span>
                             <span className="">£{price.toLocaleString()}</span>
                         </div>

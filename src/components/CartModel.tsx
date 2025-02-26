@@ -31,7 +31,7 @@ const CartModel = () => {
     },[cart]);
 
     return (
-        <div className="max-w-96 w-max absolute rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-30">
+        <div className="max-w-[30rem] w-max absolute rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-30">
             {!cartItems ? (
                 <div className="p-4 font-medium">Cart is empty</div>
             ) : (
