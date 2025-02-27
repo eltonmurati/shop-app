@@ -1,116 +1,100 @@
-import { Button, Column, Heading, Img, Row, Section, Text, Tailwind } from '@react-email/components';
+import { Column, Heading, Img, Row, Section, Text, Tailwind } from '@react-email/components';
 import * as React from 'react';
 
-export const CustomerEmail = ({orderId, subtotal, shippingAddress, items, shippingFee, totalAmount}:{orderId: string; subtotal: number; shippingAddress: {}; items: {}[]; shippingFee: number; totalAmount: number;}) => {
+interface CustomerEmailProps {
+    orderId: string,
+    subtotal: number,
+    shippingAddress: any,
+    items: {sku:string, name:string, price:number, quantity:number, imageUrl:string|undefined}[],
+    shippingFee: number,
+    totalAmount: number,
+}
+
+export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({orderId, subtotal, shippingAddress, items, shippingFee, totalAmount}) => {
     return(
-        <Tailwind
-            config={{
-                theme: {
-                    extend: {
-                        colors: {},
-                    },
-                },
-            }}
-        >
-            <Section className="py-[16px] text-center">
-                <Heading as="h1" className="mb-0 text-[30px] font-semibold leading-[36px]">
+        <Tailwind>
+            <Section className="py-4 text-center">
+                <Heading as="h1" className="mb-0 text-2xl font-semibold" style={{fontFamily: "Arial"}}>
                     Thank you for your purchase!
                 </Heading>
-                <Section className="my-[16px] rounded-[8px] border border-solid border-gray-200 p-[16px] pt-0">
-                    <table className="mb-[16px]" width="100%">
+                <Heading as="h2" className="font-normal text-base" style={{fontFamily: "Arial"}}>
+                    Order ID: {orderId}
+                </Heading>
+                <Heading as="h3" className="font-normal text-gray-400 text-base" style={{fontFamily: "Arial"}}>
+                    Address
+                </Heading>
+                <Section className="my-4 rounded-lg border border-solid border-gray-200 p-4 pt-0">
+                    <table className="mb-4" width="100%">
                         <tbody>
                             <tr>
-                                <th className="border-0 border-b border-solid border-gray-200 py-[8px]">
-                                    &nbsp;
-                                </th>
                                 <th
                                     align="left"
-                                    className="border-0 border-b border-solid border-gray-200 py-[8px] text-gray-500"
+                                    className="border-0 border-b border-solid border-gray-200 py-2"
                                     colSpan={6}
                                 >
-                                    <Text className="font-semibold">Product</Text>
+                                    <Text className="font-semibold" style={{fontFamily: "Arial"}}>Product</Text>
                                 </th>
                                 <th
                                     align="center"
-                                    className="border-0 border-b border-solid border-gray-200 py-[8px] text-gray-500"
+                                    className="border-0 border-b border-solid border-gray-200 py-2"
                                 >
-                                    <Text className="font-semibold">Quantity</Text>
+                                    <Text className="font-semibold" style={{fontFamily: "Arial"}}>Quantity</Text>
                                 </th>
                                 <th
                                     align="center"
-                                    className="border-0 border-b border-solid border-gray-200 py-[8px] text-gray-500"
+                                    className="border-0 border-b border-solid border-gray-200 py-2"
                                 >
-                                    <Text className="font-semibold">Price</Text>
+                                    <Text className="font-semibold" style={{fontFamily: "Arial"}}>Price</Text>
                                 </th>
                             </tr>
-                            <tr>
-                                <td className="border-0 border-b border-solid border-gray-200 py-[8px]">
-                                    <Img
-                                        alt="Braun Classic Watch"
-                                        className="rounded-[8px] object-cover"
-                                        height={110}
-                                        src="https://react.email/static/braun-classic-watch.jpg"
-                                    />
-                                </td>
-                                <td
-                                    align="left"
-                                    className="border-0 border-b border-solid border-gray-200 py-[8px]"
-                                    colSpan={6}
-                                >
-                                    <Text>Classic Watch</Text>
-                                </td>
-                                <td
-                                    align="center"
-                                    className="border-0 border-b border-solid border-gray-200 py-[8px]"
-                                >
-                                    <Text>1</Text>
-                                </td>
-                                <td
-                                    align="center"
-                                    className="border-0 border-b border-solid border-gray-200 py-[8px]"
-                                >
-                                    <Text>$210.00</Text>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="border-0 border-b border-solid border-gray-200 py-[8px]">
-                                    <Img
-                                        alt="Braun Analogue Clock"
-                                        className="rounded-[8px] object-cover"
-                                        height={110}
-                                        src="https://react.email/static/braun-analogue-clock.jpg"
-                                    />
-                                </td>
-                                <td
-                                    align="left"
-                                    className="border-0 border-b border-solid border-gray-200 py-[8px]"
-                                    colSpan={6}
-                                >
-                                    <Text>Analogue Clock</Text>
-                                </td>
-                                <td
-                                    align="center"
-                                    className="border-0 border-b border-solid border-gray-200 py-[8px]"
-                                >
-                                    <Text>1</Text>
-                                </td>
-                                <td
-                                    align="center"
-                                    className="border-0 border-b border-solid border-gray-200 py-[8px]"
-                                >
-                                    <Text>$40.00</Text>
-                                </td>
-                            </tr>
+                            {items.map((item)=>(
+                                <tr>
+                                    <td
+                                        align="left"
+                                        className="border-0 border-b border-solid border-gray-200 py-2"
+                                        colSpan={6}
+                                    >
+                                        <Text className="" style={{fontFamily: "Arial"}}>{item.name}</Text>
+                                        <Text className='text-gray-400' style={{fontFamily: "Arial"}}>{item.sku}</Text>
+                                    </td>
+                                    <td
+                                        align="center"
+                                        className="border-0 border-b border-solid border-gray-200 py-2"
+                                    >
+                                        <Text style={{fontFamily: "Arial"}}>{item.quantity}</Text>
+                                    </td>
+                                    <td
+                                        align="center"
+                                        className="border-0 border-b border-solid border-gray-200 py-2"
+                                    >
+                                        <Text style={{fontFamily: "Arial"}}>£{item.price.toLocaleString()}</Text>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                     <Row>
-                        <Column align="center">
-                            <Button
-                                className="box-border w-full rounded-[8px] bg-indigo-600 px-[12px] py-[12px] text-center font-semibold text-white"
-                                href="https://react.email"
-                            >
-                                Checkout
-                            </Button>
+                        <Column align="left">
+                            <Text className="font-semibold" style={{fontFamily: "Arial"}}>Subtotal</Text>
+                        </Column>
+                        <Column align="right">
+                            <Text className='font-semibold' style={{fontFamily: "Arial"}}>£{subtotal.toLocaleString()}</Text>
+                        </Column>
+                    </Row>
+                    <Row>
+                        <Column align="left">
+                            <Text className='text-gray-400' style={{fontFamily: "Arial"}}>Shipping</Text>
+                        </Column>
+                        <Column align="right">
+                            <Text className='text-gray-400' style={{fontFamily: "Arial"}}>{shippingFee > 0 ? `£${shippingFee.toLocaleString()}` : "FREE"}</Text>
+                        </Column>
+                    </Row>
+                    <Row>
+                        <Column align="left">
+                            <Text className='font-semibold text-xl' style={{fontFamily: "Arial"}}>Total</Text>
+                        </Column>
+                        <Column align="right">
+                            <Text className='font-semibold text-xl' style={{fontFamily: "Arial"}}>£{totalAmount.toLocaleString()}</Text>
                         </Column>
                     </Row>
                 </Section>
