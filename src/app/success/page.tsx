@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation'
 
 import { stripe } from '../../lib/stripe';
 import Link from 'next/link';
+import ClearCart from '@/components/ClearCart';
 
 const SuccessIcon =
   <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,6 +57,7 @@ export default async function SuccessPage({searchParams}:{searchParams:any}) {
 
   return (
     <div className='min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex flex-col justify-evenly'>
+      <ClearCart status={status} />
       <div className=''></div>
       <div id="payment-status" className='flex flex-col justify-center items-center gap-8 h-max'>
         <div className='flex gap-4 items-center'>

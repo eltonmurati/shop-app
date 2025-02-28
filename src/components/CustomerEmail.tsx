@@ -1,11 +1,11 @@
-import { Column, Heading, Img, Row, Section, Text, Tailwind } from '@react-email/components';
+import { Column, Heading, Row, Section, Text, Tailwind } from '@react-email/components';
 import * as React from 'react';
 
 interface CustomerEmailProps {
     orderId: string,
     subtotal: number,
-    shippingAddress: any,
-    items: {sku:string, name:string, price:number, quantity:number, imageUrl:string|undefined}[],
+    shippingAddress: {city: string, country: string, line1: string, line2: string, postal_code: string, state: string},
+    items: {sku:string, name:string, price:number, quantity:number}[],
     shippingFee: number,
     totalAmount: number,
 }

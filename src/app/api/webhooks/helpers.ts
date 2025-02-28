@@ -16,17 +16,20 @@ export const verifyCart = async (cart: { id: number; quantity: number; }[]) => {
             }
         });
     }
-    const clientSecret = await createPaymentIntent(totalAmount);
+    const clientSecret = await createPaymentIntent(totalAmount, verifiedCart);
     return {"cart": verifiedCart, "totalAmount": totalAmount, "clientSecret": clientSecret}
 }
 
-export const createPaymentIntent = async (price:number) => {
+export const createPaymentIntent = async (price:number, items: {id: number, quantity: number}[]) => {
     const { client_secret: clientSecret} = await stripe.paymentIntents.create({
         amount: price,
         currency: 'gbp',
         automatic_payment_methods: {
             enabled: true,
         },
+        metadata: {
+            items: JSON.stringify(items),
+        }
     });
     return clientSecret;
 }

@@ -64,6 +64,53 @@ export type Database = {
         }
         Relationships: []
       }
+      order: {
+        Row: {
+          created_at: string
+          customer: number | null
+          email: string | null
+          fulfilled: boolean
+          id: number
+          payment_id: string
+          products: Json
+          shipping_address: Json
+          shipping_amount: number
+          total_amount: number
+        }
+        Insert: {
+          created_at?: string
+          customer?: number | null
+          email?: string | null
+          fulfilled?: boolean
+          id?: number
+          payment_id: string
+          products: Json
+          shipping_address: Json
+          shipping_amount: number
+          total_amount: number
+        }
+        Update: {
+          created_at?: string
+          customer?: number | null
+          email?: string | null
+          fulfilled?: boolean
+          id?: number
+          payment_id?: string
+          products?: Json
+          shipping_address?: Json
+          shipping_amount?: number
+          total_amount?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_customer_fkey"
+            columns: ["customer"]
+            isOneToOne: false
+            referencedRelation: "user"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       product: {
         Row: {
           amount_purchased: number
