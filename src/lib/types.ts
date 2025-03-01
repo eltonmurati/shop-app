@@ -70,7 +70,8 @@ export type Database = {
           customer: number | null
           email: string | null
           fulfilled: boolean
-          id: number
+          full_name: string | null
+          id: string
           payment_id: string
           products: Json
           shipping_address: Json
@@ -82,7 +83,8 @@ export type Database = {
           customer?: number | null
           email?: string | null
           fulfilled?: boolean
-          id?: number
+          full_name?: string | null
+          id: string
           payment_id: string
           products: Json
           shipping_address: Json
@@ -94,7 +96,8 @@ export type Database = {
           customer?: number | null
           email?: string | null
           fulfilled?: boolean
-          id?: number
+          full_name?: string | null
+          id?: string
           payment_id?: string
           products?: Json
           shipping_address?: Json

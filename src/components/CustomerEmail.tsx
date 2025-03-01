@@ -2,26 +2,34 @@ import { Column, Heading, Row, Section, Text, Tailwind } from '@react-email/comp
 import * as React from 'react';
 
 interface CustomerEmailProps {
+    fullName: string,
     orderId: string,
     subtotal: number,
-    shippingAddress: {city: string, country: string, line1: string, line2: string, postal_code: string, state: string},
+    shippingAddress: {
+        city: string | undefined | null, 
+        country: string | undefined | null, 
+        line1: string | undefined | null, 
+        line2: string | undefined | null, 
+        postal_code: string | undefined | null, 
+        state: string | undefined | null
+    },
     items: {sku:string, name:string, price:number, quantity:number}[],
     shippingFee: number,
     totalAmount: number,
 }
 
-export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({orderId, subtotal, shippingAddress, items, shippingFee, totalAmount}) => {
+export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName, orderId, subtotal, shippingAddress, items, shippingFee, totalAmount}) => {
     return(
         <Tailwind>
             <Section className="py-4 text-center">
                 <Heading as="h1" className="mb-0 text-2xl font-semibold" style={{fontFamily: "Arial"}}>
-                    Thank you for your purchase!
+                    Thank you for your purchase, {fullName}
                 </Heading>
                 <Heading as="h2" className="font-normal text-base" style={{fontFamily: "Arial"}}>
                     Order ID: {orderId}
                 </Heading>
                 <Heading as="h3" className="font-normal text-gray-400 text-base" style={{fontFamily: "Arial"}}>
-                    Address
+                    {shippingAddress["line1"]}, {shippingAddress["line2"]}, {shippingAddress["city"]}, {shippingAddress["postal_code"]}
                 </Heading>
                 <Section className="my-4 rounded-lg border border-solid border-gray-200 p-4 pt-0">
                     <table className="mb-4" width="100%">
@@ -48,7 +56,7 @@ export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({orderId, 
                                 </th>
                             </tr>
                             {items.map((item)=>(
-                                <tr>
+                                <tr key={item["sku"]}>
                                     <td
                                         align="left"
                                         className="border-0 border-b border-solid border-gray-200 py-2"

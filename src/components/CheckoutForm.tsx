@@ -15,6 +15,7 @@ const PaymentForm = () => {
 
     const [message, setMessage] = useState<string | null | undefined>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [email, setEmail] = useState('');
 
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -30,7 +31,8 @@ const PaymentForm = () => {
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: "http://localhost:3000/success",
+                return_url: process.env.NEXT_PUBLIC_BASE_URL + "/success",
+                receipt_email: email,
             },
         });
 
@@ -63,7 +65,7 @@ const PaymentForm = () => {
                     <h1 className="pb-8 text-xl">Shipping Details</h1>
                     <div className="flex flex-col gap-2 pb-8">
                         <label className="text-sm text-gray-700">E-mail</label>
-                        <input id="email" type="email" name="email" placeholder="example@domain.com" 
+                        <input id="email" type="email" name="email" placeholder="example@domain.com" onChange={(e)=>setEmail(e.target.value)}
                             className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none" />
                     </div>
                     <AddressElement id="address-element" options={addressElementOptions} />

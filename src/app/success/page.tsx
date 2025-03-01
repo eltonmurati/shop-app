@@ -53,7 +53,11 @@ export default async function SuccessPage({searchParams}:{searchParams:any}) {
 
   if (!paymentIntent) redirect('/')
 
-  const { status } = paymentIntent
+  const { status, metadata } = paymentIntent
+
+  if (status === "succeeded") {
+    fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/test', {method: 'POST', body: JSON.stringify(paymentIntent)});
+  }
 
   return (
     <div className='min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex flex-col justify-evenly'>
@@ -69,7 +73,7 @@ export default async function SuccessPage({searchParams}:{searchParams:any}) {
         {paymentIntent && status === "succeeded" && (
           <div className='flex flex-col gap-2 items-center'>
             <h2 className='text-2xl font-semibold'>Thank you for your purchase!</h2>
-            <span className='text-lg'>Your order number is: <span className='font-medium'>[order_number]</span></span>
+            <span className='text-lg'>Order ID: <span className='font-medium'>{metadata["orderId"] || "Loading..."}</span></span>
             <div className='text-gray-400'>We have sent a receipt to your email</div>
           </div>
         )}

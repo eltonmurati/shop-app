@@ -2,32 +2,73 @@ import { NextRequest, NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 
 import { stripe } from '@/lib/stripe'
-import { postgres } from '@/lib/postgresClient'
 import Stripe from 'stripe'
+
+import { createClient } from "@supabase/supabase-js";
+import { Database } from "@/lib/types";
+
+export const postgres = createClient<Database> (
+  process.env.NEXT_PUBLIC_POSTGRES_URL!,
+  process.env.POSTGRES_SECRET!,
+);
 
 const handleSuccess = async(payment: Stripe.PaymentIntent) => {
   const items: {id: number, quantity: number}[] = JSON.parse(payment.metadata["items"]);
   const products = await getItems(items);
-  if (products){
+
+  if (products) {
     let orderItems = [];
     for (const product of products) {
       for (const item of items) {
         if (item["id"] === product["id"]) {
           orderItems.push({sku: product["sku"], price: product["price"], name: product["name"], quantity: item["quantity"]});
+
+          const stock = await postgres.from("product").select("*").eq("id", item["id"]).limit(1).single().then(({data: product})=>{
+            if (product) {return product.quantity;}
+            else {return 0;}
+          });
+  
+          const {error} = await postgres.from("product").update({quantity: stock - item["quantity"]}).eq("id", item["id"]);
+          if (error) {console.log(error);}
         }
       }
     }
-    createOrder(orderItems, payment.amount / 100, {
+
+    const id = await createOrder(payment.shipping?.name, orderItems, payment.amount / 100, {
       city: payment.shipping?.address?.city, 
       country: payment.shipping?.address?.country,
       line1: payment.shipping?.address?.line1,
       line2: payment.shipping?.address?.line2,
       postal_code: payment.shipping?.address?.postal_code,
       state: payment.shipping?.address?.state,
-    }, 0, payment.id, payment.metadata["email"]);
+    }, Number(payment.metadata["shippingAmount"]), payment.id, payment.receipt_email);
+
+    if (id) {
+      let metadata = (await stripe.paymentIntents.retrieve(payment.id)).metadata;
+      metadata["orderId"] = id;
+      const paymentIntent = await stripe.paymentIntents.update(payment.id, {metadata: metadata});
+
+      fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/send', {method:'POST', body:JSON.stringify({
+        fullName: payment.shipping?.name,
+        orderId: id, 
+        subtotal: (payment.amount / 100) - Number(payment.metadata["shippingAmount"]), 
+        shippingAddress: {
+          city: payment.shipping?.address?.city, 
+          country: payment.shipping?.address?.country,
+          line1: payment.shipping?.address?.line1,
+          line2: payment.shipping?.address?.line2,
+          postal_code: payment.shipping?.address?.postal_code,
+          state: payment.shipping?.address?.state,
+        }, 
+        items: orderItems, 
+        shippingFee: Number(payment.metadata["shippingAmount"]), 
+        totalAmount: payment.amount / 100,
+        email: payment.receipt_email
+      })});
+    }
   }
 }
-
+  
 const getItems = async(items:{id: number, quantity: number}[]) => {
   let itemIds: number[] = [];
 
@@ -35,12 +76,24 @@ const getItems = async(items:{id: number, quantity: number}[]) => {
     itemIds.push(item["id"]);
   }
 
-  const {data: products} = await postgres.from("product").select("*").in("id", itemIds);
+  const {data: products} = await postgres.from("product").select("*").in("id", itemIds); 
 
   return products || null;
 }
+  
+const generateId = async() => {
+  const id = Date.now().toString(36) + Math.random().toString(36).substring(2,12).padStart(12,"0");
+  const {data: order} = await postgres.from("order").select("*").eq("id", id).limit(1).single();
 
+  if (order) {
+    return generateId();
+  } else {
+    return id;
+  }
+}
+  
 const createOrder = async(
+  fullName: string | undefined | null,
   products: {sku:string, name:string, price:number, quantity:number}[], 
   totalAmount: number, 
   shippingAddress: {
@@ -53,20 +106,27 @@ const createOrder = async(
   }, 
   shippingAmount: number, 
   paymentId: string, 
-  email:string
+  email:string | null
 ) => {
+  const id = await generateId();
+
   const { error } = await postgres.from("order").insert({
+    id: id,
     products: products, 
     total_amount: totalAmount, 
     shipping_address: shippingAddress, 
     shipping_amount: shippingAmount,
     payment_id: paymentId,
-    email: email
+    email: email,
+    full_name: fullName,
   });
 
   if (error) {
-    console.log("Error: Could not create order.");
+    console.log(error);
+    return null;
   }
+
+  return id;
 }
 
 export async function POST(req:NextRequest) {
