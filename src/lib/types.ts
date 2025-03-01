@@ -72,6 +72,7 @@ export type Database = {
           fulfilled: boolean
           full_name: string | null
           id: string
+          metadata: Json | null
           payment_id: string
           products: Json
           shipping_address: Json
@@ -85,6 +86,7 @@ export type Database = {
           fulfilled?: boolean
           full_name?: string | null
           id: string
+          metadata?: Json | null
           payment_id: string
           products: Json
           shipping_address: Json
@@ -98,6 +100,7 @@ export type Database = {
           fulfilled?: boolean
           full_name?: string | null
           id?: string
+          metadata?: Json | null
           payment_id?: string
           products?: Json
           shipping_address?: Json
