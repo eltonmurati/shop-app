@@ -101,7 +101,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                                 </div>
                                 <QuickAdd product={product} />
                                 {product.on_sale && (
-                                    <div className="text-sm rounded-md bg-red-500 px-2 py-1 text-white font-semibold tracking-wider absolute top-3 left-3 z-10">SALE</div>
+                                    <div className="text-sm rounded-md bg-blue-700 px-2 py-1 text-white font-semibold tracking-wider absolute top-3 left-3 z-10">SALE</div>
                                 )}
                             </Link>
                         ))}

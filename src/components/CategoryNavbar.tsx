@@ -10,10 +10,10 @@ const CategoryNavbar = () => {
     const [saleHovered, setSaleHovered] = useState(false);
 
     const sale = "rounded-md px-2 py-1 bg-white text-blue-700";
-    const saleHover = "rounded-md px-2 py-1 bg-red-500";
+    const saleHover = "rounded-md px-2 py-1 bg-blue-700";
 
-    const highlighted = "w-full h-full px-1 flex items-center justify-center text-center bg-white text-blue-700 leading-tight z-20";
-    const notHighlighted = "w-full h-full px-1 flex items-center justify-center text-center leading-tight";
+    const highlighted = "w-full h-full px-2 flex items-center justify-center text-center bg-white text-blue-700 leading-tight z-20";
+    const notHighlighted = "w-full h-full px-2 flex items-center justify-center text-center leading-tight";
 
     return (
         <div className="relative" onMouseLeave={()=>setTabId(0)}>
@@ -30,8 +30,14 @@ const CategoryNavbar = () => {
                 <Link href="/shop?cat=72" className={tabId === 9 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(9)}>Fires</Link>
                 <Link href="/shop?cat=77" className={tabId === 10 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(10)}>Essentials</Link>
                 <Link href="/shop?cat=87" className={tabId === 11 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(11)}>Renewables</Link>
+                <Link href="/shop?cat=100" 
+                    className="w-full h-full px-2 flex items-center justify-center text-center leading-tight hover:text-blue-700 hover:bg-white" 
+                    onMouseEnter={()=>setTabId(0)}
+                >
+                    Refurbished
+                </Link>
                 <Link href="/shop?sale=true" 
-                    className="w-full h-full px-1 flex items-center justify-center text-center leading-tight hover:bg-white tracking-wider font-semibold" 
+                    className="w-full h-full px-2 flex items-center justify-center text-center leading-tight hover:bg-white tracking-wider font-semibold" 
                     onMouseEnter={()=>{setTabId(0); setSaleHovered(true);}}
                     onMouseLeave={()=>setSaleHovered(false)}
                 >

@@ -33,7 +33,7 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
                         <div className="flex items-center gap-4">
                             <h2 className="text-xl text-gray-400 line-through">£{product.original_price.toLocaleString()}</h2>
                             <h2 className="font-medium text-2xl">£{product.price.toLocaleString()}</h2>
-                            <div className="text-xs rounded-md bg-red-500 px-2 py-1 text-white font-medium">SALE</div>
+                            <div className="text-xs rounded-md bg-blue-700 px-2 py-1 text-white font-medium">SALE</div>
                         </div>
                     ) : (
                         <h2 className="font-medium text-2xl">£{product.price.toLocaleString()}</h2>

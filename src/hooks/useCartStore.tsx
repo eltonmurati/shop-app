@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 type CartState = {
     cart: {"id":number,"quantity":number}[];
     counter: number;
-    getCart: ()=>void;
+    getCart: ()=>{"id":number,"quantity":number}[];
     addItem: (itemId:number, quantity:number, stock:number)=>void;
     removeItem: (itemId:number, quantity:number)=>void;
     deleteItem: (itemId:number)=>void;
@@ -19,9 +19,11 @@ export const useCartStore = create<CartState>((set)=>({
         try {
             cart = JSON.parse(Cookies.get("cart") || "[]");
             set({cart:cart, counter:cart.length});
+            return cart;
         } catch (error) {
             Cookies.set("cart", "[]", { expires: 30 });
             set({cart:[], counter:0});
+            return [];
         }
     },
     addItem: (itemId, quantity, stock)=>{

@@ -50,7 +50,7 @@ export default async function SuccessPage({searchParams}:{searchParams:any}) {
   if (!paymentIntentId) redirect('/')
 
   const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId)
-
+  
   if (!paymentIntent) redirect('/')
 
   const { status, metadata } = paymentIntent

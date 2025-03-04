@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PaymentElement, useStripe, useElements, Elements, AddressElement } from "@stripe/react-stripe-js";
 import { Appearance, loadStripe, StripeAddressElementOptions, StripeElementsOptions } from "@stripe/stripe-js";
 import { StripePaymentElementOptions } from "@stripe/stripe-js";
+import Link from "next/link";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -78,6 +79,7 @@ const PaymentForm = () => {
                             {isLoading ? "Loading..." : "Pay now"}
                         </span>
                     </button>
+                    <p className="text-gray-400 text-xs pt-4">By submitting payment details, you agree to our <Link href="/terms" target="_blank" className="hover:text-blue-700">Terms & Conditions</Link>.</p>
                     {/* Show any error or success messages */}
                     {message && <div id="payment-message" className="pt-4 text-red-500 flex justify-center">{message}</div>}
                 </div>

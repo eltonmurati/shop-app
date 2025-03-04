@@ -9,28 +9,9 @@ export async function POST(req:NextRequest) {
     const body = await req.json();
 
     try {
-        const {data: customerData, error: customerError} = await resend.emails.send({
-            from: 'BWC Merchants <orders@bwcmerchants.co.uk>',
-            to: body["email"],
-            subject: 'Order Summary',
-            react: CustomerEmail({
-                fullName: body["fullName"],
-                orderId: body["orderId"], 
-                subtotal: body["subtotal"], 
-                shippingAddress: body["shippingAddress"], 
-                items: body["items"], 
-                shippingFee: body["shippingFee"], 
-                totalAmount: body["totalAmount"]
-            }),
-        });
-
-        if (customerError) {
-            return NextResponse.json({error: customerError}, {status:500});
-        }
-
         const {data: companyData, error: companyError} = await resend.emails.send({
             from: 'BWC Merchants <orders@bwcmerchants.co.uk>',
-            to: 'orders@bwcmerchants.co.uk',
+            to: 'eltonmurati99@gmail.com',
             subject: 'New Order',
             react: CompanyEmail({
                 fullName: body["fullName"],
@@ -48,7 +29,22 @@ export async function POST(req:NextRequest) {
             return NextResponse.json({error: companyError}, {status:500});
         }
 
-        return Response.json({customer: customerData, company: companyData});
+        const {data: customerData, error: customerError} = await resend.emails.send({
+            from: 'BWC Merchants <orders@bwcmerchants.co.uk>',
+            to: body["email"],
+            subject: 'Order Summary',
+            react: CustomerEmail({
+                fullName: body["fullName"],
+                orderId: body["orderId"], 
+                subtotal: body["subtotal"], 
+                shippingAddress: body["shippingAddress"], 
+                items: body["items"], 
+                shippingFee: body["shippingFee"], 
+                totalAmount: body["totalAmount"]
+            }),
+        });
+
+        return Response.json({company: companyData, customer: customerData ?? customerError});
     } catch (error) {
         return NextResponse.json({error}, {status:500});
     }

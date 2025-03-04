@@ -16,8 +16,13 @@ export const verifyCart = async (cart: { id: number; quantity: number; }[]) => {
             }
         });
     }
-    const clientSecret = await createPaymentIntent(totalAmount * 100, verifiedCart, 0);
-    return {"cart": verifiedCart, "totalAmount": totalAmount, "clientSecret": clientSecret}
+
+    if (totalAmount * 100 >= 50) {
+        const clientSecret = await createPaymentIntent(totalAmount * 100, verifiedCart, 0);
+        return {"cart": verifiedCart, "totalAmount": totalAmount, "clientSecret": clientSecret}
+    }
+
+    return null;
 }
 
 export const createPaymentIntent = async (price:number, items: {id: number, quantity: number}[], shippingAmount: number) => {

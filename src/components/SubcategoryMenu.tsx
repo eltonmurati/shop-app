@@ -84,7 +84,9 @@ const SubcategoryMenu = ({tabId} : any) => {
     return (
         <div className="absolute z-10 bg-white flex flex-wrap w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
             {menus[tabId-1].map((option)=>(
-                <Link href={option.link} key={option.id} className="w-1/12 h-16 px-1 hover:bg-gray-100 flex items-center justify-center text-center leading-tight">{option.title}</Link>
+                <Link href={option.link} key={option.id} className="w-[7.69230769231%] h-16 px-2 hover:bg-gray-100 flex items-center justify-center text-center leading-tight">
+                    {option.title}
+                </Link>
             ))}
         </div>
     )

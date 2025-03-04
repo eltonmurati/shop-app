@@ -13,13 +13,12 @@ const CheckoutPage = () => {
     const [items, SetItems] = useState<{id:number,quantity:number}[]>([]);
     const [price, setPrice] = useState<number>(0);
 
-    const {cart, getCart } = useCartStore();
+    const { getCart } = useCartStore();
 
     useEffect(()=>{
-        getCart();
         const setupCheckout = async () => {
-            await verifyCart(cart).then((verifiedCart)=>{
-                if (verifiedCart["totalAmount"] * 100 >= 50) {
+            await verifyCart(getCart()).then((verifiedCart)=>{
+                if (verifiedCart) {
                     SetItems(verifiedCart["cart"]);
                     setPrice(verifiedCart["totalAmount"]);
                     setClientSecret(verifiedCart["clientSecret"]);
