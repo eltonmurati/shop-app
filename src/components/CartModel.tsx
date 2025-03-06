@@ -31,14 +31,14 @@ const CartModel = () => {
     },[cart]);
 
     return (
-        <div className="max-w-[30rem] w-max absolute rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-30">
+        <div className="max-w-[28rem] w-max absolute rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-30">
             {!cartItems ? (
                 <div className="p-4 font-medium">Cart is empty</div>
             ) : (
                 <>
                     <h2 className="text-xl px-4 pt-4">Shopping Cart</h2>
                     {/* LIST */}
-                    <div className="flex flex-col gap-8 overflow-y-auto max-h-[30rem] px-4">
+                    <div className="flex flex-col gap-8 overflow-y-auto px-4">
                         {/* ITEM */}
                         {cart.map((item)=>(
                             <CartCard id={item["id"]} quantity={item["quantity"]} key={item["id"]} verified={false} />

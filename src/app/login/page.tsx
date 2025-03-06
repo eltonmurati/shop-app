@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { authenticate } from "@/app/api/auth/[...nextauth]/helpers";
 import { useActionState } from "react";
+import { redirect } from "next/navigation";
 
 enum MODE {
     LOGIN="LOGIN",
@@ -12,6 +13,8 @@ enum MODE {
 };
 
 const LoginPage = () => {
+
+    redirect("/");
 
     const [errorMessage, formAction, isPending] = useActionState(authenticate, undefined);
 

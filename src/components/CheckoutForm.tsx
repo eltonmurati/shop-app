@@ -10,7 +10,7 @@ import Link from "next/link";
 // recreating the Stripe object on every render.
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC!)
 
-const PaymentForm = () => {
+const PaymentForm = ({delivery}:{delivery:boolean}) => {
     const stripe = useStripe();
     const elements = useElements();
 
@@ -61,20 +61,20 @@ const PaymentForm = () => {
 
     return(
         <form id="payment-form" onSubmit={handleSubmit}>
-            <div className="flex flex-col md:flex-row gap-8">
-                <div className="w-full md:w-1/2 md:sticky md:top-8 h-max">
-                    <h1 className="pb-8 text-xl">Shipping Details</h1>
+            <div className={`flex flex-col ${delivery && "md:flex-row gap-8"}`}>
+                <div className={`w-full ${delivery && "md:w-1/2"} h-max`}>
+                    <h1 className="pb-8 text-xl">{delivery ? "Shipping Details" : "Collection Details"}</h1>
                     <div className="flex flex-col gap-2 pb-8">
                         <label className="text-sm text-gray-700">E-mail</label>
                         <input id="email" type="email" name="email" placeholder="example@domain.com" onChange={(e)=>setEmail(e.target.value)}
                             className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none" />
                     </div>
-                    <AddressElement id="address-element" options={addressElementOptions} />
+                    {delivery && <AddressElement id="address-element" options={addressElementOptions} />}
                 </div>
-                <div className="w-full md:w-1/2 md:sticky md:top-8 h-max">
+                <div className={`w-full ${delivery && "md:w-1/2"} h-max`}>
                     <h1 className="pb-8 text-xl">Payment Details</h1>
                     <PaymentElement id="payment-element" options={paymentElementOptions} />
-                    <button disabled={isLoading || !stripe || !elements} id="submit" className="w-full bg-blue-700 text-white p-2 rounded-md mt-8 disabled:bg-indigo-200">
+                    <button disabled={isLoading || !stripe || !elements} id="submit" className="bg-blue-700 text-white p-2 rounded-md mt-8 disabled:bg-indigo-200 w-full">
                         <span id="button-text">
                             {isLoading ? "Loading..." : "Pay now"}
                         </span>
@@ -88,7 +88,7 @@ const PaymentForm = () => {
     );
 }
 
-export default function CheckoutForm({clientSecret}:{clientSecret:string}) {
+export default function CheckoutForm({clientSecret, delivery}:{clientSecret:string; delivery:boolean}) {
     const appearance:Appearance = {
         theme: "flat",
         variables: {
@@ -168,7 +168,7 @@ export default function CheckoutForm({clientSecret}:{clientSecret:string}) {
 
     return(
         <Elements stripe={stripePromise} options={options}>
-            <PaymentForm />
+            <PaymentForm delivery={delivery} />
         </Elements>
     );
 }

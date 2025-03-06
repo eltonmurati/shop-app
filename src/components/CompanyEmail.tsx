@@ -17,9 +17,10 @@ interface CompanyEmailProps {
     shippingFee: number,
     totalAmount: number,
     email: string,
+    delivery: boolean,
 }
 
-export const CompanyEmail: React.FC<Readonly<CompanyEmailProps>> = ({fullName, orderId, subtotal, shippingAddress, items, shippingFee, totalAmount, email}) => {
+export const CompanyEmail: React.FC<Readonly<CompanyEmailProps>> = ({fullName, orderId, subtotal, shippingAddress, items, shippingFee, totalAmount, email, delivery}) => {
     return(
         <Tailwind>
             <Section className="py-4 text-center">
@@ -95,7 +96,7 @@ export const CompanyEmail: React.FC<Readonly<CompanyEmailProps>> = ({fullName, o
                     </Row>
                     <Row>
                         <Column align="left">
-                            <Text className='text-gray-400' style={{fontFamily: "Arial"}}>Shipping</Text>
+                            <Text className='text-gray-400' style={{fontFamily: "Arial"}}>{delivery ? "Shipping" : "Collection"}</Text>
                         </Column>
                         <Column align="right">
                             <Text className='text-gray-400' style={{fontFamily: "Arial"}}>{shippingFee > 0 ? `£${shippingFee.toLocaleString()}` : "FREE"}</Text>

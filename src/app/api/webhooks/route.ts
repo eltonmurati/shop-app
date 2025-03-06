@@ -41,7 +41,7 @@ const handleSuccess = async(payment: Stripe.PaymentIntent) => {
       line2: payment.shipping?.address?.line2,
       postal_code: payment.shipping?.address?.postal_code,
       state: payment.shipping?.address?.state,
-    }, Number(payment.metadata["shippingAmount"]), payment.id, payment.receipt_email);
+    }, Number(payment.metadata["shippingAmount"]), payment.id, payment.receipt_email, Number(payment.metadata["delivery"]) > 0);
 
     if (id) {
       let metadata = (await stripe.paymentIntents.retrieve(payment.id)).metadata;
@@ -63,7 +63,8 @@ const handleSuccess = async(payment: Stripe.PaymentIntent) => {
         items: orderItems, 
         shippingFee: Number(payment.metadata["shippingAmount"]), 
         totalAmount: payment.amount / 100,
-        email: payment.receipt_email
+        email: payment.receipt_email,
+        delivery: Number(payment.metadata["delivery"]) > 0
       })});
     }
   }
@@ -106,7 +107,8 @@ const createOrder = async(
   }, 
   shippingAmount: number, 
   paymentId: string, 
-  email:string | null
+  email:string | null,
+  delivery: boolean,
 ) => {
   const id = await generateId();
 
@@ -119,6 +121,7 @@ const createOrder = async(
     payment_id: paymentId,
     email: email,
     full_name: fullName,
+    delivery: delivery,
   });
 
   if (error) {

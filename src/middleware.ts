@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 
 export const config = {
-    matcher: ["/product/:path*"],
+    matcher: [],
 };
 
 export default auth((req) => {

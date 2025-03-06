@@ -11,7 +11,7 @@ export async function POST(req:NextRequest) {
     try {
         const {data: companyData, error: companyError} = await resend.emails.send({
             from: 'BWC Merchants <orders@bwcmerchants.co.uk>',
-            to: 'eltonmurati99@gmail.com',
+            to: 'orders@bwcmerchants.co.uk',
             subject: 'New Order',
             react: CompanyEmail({
                 fullName: body["fullName"],
@@ -22,6 +22,7 @@ export async function POST(req:NextRequest) {
                 shippingFee: body["shippingFee"], 
                 totalAmount: body["totalAmount"],
                 email: body["email"],
+                delivery: body["delivery"],
             }),
         });
 
@@ -40,7 +41,8 @@ export async function POST(req:NextRequest) {
                 shippingAddress: body["shippingAddress"], 
                 items: body["items"], 
                 shippingFee: body["shippingFee"], 
-                totalAmount: body["totalAmount"]
+                totalAmount: body["totalAmount"],
+                delivery: body["delivery"],
             }),
         });
 

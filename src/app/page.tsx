@@ -1,4 +1,3 @@
-import CategoryList from "@/components/CategoryList"
 import ProductList from "@/components/ProductList"
 import Slider from "@/components/Slider"
 import Link from "next/link"
@@ -17,12 +16,6 @@ const HomePage = () => {
         </Link>
         <Suspense fallback={"Loading..."}>
           <ProductList searchParams={{cat: 95}} limit={4} />
-        </Suspense>
-      </div>
-      <div className="mt-16">
-        <h1 className="text-2xl px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 mb-8">Categories</h1>
-        <Suspense fallback={"Loading..."}>
-          <CategoryList />
         </Suspense>
       </div>
       <div className="mt-16 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">

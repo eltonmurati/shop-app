@@ -6,22 +6,40 @@ import { useEffect, useState } from "react";
 import { verifyCart } from "../api/webhooks/helpers";
 import CartCard from "@/components/CartCard";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const CheckoutPage = () => {
+    const searchParams = useSearchParams();
+    const {replace} = useRouter();
+    const params = new URLSearchParams(searchParams);
+
+    let delivery = params.get("delivery") ? false : true;
+    const handleDeliveryChange = (deliver: boolean) => {
+        if (deliver) {
+            params.delete("delivery");
+        } else {
+            params.set("delivery", "false");
+        }
+
+        replace(`/checkout?${params}`)
+    }
+
     const [clientSecret, setClientSecret] = useState<string|null>();
     const [isLoading, setIsLoading] = useState(true);
     const [items, SetItems] = useState<{id:number,quantity:number}[]>([]);
     const [price, setPrice] = useState<number>(0);
+    const [shippingFee, setShippingFee] = useState(0);
 
     const { getCart } = useCartStore();
 
     useEffect(()=>{
         const setupCheckout = async () => {
-            await verifyCart(getCart()).then((verifiedCart)=>{
+            await verifyCart(getCart(), delivery).then((verifiedCart)=>{
                 if (verifiedCart) {
                     SetItems(verifiedCart["cart"]);
                     setPrice(verifiedCart["totalAmount"]);
                     setClientSecret(verifiedCart["clientSecret"]);
+                    setShippingFee(verifiedCart["shippingFee"]);
                 }
                 setIsLoading(false);
             });
@@ -49,33 +67,50 @@ const CheckoutPage = () => {
     }
 
     return(
-        <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 md:pt-4 lg:pt-8 pb-16">
-            <h1 className="text-2xl pb-8 font-semibold">Checkout</h1>
+        <div className="min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 py-16 flex flex-col justify-center">
             <div className="flex flex-col lg:flex-row gap-8 justify-center w-full">
-                <div className="lg:sticky lg:top-8 h-max w-full lg:w-1/3 flex flex-col gap-8 p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md">
-                    <h1 className="text-xl">Shopping Cart</h1>
-                    <div className="flex flex-col gap-8">
-                        {items.map((item)=>(
-                            <CartCard id={item["id"]} quantity={item["quantity"]} key={item["id"]} verified={true} />
-                        ))}
+                <div className="flex flex-col gap-8 lg:w-1/3">
+                    <div className="flex jsutify-center">
+                        <button 
+                            className="rounded-l-md bg-blue-700 w-full p-2 text-white disabled:bg-indigo-200"
+                            disabled={delivery}
+                            onClick={()=>handleDeliveryChange(true)}
+                        >
+                            Delivery
+                        </button>
+                        <button 
+                            className="rounded-r-md bg-blue-700 w-full p-2 text-white disabled:bg-indigo-200"
+                            disabled={!delivery}
+                            onClick={()=>handleDeliveryChange(false)}
+                        >
+                            Collection
+                        </button>
                     </div>
-                    <div className="flex flex-col gap-2">
-                        <div className="flex items-center justify-between font-semibold">
-                            <span className="">Subtotal</span>
-                            <span className="">£{price.toLocaleString()}</span>
+                    <div className="h-max w-full flex flex-col gap-8 p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md">
+                        <h1 className="text-xl">Shopping Cart</h1>
+                        <div className="flex flex-col gap-8">
+                            {items.map((item)=>(
+                                <CartCard id={item["id"]} quantity={item["quantity"]} key={item["id"]} verified={true} />
+                            ))}
                         </div>
-                        <div className="flex items-center justify-between text-gray-400 text-sm">
-                            <span className="">Shipping</span>
-                            <span className="">FREE</span>
-                        </div>
-                        <div className="flex items-center justify-between font-semibold text-xl">
-                            <span className="">Total</span>
-                            <span className="">£{price.toLocaleString()}</span>
+                        <div className="flex flex-col gap-2">
+                            <div className="flex items-center justify-between font-semibold">
+                                <span className="">Subtotal</span>
+                                <span className="">£{price.toLocaleString()}</span>
+                            </div>
+                            <div className="flex items-center justify-between text-gray-400 text-sm">
+                                <span className="">{delivery ? "Shipping" : "Collection"}</span>
+                                <span className="">{shippingFee > 0 ? "£" + shippingFee.toLocaleString() : "FREE"}</span>
+                            </div>
+                            <div className="flex items-center justify-between font-semibold text-xl">
+                                <span className="">Total</span>
+                                <span className="">£{price.toLocaleString()}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="checkout" className="lg:sticky lg:top-8 h-max w-full lg:w-2/3">
-                    <CheckoutForm clientSecret={clientSecret!} />
+                <div id="checkout" className="h-max w-full lg:w-2/3">
+                    <CheckoutForm clientSecret={clientSecret!} delivery={delivery} />
                 </div>
             </div>
         </div>

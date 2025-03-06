@@ -16,9 +16,10 @@ interface CustomerEmailProps {
     items: {sku:string, name:string, price:number, quantity:number}[],
     shippingFee: number,
     totalAmount: number,
+    delivery: boolean,
 }
 
-export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName, orderId, subtotal, shippingAddress, items, shippingFee, totalAmount}) => {
+export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName, orderId, subtotal, shippingAddress, items, shippingFee, totalAmount, delivery}) => {
     return(
         <Tailwind>
             <Section className="py-4 text-center">
@@ -91,7 +92,7 @@ export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName,
                     </Row>
                     <Row>
                         <Column align="left">
-                            <Text className='text-gray-400' style={{fontFamily: "Arial"}}>Shipping</Text>
+                            <Text className='text-gray-400' style={{fontFamily: "Arial"}}>{delivery ? "Shipping" : "Collection"}</Text>
                         </Column>
                         <Column align="right">
                             <Text className='text-gray-400' style={{fontFamily: "Arial"}}>{shippingFee > 0 ? `£${shippingFee.toLocaleString()}` : "FREE"}</Text>

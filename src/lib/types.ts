@@ -68,6 +68,7 @@ export type Database = {
         Row: {
           created_at: string
           customer: number | null
+          delivery: boolean
           email: string | null
           fulfilled: boolean
           full_name: string | null
@@ -82,6 +83,7 @@ export type Database = {
         Insert: {
           created_at?: string
           customer?: number | null
+          delivery?: boolean
           email?: string | null
           fulfilled?: boolean
           full_name?: string | null
@@ -96,6 +98,7 @@ export type Database = {
         Update: {
           created_at?: string
           customer?: number | null
+          delivery?: boolean
           email?: string | null
           fulfilled?: boolean
           full_name?: string | null
