@@ -23,8 +23,10 @@ export const verifyCart = async (cart: { id: number; quantity: number; }[], deli
         shippingAmount = calculateShipping();
     }
 
+    totalAmount += shippingAmount;
+
     if (totalAmount * 100 >= 50) {
-        const clientSecret = await createPaymentIntent(totalAmount * 100 + shippingAmount * 100, verifiedCart, shippingAmount, delivery ? 1 : 0);
+        const clientSecret = await createPaymentIntent(totalAmount * 100, verifiedCart, shippingAmount, delivery ? 1 : 0);
         return {"cart": verifiedCart, "totalAmount": totalAmount, "clientSecret": clientSecret, "shippingFee": shippingAmount}
     }
 
@@ -48,5 +50,5 @@ const createPaymentIntent = async (price:number, items: {id: number, quantity: n
 }
 
 const calculateShipping = () => {
-    return 0;
+    return 4.99;
 }

@@ -54,7 +54,7 @@ const NavIcons = () => {
                     </div>
                 )}
             </div>
-            {isCartOpen && <CartModel/>}
+            {isCartOpen && <CartModel open={isCartOpen} onClose={()=>setIsCartOpen(false)} />}
         </div>
     )
 }
