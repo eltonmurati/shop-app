@@ -85,10 +85,10 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                                     {product.on_sale ? (
                                         <div className="flex flex-col text-end">
                                             <div className="text-gray-400 line-through pl-4">£{product.original_price.toLocaleString()}</div>
-                                            <div className="font-semibold pl-4 text-black">£{product.price.toLocaleString()}</div>
+                                            <div className="font-medium pl-4 text-black">£{product.price.toLocaleString()}</div>
                                         </div>
                                     ) : (
-                                        <div className="font-semibold pl-4 text-black">£{product.price.toLocaleString()}</div>
+                                        <div className="font-medium pl-4 text-black">£{product.price.toLocaleString()}</div>
                                     )}
                                 </div>
                                 <div className="flex justify-between items-center">
@@ -101,7 +101,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                                 </div>
                                 <QuickAdd product={product} />
                                 {product.on_sale && (
-                                    <div className="text-sm rounded-md bg-blue-700 px-2 py-1 text-white font-semibold tracking-wider absolute top-3 left-3 z-10">SALE</div>
+                                    <div className="text-sm rounded-md bg-blue-700 px-2 py-1 text-white font-medium tracking-wider absolute top-3 left-3 z-10">SALE</div>
                                 )}
                             </Link>
                         ))}
@@ -109,7 +109,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                     <Pagination length={length!} limit={limit} page={page} />
                 </>
             ) : (
-                <div className="text-gray-700 text-center my-8 text-xl font-medium">No products found</div>
+                <div className="text-gray-700 text-center text-xl font-medium">No products found</div>
             )}
         </>
     )

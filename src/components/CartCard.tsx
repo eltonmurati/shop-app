@@ -60,7 +60,7 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
                         <div className="">
                             {/* TITLE */}
                             <div className="flex justify-between gap-4">
-                                <h3 className="font-semibold line-clamp-2">{product.name}</h3>
+                                <h3 className="font-medium line-clamp-2">{product.name}</h3>
                                 {product.on_sale ? (
                                     <div className="flex flex-col gap-1 text-end">
                                         <div className="text-gray-400 line-through text-sm">£{product.original_price.toLocaleString()}</div>

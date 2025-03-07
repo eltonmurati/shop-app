@@ -68,11 +68,11 @@ export default async function SuccessPage({searchParams}:{searchParams:any}) {
           <div id="status-icon" style={{backgroundColor: STATUS_CONTENT_MAP[status as keyof typeof STATUS_CONTENT_MAP].iconColor}} className='p-2 w-max rounded-md'>
             {STATUS_CONTENT_MAP[status as keyof typeof STATUS_CONTENT_MAP].icon}
           </div>
-          <h1 id="status-text" className='text-4xl font-semibold'>{STATUS_CONTENT_MAP[status as keyof typeof STATUS_CONTENT_MAP].text}</h1>
+          <h1 id="status-text" className='text-4xl font-medium'>{STATUS_CONTENT_MAP[status as keyof typeof STATUS_CONTENT_MAP].text}</h1>
         </div>
         {paymentIntent && status === "succeeded" && (
           <div className='flex flex-col gap-2 items-center'>
-            <h2 className='text-2xl font-semibold'>Thank you for your purchase!</h2>
+            <h2 className='text-2xl font-medium'>Thank you for your purchase!</h2>
             <span className='text-lg'>Order ID: <span className='font-medium'>{metadata["orderId"] || "Loading..."}</span></span>
             <div className='text-gray-400'>We have sent a receipt to your email</div>
           </div>

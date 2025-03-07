@@ -37,7 +37,7 @@ const CategoryNavbar = () => {
                     Refurbished
                 </Link>
                 <Link href="/shop?sale=true" 
-                    className="w-full h-full px-2 flex items-center justify-center text-center leading-tight hover:bg-white tracking-wider font-semibold" 
+                    className="w-full h-full px-2 flex items-center justify-center text-center leading-tight hover:bg-white tracking-wider font-medium" 
                     onMouseEnter={()=>{setTabId(0); setSaleHovered(true);}}
                     onMouseLeave={()=>setSaleHovered(false)}
                 >

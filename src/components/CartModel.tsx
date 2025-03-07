@@ -34,7 +34,7 @@ const CartModel = ({open, onClose}:{open:boolean; onClose: ()=>void;}) => {
     return (
         <>
             <div className="fixed top-0 left-0 right-0 bottom-0 z-30" onClick={onClose}></div>
-            <div className="max-w-[28rem] w-max absolute rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-30">
+            <div className="max-w-[27rem] w-max absolute rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-30">
                 {!cartItems ? (
                     <div className="p-4 font-medium">Cart is empty</div>
                 ) : (
@@ -49,7 +49,7 @@ const CartModel = ({open, onClose}:{open:boolean; onClose: ()=>void;}) => {
                         </div>
                         {/* BOTTOM */}
                         <div className="pb-4 px-4">
-                            <div className="flex items-center justify-between font-semibold">
+                            <div className="flex items-center justify-between font-medium">
                                 <span className="">Subtotal</span>
                                 <span className="">£{subtotal.toLocaleString()}</span>
                             </div>

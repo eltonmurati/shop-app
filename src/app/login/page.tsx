@@ -33,7 +33,7 @@ const LoginPage = () => {
     return (
         <div className='min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex items-center justify-center'>
             <form className="flex flex-col gap-8 py-8" action={formAction}>
-                <h1 className="text-2xl font-semibold">{formTitle}</h1>
+                <h1 className="text-2xl font-medium">{formTitle}</h1>
                 {mode !== MODE.REGISTER ? (
                     <>
                         {errorMessage && <div className="text-red-500">{errorMessage}</div>}

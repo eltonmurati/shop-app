@@ -36,7 +36,7 @@ const CartPage = () => {
                     <div className="my-4 font-medium">Cart is empty</div>
                 ) : (
                     <>
-                        <h2 className="text-2xl px-4 font-semibold">Shopping Cart</h2>
+                        <h2 className="text-2xl px-4 font-medium">Shopping Cart</h2>
                         {/* LIST */}
                         <div className="flex flex-col gap-8 px-4">
                             {/* ITEM */}
@@ -46,7 +46,7 @@ const CartPage = () => {
                         </div>
                         {/* BOTTOM */}
                         <div className="px-4">
-                            <div className="flex items-center justify-between font-semibold">
+                            <div className="flex items-center justify-between font-medium">
                                 <span className="">Subtotal</span>
                                 <span className="">£{subtotal.toLocaleString()}</span>
                             </div>

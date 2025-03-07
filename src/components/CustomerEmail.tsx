@@ -23,7 +23,7 @@ export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName,
     return(
         <Tailwind>
             <Section className="py-4 text-center">
-                <Heading as="h1" className="mb-0 text-2xl font-semibold" style={{fontFamily: "Arial"}}>
+                <Heading as="h1" className="mb-0 text-2xl font-medium" style={{fontFamily: "Arial"}}>
                     Thank you for your purchase, {fullName}
                 </Heading>
                 <Heading as="h2" className="font-normal text-base" style={{fontFamily: "Arial"}}>
@@ -41,19 +41,19 @@ export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName,
                                     className="border-0 border-b border-solid border-gray-200 py-2"
                                     colSpan={6}
                                 >
-                                    <Text className="font-semibold" style={{fontFamily: "Arial"}}>Product</Text>
+                                    <Text className="font-medium" style={{fontFamily: "Arial"}}>Product</Text>
                                 </th>
                                 <th
                                     align="center"
                                     className="border-0 border-b border-solid border-gray-200 py-2"
                                 >
-                                    <Text className="font-semibold" style={{fontFamily: "Arial"}}>Quantity</Text>
+                                    <Text className="font-medium" style={{fontFamily: "Arial"}}>Quantity</Text>
                                 </th>
                                 <th
                                     align="center"
                                     className="border-0 border-b border-solid border-gray-200 py-2"
                                 >
-                                    <Text className="font-semibold" style={{fontFamily: "Arial"}}>Price</Text>
+                                    <Text className="font-medium" style={{fontFamily: "Arial"}}>Price</Text>
                                 </th>
                             </tr>
                             {items.map((item)=>(
@@ -84,10 +84,10 @@ export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName,
                     </table>
                     <Row>
                         <Column align="left">
-                            <Text className="font-semibold" style={{fontFamily: "Arial"}}>Subtotal</Text>
+                            <Text className="font-medium" style={{fontFamily: "Arial"}}>Subtotal</Text>
                         </Column>
                         <Column align="right">
-                            <Text className='font-semibold' style={{fontFamily: "Arial"}}>£{subtotal.toLocaleString()}</Text>
+                            <Text className='font-medium' style={{fontFamily: "Arial"}}>£{subtotal.toLocaleString()}</Text>
                         </Column>
                     </Row>
                     <Row>
@@ -100,10 +100,10 @@ export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName,
                     </Row>
                     <Row>
                         <Column align="left">
-                            <Text className='font-semibold text-xl' style={{fontFamily: "Arial"}}>Total</Text>
+                            <Text className='font-medium text-xl' style={{fontFamily: "Arial"}}>Total</Text>
                         </Column>
                         <Column align="right">
-                            <Text className='font-semibold text-xl' style={{fontFamily: "Arial"}}>£{totalAmount.toLocaleString()}</Text>
+                            <Text className='font-medium text-xl' style={{fontFamily: "Arial"}}>£{totalAmount.toLocaleString()}</Text>
                         </Column>
                     </Row>
                 </Section>
@@ -113,3 +113,33 @@ export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName,
 }
 
 export default CustomerEmail;
+
+export const CustomerEmailText = (
+    fullName: string,
+    orderId: string,
+    subtotal: number,
+    shippingAddress: {
+        city: string | undefined | null, 
+        country: string | undefined | null, 
+        line1: string | undefined | null, 
+        line2: string | undefined | null, 
+        postal_code: string | undefined | null, 
+        state: string | undefined | null
+    },
+    items: {sku:string, name:string, price:number, quantity:number}[],
+    shippingFee: number,
+    totalAmount: number,
+    delivery: boolean,
+) => {
+    return(
+        "Thank you for your purchase!" + "\n\n" +
+        "Name: " + fullName + "\n" +
+        "Order ID: " + orderId + "\n" +
+        "Address: " + shippingAddress + "\n" +
+        "Items: " + items + "\n" +
+        "Subtotal: " + subtotal + "\n" +
+        "Shipping Fee: " + shippingFee + "\n" +
+        "Delivery Mode: " + (delivery ? "Delivery" : "Collection") + "\n" +
+        "Total: " + totalAmount
+    );
+}

@@ -44,7 +44,7 @@ const FilterTags = () => {
                     {tags.map((tag)=>(
                         <div className="rounded-full pl-2 pr-1 h-6 ring-1 ring-gray-400 text-xs text-gray-400 flex gap-1 items-center text-gray-400" key={tag}>
                             <div className="flex gap-1">
-                                <p className="font-semibold">{renameTag(tag.split(": ")[0])}:</p>
+                                <p className="font-medium">{renameTag(tag.split(": ")[0])}:</p>
                                 <FilterTagValue tag={tag} />
                             </div>
                             <button className="" onClick={()=>removeFilter(tag)}>

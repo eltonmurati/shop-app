@@ -1,5 +1,5 @@
-import { CompanyEmail } from "@/components/CompanyEmail";
-import CustomerEmail from "@/components/CustomerEmail";
+import { CompanyEmail, CompanyEmailText } from "@/components/CompanyEmail";
+import CustomerEmail, { CustomerEmailText } from "@/components/CustomerEmail";
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
@@ -13,6 +13,17 @@ export async function POST(req:NextRequest) {
             from: 'BWC Merchants <orders@bwcmerchants.co.uk>',
             to: 'orders@bwcmerchants.co.uk',
             subject: 'New Order',
+            text: CompanyEmailText(
+                body["fullName"],
+                body["orderId"], 
+                body["subtotal"], 
+                body["shippingAddress"], 
+                body["items"], 
+                body["shippingFee"], 
+                body["totalAmount"],
+                body["email"],
+                body["delivery"],
+            ),
             react: CompanyEmail({
                 fullName: body["fullName"],
                 orderId: body["orderId"], 
@@ -34,6 +45,16 @@ export async function POST(req:NextRequest) {
             from: 'BWC Merchants <orders@bwcmerchants.co.uk>',
             to: body["email"],
             subject: 'Order Summary',
+            text: CustomerEmailText(
+                body["fullName"],
+                body["orderId"], 
+                body["subtotal"], 
+                body["shippingAddress"], 
+                body["items"], 
+                body["shippingFee"], 
+                body["totalAmount"],
+                body["delivery"],
+            ),
             react: CustomerEmail({
                 fullName: body["fullName"],
                 orderId: body["orderId"], 
