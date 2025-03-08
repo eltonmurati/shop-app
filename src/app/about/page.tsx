@@ -1,7 +1,7 @@
 const AboutPage = () => {
     return(
         <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
-            <h1 className="text-2xl font-medium py-8">About</h1>
+            <h1 className="text-2xl font-medium pb-8 lg:pt-4 xl:pt-8">About</h1>
             <div className="flex flex-col gap-12 pb-16">
                 <div className="flex flex-col gap-4">
                     <h2 className="text-xl font-medium">Welcome to BWC Merchants – Your Trusted Plumbing Partner</h2>

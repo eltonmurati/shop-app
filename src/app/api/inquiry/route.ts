@@ -14,9 +14,9 @@ export async function POST(req:NextRequest) {
             subject: 'New Inquiry',
             text: InquiryEmail(
                 body["fullName"],
-                body["email"], 
                 body["inquiry"], 
             ),
+            replyTo: body["email"]
         });
 
         if (error) {

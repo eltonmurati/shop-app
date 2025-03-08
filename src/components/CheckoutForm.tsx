@@ -66,7 +66,7 @@ const PaymentForm = ({delivery}:{delivery:boolean}) => {
                     <h1 className="pb-8 text-xl">{delivery ? "Shipping Details" : "Collection Details"}</h1>
                     <div className="flex flex-col gap-2 pb-8">
                         <label className="text-sm text-gray-700">E-mail</label>
-                        <input id="email" type="email" name="email" placeholder="example@domain.com" onChange={(e)=>setEmail(e.target.value)}
+                        <input required id="email" type="email" name="email" placeholder="example@domain.com" onChange={(e)=>setEmail(e.target.value)}
                             className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none" />
                     </div>
                     {delivery && <AddressElement id="address-element" options={addressElementOptions} />}

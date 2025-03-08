@@ -1,6 +1,6 @@
-export const InquiryEmail = (fullName: string, email: string, inquiry: string) => {
+export const InquiryEmail = (fullName: string, inquiry: string) => {
     return(
-        inquiry + "\n\n" + "From," + "\n" + fullName + "\n\n" + email
+        inquiry + "\n\n" + "From," + "\n" + fullName
     );
 };
 

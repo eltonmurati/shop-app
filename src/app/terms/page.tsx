@@ -1,6 +1,6 @@
 const TermsPage = () => {
     return(
-        <div className="py-8 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] flex flex-col gap-12 justify-center">
+        <div className="pb-8 pt-4 md:pt-8 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] flex flex-col gap-12 justify-center">
             <h1 className="text-2xl font-medium">Terms & Conditions</h1>
             <div className="flex flex-col items-center justify-center gap-12">
                 <div className="flex flex-col gap-4">
