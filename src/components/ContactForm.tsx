@@ -13,9 +13,9 @@ const ContactForm = () => {
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (!message) {
+        if (!message && !error) {
             setLoading(true);
-            
+
             fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/inquiry', {method: 'POST', body: JSON.stringify({
                 fullName: name,
                 email: email,

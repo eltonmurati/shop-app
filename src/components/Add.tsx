@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useCartStore } from "@/hooks/useCartStore";
 
 const Add = ({stock, productId}:{stock:number; productId:number;}) => {
-
     const [quantity,setQuantity] = useState(1);
+    const [qty, setQty] = useState("1");
 
     const {addItem} = useCartStore();
 
-    const handleQuantity = (type: "i" | "d") => {
+    const incramentQuantity = (type: "i" | "d") => {
         if (type === "d" && quantity > 1) {
             setQuantity( (prev) => prev - 1 );
         };
@@ -18,6 +18,33 @@ const Add = ({stock, productId}:{stock:number; productId:number;}) => {
         };
     };
 
+    const handleFocus = (e:React.FocusEvent<HTMLInputElement>) => {
+        handleQuantity(e.target.value);
+    }
+
+    const handleKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            handleQuantity(e.currentTarget.value);
+        }
+    }
+
+    const handleQuantity = (value: string) => {
+        if (Number(value)) {
+            if (Number(value) > stock) { 
+                setQuantity(stock); 
+                setQty(stock.toString());
+            } else if (Number(value) < 1) { 
+                setQuantity(1);
+                setQty("1");
+            } else { 
+                setQuantity(Number(value));
+            }
+        } else {
+            setQuantity(1);
+            setQty("1");
+        }
+    }
+
     return (
         <div className="flex flex-col gap-4">
             <h4 className="font-medium">Choose a quantity</h4>
@@ -25,9 +52,11 @@ const Add = ({stock, productId}:{stock:number; productId:number;}) => {
                 <div className="flex justify-between">
                     <div className="flex items-center gap-4">
                         <div className="bg-gray-100 py-2 px-4 rounded-3xl flex items-center justify-between w-32">
-                            <button className="cursor-pointer text-xl" onClick={()=>handleQuantity("d")}>-</button>
-                            {quantity}
-                            <button className="cursor-pointer text-xl" onClick={()=>handleQuantity("i")}>+</button>
+                            <button className="cursor-pointer text-xl" onClick={()=>incramentQuantity("d")}>-</button>
+                            <input type="text" placeholder="Qty." name="quantity" value={qty} className="w-12 text-center bg-gray-100" 
+                                onChange={(e)=>setQty(e.target.value)} onBlur={handleFocus} onKeyDown={handleKeyDown}
+                            />
+                            <button className="cursor-pointer text-xl" onClick={()=>incramentQuantity("i")}>+</button>
                         </div>
                         <div className="text-sm text-green-500 font-medium">
                             {stock} In Stock

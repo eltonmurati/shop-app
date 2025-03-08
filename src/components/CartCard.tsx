@@ -78,7 +78,6 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
                         {/* BOTTOM */}
                         <div className="flex justify-between text-sm">
                             <div className="flex gap-1">
-                                <span className="text-gray-400">Qty. {quantity}</span>
                                 {!verified && <div className="flex items-center">
                                     <button className="text-gray-400 hover:text-blue-700 w-4 h-4 flex items-center justify-center" onClick={removeOne}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-3">
@@ -91,6 +90,7 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
                                         </svg>
                                     </button>
                                 </div>}
+                                <span className="text-gray-400">Qty. {quantity}</span>
                             </div>
                             {!verified && <button className="text-red-500" onClick={deleteCard}>Remove</button>}
                         </div>
