@@ -66,6 +66,7 @@ export type Database = {
       }
       order: {
         Row: {
+          alt_codes: string[] | null
           created_at: string
           customer: number | null
           delivery: boolean
@@ -81,6 +82,7 @@ export type Database = {
           total_amount: number
         }
         Insert: {
+          alt_codes?: string[] | null
           created_at?: string
           customer?: number | null
           delivery?: boolean
@@ -96,6 +98,7 @@ export type Database = {
           total_amount: number
         }
         Update: {
+          alt_codes?: string[] | null
           created_at?: string
           customer?: number | null
           delivery?: boolean
@@ -122,14 +125,9 @@ export type Database = {
       }
       product: {
         Row: {
-          amount_purchased: number
-          brand: number
-          depth: number
-          description: string | null
-          height: number
+          brand: number | null
           id: number
           image_urls: string[] | null
-          last_purchased: string | null
           name: string
           on_sale: boolean
           original_price: number
@@ -138,18 +136,11 @@ export type Database = {
           sku: string
           specifications: Json | null
           variants: Json | null
-          weight: number
-          width: number
         }
         Insert: {
-          amount_purchased?: number
-          brand: number
-          depth: number
-          description?: string | null
-          height: number
+          brand?: number | null
           id?: number
           image_urls?: string[] | null
-          last_purchased?: string | null
           name: string
           on_sale?: boolean
           original_price: number
@@ -158,18 +149,11 @@ export type Database = {
           sku: string
           specifications?: Json | null
           variants?: Json | null
-          weight: number
-          width: number
         }
         Update: {
-          amount_purchased?: number
-          brand?: number
-          depth?: number
-          description?: string | null
-          height?: number
+          brand?: number | null
           id?: number
           image_urls?: string[] | null
-          last_purchased?: string | null
           name?: string
           on_sale?: boolean
           original_price?: number
@@ -178,8 +162,6 @@ export type Database = {
           sku?: string
           specifications?: Json | null
           variants?: Json | null
-          weight?: number
-          width?: number
         }
         Relationships: [
           {

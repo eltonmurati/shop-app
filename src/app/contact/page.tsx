@@ -14,7 +14,7 @@ const ContactPage = () => {
                     className="rounded-md"
                     loading="lazy" 
                     allowFullScreen 
-                    src={"https://www.google.com/maps/embed/v1/place?q=place_id:ChIJiXmv85gddkgR5G8QOlcxiYA&key=" + process.env.GOOGLE_MAPS_PUBLIC}
+                    src={"https://www.google.com/maps/embed/v1/place?q=place_id:ChIJuUOgMssddkgRFtXoMiOh5Bg&key=" + process.env.GOOGLE_MAPS_PUBLIC}
                 ></iframe>
             </div>
         </div>

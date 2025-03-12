@@ -7,7 +7,6 @@ import FilterDropdown from "./FilterDropdown";
 import { useState } from "react";
 
 const Filter = () => {
-
     const [categoryOpen, setCategoryOpen] = useState(false);
     const [brandOpen, setBrandOpen] = useState(false);
 
@@ -19,23 +18,22 @@ const Filter = () => {
         const {name,value} = e.target;
         
         if (e.target.type === "checkbox") {
-            if (e.target.checked) { params.set(name, "true"); } 
+            if (e.target.checked) { params.set(name, "true"); }
             else { params.delete(name); }
         } else {
             if (value === "false") { params.delete(name); }
-            else if (name === "sort") { params.set(name, value); } 
+            else if (name === "sort") { params.set(name, value); }
             else {
                 if (!params.has(name, value)) { params.append(name, value); }
             }
         }
 
+        params.delete("page");
         replace(`/shop?${params}`);
     }
 
     const clearFilters = () => {
-        if (params.get("sort") && params.get("page")) { replace(`shop?sort=${params.get("sort")}&page=${params.get("page")}`); }
-        else if (params.get("sort")) { replace(`shop?sort=${params.get("sort")}`); }
-        else if (params.get("page")) { replace(`shop?page=${params.get("page")}`); }
+        if (params.get("sort")) { replace(`shop?sort=${params.get("sort")}`); }
         else { replace("/shop"); }
     }
 
@@ -74,10 +72,6 @@ const Filter = () => {
                         )}
                     </div>
                     <DoubleRange title={"Price"} measurement={"£"} column="price" />
-                    <DoubleRange title={"Height"} measurement={"mm"} column="height" />
-                    <DoubleRange title={"Width"} measurement={"mm"} column="width" />
-                    <DoubleRange title={"Depth"} measurement={"mm"} column="depth" />
-                    <DoubleRange title={"Weight"} measurement={"kg"} column="weight" />
                     <div className="flex gap-2 items-center bg-gray-100 rounded-full px-4 h-max py-2">
                         <input type="checkbox" id="stock" name="stock" className="accent-blue-700" checked={params.has("stock")} onChange={handleFilterChange} />
                         <label htmlFor="stock" className="text-xs font-medium">In Stock</label>

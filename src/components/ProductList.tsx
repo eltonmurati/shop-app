@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Pagination from "./Pagination";
 import QuickAdd from "./QuickAdd";
+import { getPriceText } from "@/lib/helpers";
 
 const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:number;}) => {
 
@@ -12,7 +13,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
     const start = limit * (page - 1)
     const end = limit * page - 1;
 
-    let productQuery = postgres.from('product').select('*, category!inner(*), brand!inner(*)');
+    let productQuery = postgres.from('product').select('*', {count: 'exact'});
 
     if (searchParams["search"]) { productQuery = productQuery.or(`name.ilike.%${searchParams["search"]}%, sku.ilike.%${searchParams["search"]}%`); }
     if (searchParams["cat"]) { productQuery = productQuery.in("category.id", Array.isArray(searchParams["cat"]) ? searchParams["cat"] : [searchParams["cat"]] ); }
@@ -44,11 +45,8 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
         }
     }
 
-    let {data: temp} = await productQuery;
-    const length = temp?.length;
-
     productQuery = productQuery.range(start, end);
-    let { data: products } = await productQuery;
+    let { data: products, count } = await productQuery;
     let found = true;
     if (!products || products.length < 1) { found = false; }
 
@@ -68,27 +66,18 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                                         alt="" 
                                         fill 
                                         sizes="25vw" 
-                                        className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
+                                        className="absolute object-cover rounded-md z-10"
                                     />
-                                    {product.image_urls?.at(1) && (
-                                        <Image 
-                                            src={product.image_urls[1]} 
-                                            alt="" 
-                                            fill 
-                                            sizes="25vw"
-                                            className="absolute object-cover rounded-md"
-                                        />
-                                    )}
                                 </div>
                                 <div className="flex justify-between min-h-12">
                                     <h2 className="font-medium line-clamp-2">{product.name}</h2>
                                     {product.on_sale ? (
                                         <div className="flex flex-col text-end">
-                                            <div className="text-gray-400 line-through pl-4">£{product.original_price.toLocaleString()}</div>
-                                            <div className="font-medium pl-4 text-black">£{product.price.toLocaleString()}</div>
+                                            <div className="text-gray-400 line-through pl-4">£{getPriceText(product.original_price)}</div>
+                                            <div className="font-medium pl-4 text-black">£{getPriceText(product.price)}</div>
                                         </div>
                                     ) : (
-                                        <div className="font-medium pl-4 text-black">£{product.price.toLocaleString()}</div>
+                                        <div className="font-medium pl-4 text-black">£{getPriceText(product.price)}</div>
                                     )}
                                 </div>
                                 <div className="flex justify-between items-center">
@@ -106,7 +95,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                             </Link>
                         ))}
                     </div>
-                    <Pagination length={length!} limit={limit} page={page} />
+                    <Pagination length={count!} limit={limit} page={page} />
                 </>
             ) : (
                 <div className="text-gray-700 text-center text-xl font-medium">No products found</div>

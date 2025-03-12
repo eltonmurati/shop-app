@@ -7,6 +7,20 @@ const ProductImages = ({images}:{images:string[]}) => {
 
     const [index, setIndex] = useState(0);
 
+    if (images.length === 0) { 
+        return(
+            <div className="h-[600px] relative">
+                <Image 
+                    src={"/noImage.jpg"}
+                    alt="" 
+                    fill
+                    sizes="50vw" 
+                    className="object-cover rounded-md"
+                />
+            </div>
+        );
+    }
+
     return (
         <div className="">
             <div className="h-[600px] relative">

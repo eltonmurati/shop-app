@@ -6,6 +6,7 @@ import { useCartStore } from "@/hooks/useCartStore";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { getPriceText } from "@/lib/helpers";
 
 const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified:boolean}) => {
 
@@ -63,11 +64,11 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
                                 <h3 className="font-medium line-clamp-2">{product.name}</h3>
                                 {product.on_sale ? (
                                     <div className="flex flex-col gap-1 text-end">
-                                        <div className="text-gray-400 line-through text-sm">£{product.original_price.toLocaleString()}</div>
-                                        <div className="text-black">£{product.price.toLocaleString()}</div>
+                                        <div className="text-gray-400 line-through text-sm">£{getPriceText(product.original_price)}</div>
+                                        <div className="text-black">£{getPriceText(product.price)}</div>
                                     </div>
                                 ) : (
-                                    <div className="text-black">£{product.price.toLocaleString()}</div>
+                                    <div className="text-black">£{getPriceText(product.price)}</div>
                                 )}
                             </div>
                             {/* DESCRIPTION */}

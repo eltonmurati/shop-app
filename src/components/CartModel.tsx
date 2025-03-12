@@ -5,6 +5,7 @@ import { postgres } from "@/lib/postgresClient";
 import { useEffect, useState } from "react";
 import { useCartStore } from "@/hooks/useCartStore";
 import Link from "next/link";
+import { getPriceText } from "@/lib/helpers";
 
 const CartModel = ({open, onClose}:{open:boolean; onClose: ()=>void;}) => {
     if (!open) { return null; }
@@ -51,7 +52,7 @@ const CartModel = ({open, onClose}:{open:boolean; onClose: ()=>void;}) => {
                         <div className="pb-4 px-4">
                             <div className="flex items-center justify-between font-medium">
                                 <span className="">Subtotal</span>
-                                <span className="">£{subtotal.toLocaleString()}</span>
+                                <span className="">£{getPriceText(subtotal)}</span>
                             </div>
                             <p className="text-gray-400 text-sm mt-2 mb-4">
                                 Shipping calculated at checkout.<br/>
@@ -59,7 +60,7 @@ const CartModel = ({open, onClose}:{open:boolean; onClose: ()=>void;}) => {
                             </p>
                             <div className="flex justify-between text-sm">
                                 <button className="rounded-md py-3 px-4 ring-1 ring-inset ring-red-500 text-red-500" onClick={()=>clearCart()}>Clear Cart</button>
-                                <Link className="rounded-md py-3 px-4 bg-black text-white" href="/checkout">Checkout</Link>
+                                <Link className="rounded-md py-3 px-4 bg-black text-white" href="/checkout" onClick={onClose}>Checkout</Link>
                             </div>
                         </div>
                     </>

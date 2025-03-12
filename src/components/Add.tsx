@@ -12,9 +12,11 @@ const Add = ({stock, productId}:{stock:number; productId:number;}) => {
     const incramentQuantity = (type: "i" | "d") => {
         if (type === "d" && quantity > 1) {
             setQuantity( (prev) => prev - 1 );
-        };
-        if (type === "i" && quantity < stock) {
+            setQty((quantity-1).toString());
+            
+        } else if (type === "i" && quantity < stock) {
             setQuantity( (prev) => prev + 1 );
+            setQty((quantity+1).toString());
         };
     };
 

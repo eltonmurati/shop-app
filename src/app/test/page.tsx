@@ -1,8 +1,6 @@
-import TestModal from "@/components/TestModal";
-
 const TestPage = () => {
     return(
-        <TestModal />
+        <div className="">TestPage</div>
     );
 }
 

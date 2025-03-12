@@ -45,7 +45,7 @@ const ContactForm = () => {
             </div>
             <div className="flex flex-col gap-2">
                 <label className="text-sm text-gray-700">Inquiry</label>
-                <textarea required name="inquiry" rows={5} onChange={(e)=>setInquiry(e.target.value)} className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none" />
+                <textarea required name="inquiry" rows={5} onChange={(e)=>setInquiry(e.target.value)} className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none resize-none" />
             </div>
             <button className="p-2 bg-blue-700 text-white rounded-md relative disabled:bg-indigo-200" disabled={loading}>
                 {loading ? "Loading..." : "Submit"}

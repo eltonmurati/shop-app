@@ -9,7 +9,7 @@ const CategoryNavbar = () => {
     const [tabId, setTabId] = useState(0);
     const [saleHovered, setSaleHovered] = useState(false);
 
-    const sale = "rounded-md px-2 py-1 bg-white text-blue-700";
+    const sale = "rounded-md px-2 py-1 bg-white text-blue-700 font-semibold";
     const saleHover = "rounded-md px-2 py-1 bg-blue-700";
 
     const highlighted = "w-full h-full px-2 flex items-center justify-center text-center bg-white text-blue-700 leading-tight z-20";

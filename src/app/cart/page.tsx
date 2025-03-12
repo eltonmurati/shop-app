@@ -4,6 +4,7 @@ import { postgres } from "@/lib/postgresClient";
 import { useEffect, useState } from "react";
 import { useCartStore } from "@/hooks/useCartStore";
 import CartCard from "@/components/CartCard";
+import { getPriceText } from "@/lib/helpers";
 
 const CartPage = () => {
 
@@ -41,14 +42,14 @@ const CartPage = () => {
                         <div className="flex flex-col gap-8 px-4">
                             {/* ITEM */}
                             {cart.map((item)=>(
-                                <CartCard id={item["id"]} quantity={item["quantity"]} key={item["id"]} />
+                                <CartCard id={item["id"]} quantity={item["quantity"]} key={item["id"]} verified={false} />
                             ))}
                         </div>
                         {/* BOTTOM */}
                         <div className="px-4">
                             <div className="flex items-center justify-between font-medium">
                                 <span className="">Subtotal</span>
-                                <span className="">£{subtotal.toLocaleString()}</span>
+                                <span className="">£{getPriceText(subtotal)}</span>
                             </div>
                             <p className="text-gray-400 text-sm mt-3 mb-5">
                                 Shipping calculated at checkout.<br/>

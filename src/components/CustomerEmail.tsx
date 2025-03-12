@@ -1,3 +1,4 @@
+import { getPriceText } from '@/lib/helpers';
 import { Column, Heading, Row, Section, Text, Tailwind } from '@react-email/components';
 import * as React from 'react';
 
@@ -76,7 +77,7 @@ export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName,
                                         align="center"
                                         className="border-0 border-b border-solid border-gray-200 py-2"
                                     >
-                                        <Text style={{fontFamily: "Arial"}}>£{item.price.toLocaleString()}</Text>
+                                        <Text style={{fontFamily: "Arial"}}>£{getPriceText(item.price)}</Text>
                                     </td>
                                 </tr>
                             ))}
@@ -87,7 +88,7 @@ export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName,
                             <Text className="font-medium" style={{fontFamily: "Arial"}}>Subtotal</Text>
                         </Column>
                         <Column align="right">
-                            <Text className='font-medium' style={{fontFamily: "Arial"}}>£{subtotal.toLocaleString()}</Text>
+                            <Text className='font-medium' style={{fontFamily: "Arial"}}>£{getPriceText(subtotal)}</Text>
                         </Column>
                     </Row>
                     <Row>
@@ -95,7 +96,7 @@ export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName,
                             <Text className='text-gray-400' style={{fontFamily: "Arial"}}>{delivery ? "Shipping" : "Collection"}</Text>
                         </Column>
                         <Column align="right">
-                            <Text className='text-gray-400' style={{fontFamily: "Arial"}}>{shippingFee > 0 ? `£${shippingFee.toLocaleString()}` : "FREE"}</Text>
+                            <Text className='text-gray-400' style={{fontFamily: "Arial"}}>{shippingFee > 0 ? `£${getPriceText(shippingFee)}` : "FREE"}</Text>
                         </Column>
                     </Row>
                     <Row>
@@ -103,7 +104,7 @@ export const CustomerEmail: React.FC<Readonly<CustomerEmailProps>> = ({fullName,
                             <Text className='font-medium text-xl' style={{fontFamily: "Arial"}}>Total</Text>
                         </Column>
                         <Column align="right">
-                            <Text className='font-medium text-xl' style={{fontFamily: "Arial"}}>£{totalAmount.toLocaleString()}</Text>
+                            <Text className='font-medium text-xl' style={{fontFamily: "Arial"}}>£{getPriceText(totalAmount)}</Text>
                         </Column>
                     </Row>
                 </Section>

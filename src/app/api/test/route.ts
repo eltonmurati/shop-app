@@ -81,7 +81,7 @@ export const postgres = createClient<Database> (
   }
     
   const generateId = async() => {
-    const id = Date.now().toString(36).substring(0,10).padStart(12,"0").toUpperCase() + Math.random().toString(36).substring(2,12).padStart(12,"0").toUpperCase();
+    const id = Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2).toUpperCase();
     const {data: order} = await postgres.from("order").select("*").eq("id", id).limit(1).single();
   
     if (order) {
