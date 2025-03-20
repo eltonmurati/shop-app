@@ -22,13 +22,14 @@ const SinglePage = async ({params}:{params:{slug:string}}) => {
         <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 flex flex-col lg:flex-row gap-8 xl:gap-16 md:mt-4 lg:mt-8 mb-16">
                 {/* IMAGES */}
                 <div className="w-full lg:w-1/2 lg:sticky top-4 h-max">
-                    <ProductImages images={images}/>
+                    <ProductImages images={images} />
                 </div>
                 {/* TEXTS */}
                 <div className="w-full lg:w-1/2 flex flex-col gap-6">
                     <h1 className="text-4xl font-medium">{product.name}</h1>
                     <div className="">
-                        <h4 className="text-gray-400">{product.sku}</h4>
+                        <h4 className="">Our Code: <span className="text-gray-400">{product.sku}</span></h4>
+                        <h4 className="">Manufacturer Code: <span className="text-gray-400">{product.manufacturer_code}</span></h4>
                     </div>
                     <div className="h-[2px] bg-gray-100"/>
                     {product.on_sale ? (

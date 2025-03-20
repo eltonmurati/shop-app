@@ -128,6 +128,7 @@ export type Database = {
           brand: number | null
           id: number
           image_urls: string[] | null
+          manufacturer_code: string | null
           name: string
           on_sale: boolean
           original_price: number
@@ -136,11 +137,13 @@ export type Database = {
           sku: string
           specifications: Json | null
           variants: Json | null
+          name_sku: string | null
         }
         Insert: {
           brand?: number | null
           id?: number
           image_urls?: string[] | null
+          manufacturer_code?: string | null
           name: string
           on_sale?: boolean
           original_price: number
@@ -154,6 +157,7 @@ export type Database = {
           brand?: number | null
           id?: number
           image_urls?: string[] | null
+          manufacturer_code?: string | null
           name?: string
           on_sale?: boolean
           original_price?: number
@@ -247,7 +251,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      name_sku: {
+        Args: {
+          "": unknown
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

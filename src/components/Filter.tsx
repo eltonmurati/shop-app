@@ -88,7 +88,6 @@ const Filter = () => {
                 <div className="">
                     <select name="sort" className="py-2 px-4 rounded-full text-xs font-medium outline-none cursor-pointer ring-1 ring-gray-400 ring-inset" onChange={handleFilterChange}>
                         <option value="false">Sort By</option>
-                        <option value="pop">Popularity</option>
                         <option value="asc">Price (low to high)</option>
                         <option value="desc">Price (high to low)</option>
                     </select>
