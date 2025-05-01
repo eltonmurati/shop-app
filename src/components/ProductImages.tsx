@@ -29,7 +29,7 @@ const ProductImages = ({images}:{images:string[]}) => {
                     alt="" 
                     fill
                     sizes="50vw" 
-                    className="object-cover rounded-md"
+                    className="object-contain rounded-md"
                 />
             </div>
             <div className="flex justify-between gap-4 mt-4">
@@ -40,7 +40,7 @@ const ProductImages = ({images}:{images:string[]}) => {
                             alt="" 
                             fill 
                             sizes="30vw" 
-                            className="object-cover rounded-md"
+                            className="object-contain rounded-md"
                         />
                     </div>
                 ))}

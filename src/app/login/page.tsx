@@ -14,7 +14,7 @@ enum MODE {
 
 const LoginPage = () => {
 
-    redirect("/");
+    //redirect("/");
 
     const [errorMessage, formAction, isPending] = useActionState(authenticate, undefined);
 

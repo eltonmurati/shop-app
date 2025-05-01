@@ -42,7 +42,7 @@ const FilterTags = () => {
             {tags.length > 0 && (
                 <div className="flex flex-wrap gap-3">
                     {tags.map((tag)=>(
-                        <div className="rounded-full pl-2 pr-1 h-6 ring-1 ring-gray-400 text-xs text-gray-400 flex gap-1 items-center text-gray-400" key={tag}>
+                        <div className="rounded-full pl-2 pr-1 h-6 ring-1 ring-gray-400 text-xs flex gap-1 items-center text-gray-400" key={tag}>
                             <div className="flex gap-1">
                                 <p className="font-medium">{renameTag(tag.split(": ")[0])}:</p>
                                 <FilterTagValue tag={tag} />

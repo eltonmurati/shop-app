@@ -8,7 +8,7 @@ const AdminNav = () => {
 
     return(
         <div className="p-4 bg-gray-50">
-            <h1 className="text-2xl pb-4 whitespace-nowrap">Admin Dashboard</h1>
+            <h1 className="text-2xl pb-4 whitespace-nowrap font-medium">Admin Dashboard</h1>
             <ul className="flex flex-col gap-2">
                 <li><Link 
                     href={"/admin"} 

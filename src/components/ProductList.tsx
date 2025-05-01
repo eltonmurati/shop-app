@@ -13,17 +13,24 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
     const start = limit * (page - 1)
     const end = limit * page - 1;
 
-    let productQuery = postgres.from('product').select('*, category(*)', {count: 'exact'});
+    let productQuery = postgres.from('product').select('*', {count: 'planned'});
+
+    if (searchParams["cat"]) { 
+        const { data: productIds } = await postgres
+            .from("product_category")
+            .select("product_id")
+            .in("category_id", Array.isArray(searchParams["cat"]) ? searchParams["cat"] : [searchParams["cat"]]);
+
+        productQuery = productQuery.in('id', productIds?.map(item => item.product_id)!);
+    }
 
     if (searchParams["search"]) { productQuery = productQuery.textSearch('name', searchParams["search"], {type: "websearch"}); }
-    if (searchParams["cat"]) { 
-        productQuery = productQuery.in('category.id', Array.isArray(searchParams["cat"]) ? searchParams["cat"] : [searchParams["cat"]] ); 
-    }
-    if (searchParams["brand"]) { productQuery = productQuery.in("brand.id", Array.isArray(searchParams["brand"]) ? searchParams["brand"] : [searchParams["brand"]] ); }
+    if (searchParams["brand"]) { productQuery = productQuery.in("brand", Array.isArray(searchParams["brand"]) ? searchParams["brand"] : [searchParams["brand"]] ); }
     if (searchParams["stock"]) { productQuery = productQuery.gt("quantity", 0); }
     if (searchParams["sale"]) { productQuery = productQuery.eq("on_sale", true); }
     if (searchParams["minprice"]) { productQuery = productQuery.gte("price", searchParams["minprice"]); }
     if (searchParams["maxprice"]) { productQuery = productQuery.lte("price", searchParams["maxprice"]); }
+
     if (searchParams["sort"]) { 
         switch (searchParams["sort"]) {
             case "asc":
@@ -58,18 +65,18 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                                         alt="" 
                                         fill 
                                         sizes="25vw" 
-                                        className="absolute object-cover rounded-md z-10"
+                                        className="absolute object-contain rounded-md z-10"
                                     />
                                 </div>
-                                <div className="flex justify-between min-h-12">
+                                <div className="flex justify-between min-h-12 gap-4">
                                     <h2 className="font-medium line-clamp-2">{product.name}</h2>
                                     {product.on_sale ? (
                                         <div className="flex flex-col text-end">
-                                            <div className="text-gray-400 line-through pl-4">£{getPriceText(product.original_price)}</div>
-                                            <div className="font-medium pl-4 text-black">£{getPriceText(product.price)}</div>
+                                            <div className="text-gray-400 line-through">£{getPriceText(product.original_price)}</div>
+                                            <div className="font-medium text-black ring-1 ring-gray-400 px-1 rounded-md h-max">£{getPriceText(product.price)}</div>
                                         </div>
                                     ) : (
-                                        <div className="font-medium pl-4 text-black">£{getPriceText(product.price)}</div>
+                                        <div className="font-medium text-black ring-1 ring-gray-400 px-1 rounded-md h-max">£{getPriceText(product.price)}</div>
                                     )}
                                 </div>
                                 <div className="flex justify-between items-center">

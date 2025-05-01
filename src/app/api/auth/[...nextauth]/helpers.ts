@@ -24,5 +24,9 @@ export async function authenticate(prevState: string | undefined, formData: Form
 }
 
 export async function register(prevState: string | undefined, formData: FormData) {
+    try {
 
+    } catch (error) {
+        
+    }
 }

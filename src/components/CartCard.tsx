@@ -54,7 +54,7 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
                         alt="" 
                         width={72} 
                         height={96} 
-                        className="object-cover rounded-md"
+                        className="object-contain rounded-md"
                     />
                     <div className="flex flex-col justify-between w-full">
                         {/* TOP */}

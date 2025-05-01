@@ -10,8 +10,8 @@ const Footer = () => {
                     <Link href="/">
                         <div className="text-2xl tracking-wide">BWC Merchants</div>
                     </Link>
-                    <p>Unit 15, Leyton Business Centre, Etloe Road, Leyton, London, E10 7BT, United Kingdom</p>
-                    <span className="">info@bwcmerchants.co.uk</span>
+                    <p>Unit 15, Leyton Business Centre, Etloe Road, Leyton, E10 7BT, London, United Kingdom</p>
+                    <span className="">orders@bwcmerchants.co.uk</span>
                     <div className="flex flex-col">
                         <span className="">020 3336 7457</span>
                         <span className="">+44 7469 285005</span>

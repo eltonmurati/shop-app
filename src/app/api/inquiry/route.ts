@@ -9,8 +9,8 @@ export async function POST(req:NextRequest) {
     
     try {
         const {data, error} = await resend.emails.send({
-            from: 'BWC Merchants <info@bwcmerchants.co.uk>',
-            to: 'info@bwcmerchants.co.uk',
+            from: 'BWC Merchants <orders@bwcmerchants.co.uk>',
+            to: 'orders@bwcmerchants.co.uk',
             subject: 'New Inquiry',
             text: InquiryEmail(
                 body["fullName"],

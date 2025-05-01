@@ -26,7 +26,7 @@ export const verifyCart = async (cart: { id: number; quantity: number; }[], deli
     totalAmount += shippingAmount;
 
     if (totalAmount * 100 >= 50) {
-        const clientSecret = await createPaymentIntent(totalAmount * 100, verifiedCart, shippingAmount, delivery ? 1 : 0);
+        const clientSecret = await createPaymentIntent(Math.trunc(totalAmount * 100), verifiedCart, shippingAmount, delivery ? 1 : 0);
         return {"cart": verifiedCart, "totalAmount": totalAmount, "clientSecret": clientSecret, "shippingFee": shippingAmount}
     }
 
