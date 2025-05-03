@@ -62,6 +62,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                                 <div className="relative w-full h-80">
                                     <Image 
                                         src={product.image_urls?.at(0) || "/noImage.jpg"} 
+                                        //src="/noImage.jpg"
                                         alt="" 
                                         fill 
                                         sizes="25vw" 

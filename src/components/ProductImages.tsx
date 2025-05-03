@@ -23,12 +23,12 @@ const ProductImages = ({images}:{images:string[]}) => {
 
     return (
         <div className="">
-            <div className="h-[600px] relative">
+            <div className="h-[600px] flex justify-center relative">
                 <Image 
                     src={images[index]}
                     alt="" 
                     fill
-                    sizes="50vw" 
+                    sizes="50vw"
                     className="object-contain rounded-md"
                 />
             </div>

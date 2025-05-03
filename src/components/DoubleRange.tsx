@@ -4,7 +4,7 @@ import { postgres } from "@/lib/postgresClient";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const DoubleRange = ({title, measurement, column}:{title:string; measurement:string; column:"price"|"height"|"depth"|"width"|"weight";}) => {
+const DoubleRange = ({title, measurement, column}:{title:string; measurement:string; column:string;}) => {
 
     const [open, setOpen] = useState(false);
     const [min, setMin] = useState(0);
@@ -27,22 +27,22 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
         const getValues = async () => {
             await postgres.from("product").select("*").order(column, {ascending: false}).then(({data: products})=>{
                 if (products && products.length > 0) {
-                    if (products[0][column] !== products[products.length - 1][column]) {
-                        setMinValue(products[products.length - 1][column]);
-                        setMaxValue(products[0][column]);
+                    if (products[0][column as keyof typeof products[0]] !== products[products.length - 1][column as keyof typeof products[0]]) {
+                        setMinValue(products[products.length - 1][column as keyof typeof products[0]] as number);
+                        setMaxValue(products[0][column as keyof typeof products[0]] as number);
                         if (params.has("min"+column)) { 
-                            setMin(Number(params.get("min"+column)) || products[products.length - 1][column]);
+                            setMin(Number(params.get("min"+column)) || products[products.length - 1][column as keyof typeof products[0]] as number);
                             setMinText(params.get("min"+column) || "");
                         } else { 
-                            setMin(products[products.length - 1][column]);
-                            setMinText(products[products.length - 1][column].toString());
+                            setMin(products[products.length - 1][column as keyof typeof products[0]] as number);
+                            setMinText(products[products.length - 1][column as keyof typeof products[0]]!.toString());
                         }
                         if (params.has("max"+column)) { 
-                            setMax(Number(params.get("max"+column)) || products[0][column]);
+                            setMax(Number(params.get("max"+column)) || products[0][column as keyof typeof products[0]] as number);
                             setMaxText(params.get("max"+column) || "");
                         } else { 
-                            setMax(products[0][column]);
-                            setMaxText(products[0][column].toString());
+                            setMax(products[0][column as keyof typeof products[0]] as number);
+                            setMaxText(products[0][column as keyof typeof products[0]]!.toString());
                         }
                     } else { setError(true); }
                 } else { setError(true); }
