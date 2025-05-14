@@ -13,7 +13,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
     const start = limit * (page - 1)
     const end = limit * page - 1;
 
-    let productQuery = postgres.from('product').select('*', {count: 'planned'});
+    let productQuery = postgres.from('product').select('*', {count: "estimated"});
 
     if (searchParams["cat"]) { 
         const { data: productIds } = await postgres

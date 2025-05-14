@@ -20,11 +20,11 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
     const {replace} = useRouter();
     const params = new URLSearchParams(searchParams);
 
-    // (min - minValue) / (maxValue - minValue) * 100
+    // (min - minValue) / (maxValue - minValue) * 100 
     // 100 - ((max - minValue) / (maxValue - minValue) * 100)
 
     useEffect(()=>{
-        const getValues = async () => {
+        const getValues = async () => { 
             await postgres.from("product").select("*").order(column, {ascending: false}).then(({data: products})=>{
                 if (products && products.length > 0) {
                     if (products[0][column as keyof typeof products[0]] !== products[products.length - 1][column as keyof typeof products[0]]) {
