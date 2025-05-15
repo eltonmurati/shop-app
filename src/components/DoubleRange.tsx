@@ -20,32 +20,51 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
     const {replace} = useRouter();
     const params = new URLSearchParams(searchParams);
 
-    // (min - minValue) / (maxValue - minValue) * 100 
-    // 100 - ((max - minValue) / (maxValue - minValue) * 100)
-
     useEffect(()=>{
-        const getValues = async () => { 
-            await postgres.from("product").select("*").order(column, {ascending: false}).then(({data: products})=>{
-                if (products && products.length > 0) {
-                    if (products[0][column as keyof typeof products[0]] !== products[products.length - 1][column as keyof typeof products[0]]) {
-                        setMinValue(products[products.length - 1][column as keyof typeof products[0]] as number);
-                        setMaxValue(products[0][column as keyof typeof products[0]] as number);
-                        if (params.has("min"+column)) { 
-                            setMin(Number(params.get("min"+column)) || products[products.length - 1][column as keyof typeof products[0]] as number);
-                            setMinText(params.get("min"+column) || "");
-                        } else { 
-                            setMin(products[products.length - 1][column as keyof typeof products[0]] as number);
-                            setMinText(products[products.length - 1][column as keyof typeof products[0]]!.toString());
-                        }
-                        if (params.has("max"+column)) { 
-                            setMax(Number(params.get("max"+column)) || products[0][column as keyof typeof products[0]] as number);
-                            setMaxText(params.get("max"+column) || "");
-                        } else { 
-                            setMax(products[0][column as keyof typeof products[0]] as number);
-                            setMaxText(products[0][column as keyof typeof products[0]]!.toString());
-                        }
-                    } else { setError(true); }
-                } else { setError(true); }
+        const getValues = async () => {
+            let productQuery = postgres.from("product").select(`${column}.max(), ${column}.min()`);
+
+            if (params.has("cat")) { 
+                const { data: productIds } = await postgres
+                    .from("product_category")
+                    .select("product_id")
+                    .in("category_id", params.getAll("cat"));
+
+                productQuery = productQuery.in('id', productIds?.map(item => item.product_id)!);
+            }
+
+            if (params.has("search")) { productQuery = productQuery.textSearch('name', params.get("search")!, {type: "websearch"}); }
+            if (params.has("brand")) { productQuery = productQuery.in("brand", params.getAll("brand") ); }
+            if (params.has("stock")) { productQuery = productQuery.gt("quantity", 0); }
+            if (params.has("sale")) { productQuery = productQuery.eq("on_sale", true); }
+
+            await productQuery.then(({data: products, error})=>{
+                if (error) {
+                    console.log(error);
+                }
+                if (products && products[0]) {
+                    setMinValue(products[0]["min" as keyof typeof products[0]] as number);
+                    setMaxValue(products[0]["max" as keyof typeof products[0]] as number);
+
+                    if (params.has("min"+column)) {
+                        setMin(Number(params.get("min"+column)));
+                        setMinText(params.get("min"+column)!);
+                    } else {
+                        setMin(products[0]["min" as keyof typeof products[0]] as number);
+                        setMinText(products[0]["min" as keyof typeof products[0]].toString());
+                    }
+
+                    if (params.has("max"+column)) {
+                        setMax(Number(params.get("max"+column)));
+                        setMaxText(params.get("max"+column)!);
+                    } else {
+                        setMax(products[0]["max" as keyof typeof products[0]] as number);
+                        setMaxText(products[0]["max" as keyof typeof products[0]].toString());
+                    }
+                } else {
+                    setError(true);
+                }
+
                 setLoading(false);
             });
         }
@@ -145,7 +164,7 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
                 <div className="flex flex-col gap-4 cursor-default" onClick={(e)=>e.stopPropagation()}>
                     <div className="w-full bg-white h-1.5 relative rounded-full">
                         {/* <span className={`h-full absolute bg-blue-700 max-w-full`} /> */}
-                        <input type="range" name="min" min={minValue} max={maxValue} value={min} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
+                        <input type="range" name="min" min={minValue} max={maxValue} value={min} step={0.01} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
                             className="absolute w-full pr-[21px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent 
                                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full 
                                 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:ring-1
@@ -154,7 +173,7 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
                                 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:cursor-pointer
                             " 
                         />
-                        <input type="range" name="max" min={minValue} max={maxValue} value={max} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
+                        <input type="range" name="max" min={minValue} max={maxValue} value={max} step={0.01} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
                             className="absolute w-full pl-[21px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent
                                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full 
                                 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:ring-1

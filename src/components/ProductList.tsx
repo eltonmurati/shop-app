@@ -10,7 +10,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
     if (!limit) { limit = 20; }
     let page = 1;
     if (searchParams["page"]) { page = searchParams["page"]; }
-    const start = limit * (page - 1)
+    const start = limit * (page - 1);
     const end = limit * page - 1;
 
     let productQuery = postgres.from('product').select('*', {count: "estimated"});
@@ -74,10 +74,10 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                                     {product.on_sale ? (
                                         <div className="flex flex-col text-end">
                                             <div className="text-gray-400 line-through">£{getPriceText(product.original_price)}</div>
-                                            <div className="font-medium text-black ring-1 ring-gray-400 px-1 rounded-md h-max">£{getPriceText(product.price)}</div>
+                                            <div className="font-medium text-blue-700 ring-1 ring-blue-700 px-1 rounded-md h-max">£{getPriceText(product.price)}</div>
                                         </div>
                                     ) : (
-                                        <div className="font-medium text-black ring-1 ring-gray-400 px-1 rounded-md h-max">£{getPriceText(product.price)}</div>
+                                        <div className="font-medium text-blue-700 ring-1 ring-blue-700 px-1 rounded-md h-max">£{getPriceText(product.price)}</div>
                                     )}
                                 </div>
                                 <div className="flex justify-between items-center">
