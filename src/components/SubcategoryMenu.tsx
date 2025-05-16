@@ -34,7 +34,8 @@ const menus = [
         {title: "All", link: "/shop?stock=true&cat=29", id: 1}, {title: "Brass Fittings & Accessories", link: "/shop?stock=true&cat=30", id: 2}, {title: "Brassware", link: "/shop?stock=true&cat=31", id: 3}, 
         {title: "Clips & Fixings", link: "/shop?stock=true&cat=32", id: 4}, {title: "Compression", link: "/shop?stock=true&cat=33", id: 5}, {title: "Copper Tube", link: "/shop?stock=true&cat=34", id: 6}, 
         {title: "Endfeed", link: "/shop?stock=true&cat=35", id: 7}, {title: "Gas Fittings & Accessories", link: "/shop?stock=true&cat=36", id: 8}, {title: "Malleable Iron", link: "/shop?stock=true&cat=37", id: 9}, 
-        {title: "Oil Line Components", link: "/shop?stock=true&cat=38", id: 10}, {title: "Press Fit", link: "/shop?stock=true&cat=39", id: 11}, {title: "Solder Ring", link: "/shop?stock=true&cat=40", id: 12}
+        {title: "Oil Line Components", link: "/shop?stock=true&cat=38", id: 10}, {title: "Press Fit", link: "/shop?stock=true&cat=39", id: 11}, {title: "Solder Ring", link: "/shop?stock=true&cat=40", id: 12}, 
+        {title: "Push Fit", link: "/shop?stock=true&cat=102", id: 13}
     ],
     [
         {title: "All", link: "/shop?stock=true&cat=41", id: 1}, {title: "Pipe", link: "/shop?stock=true&cat=42", id: 2}, {title: "Fittings", link: "/shop?stock=true&cat=43", id: 3}, 
@@ -52,9 +53,9 @@ const menus = [
         {title: "Bathroom", link: "/shop?stock=true&cat=59", id: 1}, {title: "Kitchen", link: "/shop?stock=true&cat=60", id: 2}, {title: "Baths", link: "/shop?stock=true&cat=61", id: 3}, 
         {title: "Bath Panels & Screens", link: "/shop?stock=true&cat=62", id: 4}, {title: "Shower Enclosures", link: "/shop?stock=true&cat=63", id: 5}, {title: "Furniture", link: "/shop?stock=true&cat=64", id: 6},
         {title: "Macerators", link: "/shop?stock=true&cat=65", id: 7}, {title: "Sanitaryware", link: "/shop?stock=true&cat=66", id: 8}, {title: "Showers", link: "/shop?stock=true&cat=67", id: 9}, 
-        {title: "Shower Trays", link: "/shop?stock=true&cat=68", id: 10}, {title: "Taps", link: "/shop?stock=true&cat=69", id: 11}, {title: "Towel Rails & Decorative Heating", link: "/shop?stock=true&cat=70", id: 12}, 
-        {title: "Wastes, Traps & Connectors", link: "/shop?stock=true&cat=71", id: 13}, {title: "Grohe", link: "/shop?stock=true&cat=58&brand=24", id: 14}, 
-        {title: "Mira", link: "/shop?stock=true&cat=58&brand=25", id: 15}, {title: "Roca", link: "/shop?stock=true&cat=58&brand=26", id: 16}
+        {title: "Shower Trays", link: "/shop?stock=true&cat=68", id: 10}, {title: "Taps", link: "/shop?stock=true&cat=69", id: 11}, {title: "Towel Rails/Decorative Heating", link: "/shop?stock=true&cat=70", id: 12}, 
+        {title: "Wastes, Traps & Connectors", link: "/shop?stock=true&cat=71", id: 13}, {title: "Spares & Accessories", link: "/shop?stock=true&cat=103", id: 14}, {title: "Grohe", link: "/shop?stock=true&cat=58&brand=24", id: 15}, 
+        {title: "Mira", link: "/shop?stock=true&cat=58&brand=25", id: 16}, {title: "Roca", link: "/shop?stock=true&cat=58&brand=26", id: 17}
     ],
     [
         {title: "All", link: "/shop?stock=true&cat=72", id: 1}, {title: "Electric Fires", link: "/shop?stock=true&cat=73", id: 2}, {title: "Gas Fires", link: "/shop?stock=true&cat=74", id: 3}, 
