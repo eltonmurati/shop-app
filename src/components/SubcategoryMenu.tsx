@@ -53,7 +53,7 @@ const menus = [
         {title: "Bathroom", link: "/shop?stock=true&cat=59", id: 1}, {title: "Kitchen", link: "/shop?stock=true&cat=60", id: 2}, {title: "Baths", link: "/shop?stock=true&cat=61", id: 3}, 
         {title: "Bath Panels & Screens", link: "/shop?stock=true&cat=62", id: 4}, {title: "Shower Enclosures", link: "/shop?stock=true&cat=63", id: 5}, {title: "Furniture", link: "/shop?stock=true&cat=64", id: 6},
         {title: "Macerators", link: "/shop?stock=true&cat=65", id: 7}, {title: "Sanitaryware", link: "/shop?stock=true&cat=66", id: 8}, {title: "Showers", link: "/shop?stock=true&cat=67", id: 9}, 
-        {title: "Shower Trays", link: "/shop?stock=true&cat=68", id: 10}, {title: "Taps", link: "/shop?stock=true&cat=69", id: 11}, {title: "Towel Rails/Decorative Heating", link: "/shop?stock=true&cat=70", id: 12}, 
+        {title: "Shower Trays", link: "/shop?stock=true&cat=68", id: 10}, {title: "Taps", link: "/shop?stock=true&cat=69", id: 11}, {title: "Towel Rails & Decorative Heating", link: "/shop?stock=true&cat=70", id: 12}, 
         {title: "Wastes, Traps & Connectors", link: "/shop?stock=true&cat=71", id: 13}, {title: "Spares & Accessories", link: "/shop?stock=true&cat=103", id: 14}, {title: "Grohe", link: "/shop?stock=true&cat=58&brand=24", id: 15}, 
         {title: "Mira", link: "/shop?stock=true&cat=58&brand=25", id: 16}, {title: "Roca", link: "/shop?stock=true&cat=58&brand=26", id: 17}
     ],
@@ -85,8 +85,8 @@ const SubcategoryMenu = ({tabId} : any) => {
     return (
         <div className="absolute z-10 bg-white flex flex-wrap w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
             {menus[tabId-1].map((option)=>(
-                <Link href={option.link} key={option.id} className="w-[7.14285714286%] px-2 h-16 hover:bg-gray-100 flex items-center justify-center text-center leading-tight">
-                    {option.title}
+                <Link href={option.link} key={option.id} className="w-[7.69230769231%] px-2 h-16 hover:bg-gray-100 flex items-center justify-center text-center leading-tight">
+                    <div className="line-clamp-3 inline text-ellipsis">{option.title}</div>
                 </Link>
             ))}
         </div>

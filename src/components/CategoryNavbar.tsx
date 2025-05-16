@@ -7,13 +7,9 @@ import { useState } from "react";
 const CategoryNavbar = () => {
 
     const [tabId, setTabId] = useState(0);
-    const [saleHovered, setSaleHovered] = useState(false);
 
-    const sale = "rounded-md px-2 py-1 bg-white text-blue-700 font-semibold";
-    const saleHover = "rounded-md px-2 py-1 bg-blue-700";
-
-    const highlighted = "w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center bg-white text-blue-700 leading-tight z-20";
-    const notHighlighted = "w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight";
+    const highlighted = "w-[7.69230769231%] h-full px-2 flex items-center justify-center text-center bg-white text-blue-700 leading-tight z-20";
+    const notHighlighted = "w-[7.69230769231%] h-full px-2 flex items-center justify-center text-center leading-tight";
 
     return (
         <div className="relative" onMouseLeave={()=>setTabId(0)}>
@@ -22,7 +18,7 @@ const CategoryNavbar = () => {
                 <Link href="/shop?cat=1&stock=true" className={tabId === 1 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(1)}>Boilers</Link>
                 <Link
                     href="/shop?cat=101&stock=true" 
-                    className="w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight hover:text-blue-700 hover:bg-white" 
+                    className="w-[7.69230769231%] h-full px-2 flex items-center justify-center text-center leading-tight hover:text-blue-700 hover:bg-white" 
                     onMouseEnter={()=>setTabId(0)}
                 >
                     Boiler Spares
@@ -39,18 +35,10 @@ const CategoryNavbar = () => {
                 <Link href="/shop?cat=87&stock=true" className={tabId === 11 ? highlighted : notHighlighted} onMouseEnter={()=>setTabId(11)}>Renewables</Link>
                 <Link 
                     href="/shop?cat=100&stock=true" 
-                    className="w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight hover:text-blue-700 hover:bg-white" 
+                    className="w-[7.69230769231%] h-full px-2 flex items-center justify-center text-center leading-tight hover:text-blue-700 hover:bg-white" 
                     onMouseEnter={()=>setTabId(0)}
                 >
                     Refurbished
-                </Link>
-                <Link 
-                    href="/shop?sale=true&stock=true" 
-                    className="w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight hover:bg-white tracking-wider font-medium" 
-                    onMouseEnter={()=>{setTabId(0); setSaleHovered(true);}}
-                    onMouseLeave={()=>setSaleHovered(false)}
-                >
-                    <div className={saleHovered ? saleHover : sale}>SALE</div>
                 </Link>
             </div>
             {tabId > 0 && (<SubcategoryMenu tabId={tabId}/>)}

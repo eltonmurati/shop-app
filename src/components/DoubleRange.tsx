@@ -38,11 +38,8 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
             if (params.has("stock")) { productQuery = productQuery.gt("quantity", 0); }
             if (params.has("sale")) { productQuery = productQuery.eq("on_sale", true); }
 
-            await productQuery.then(({data: products, error})=>{
-                if (error) {
-                    console.log(error);
-                }
-                if (products && products[0]) {
+            await productQuery.then(({data: products})=>{
+                if (products && products[0]["min" as keyof typeof products[0]] != null) {
                     setMinValue(products[0]["min" as keyof typeof products[0]] as number);
                     setMaxValue(products[0]["max" as keyof typeof products[0]] as number);
 
