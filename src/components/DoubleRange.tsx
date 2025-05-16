@@ -39,29 +39,32 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
             if (params.has("sale")) { productQuery = productQuery.eq("on_sale", true); }
 
             await productQuery.then(({data: products})=>{
-                if (products && products[0]["min" as keyof typeof products[0]] != null) {
-                    setMinValue(products[0]["min" as keyof typeof products[0]] as number);
-                    setMaxValue(products[0]["max" as keyof typeof products[0]] as number);
+                try {
+                    if (products) {
+                        setMinValue(products[0]["min" as keyof typeof products[0]] as number);
+                        setMaxValue(products[0]["max" as keyof typeof products[0]] as number);
 
-                    if (params.has("min"+column)) {
-                        setMin(Number(params.get("min"+column)));
-                        setMinText(params.get("min"+column)!);
-                    } else {
-                        setMin(products[0]["min" as keyof typeof products[0]] as number);
-                        setMinText(products[0]["min" as keyof typeof products[0]].toString());
-                    }
+                        if (params.has("min"+column)) {
+                            setMin(Number(params.get("min"+column)));
+                            setMinText(params.get("min"+column)!);
+                        } else {
+                            setMin(products[0]["min" as keyof typeof products[0]] as number);
+                            setMinText(products[0]["min" as keyof typeof products[0]].toString());
+                        }
 
-                    if (params.has("max"+column)) {
-                        setMax(Number(params.get("max"+column)));
-                        setMaxText(params.get("max"+column)!);
+                        if (params.has("max"+column)) {
+                            setMax(Number(params.get("max"+column)));
+                            setMaxText(params.get("max"+column)!);
+                        } else {
+                            setMax(products[0]["max" as keyof typeof products[0]] as number);
+                            setMaxText(products[0]["max" as keyof typeof products[0]].toString());
+                        }
                     } else {
-                        setMax(products[0]["max" as keyof typeof products[0]] as number);
-                        setMaxText(products[0]["max" as keyof typeof products[0]].toString());
+                        setError(true);
                     }
-                } else {
+                } catch (error) {
                     setError(true);
                 }
-
                 setLoading(false);
             });
         }
