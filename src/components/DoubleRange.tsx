@@ -165,7 +165,7 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
                     <div className="w-full bg-white h-1.5 relative rounded-full">
                         {/* <span className={`h-full absolute bg-blue-700 max-w-full`} /> */}
                         <input type="range" name="min" min={minValue} max={maxValue} value={min} step={0.01} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
-                            className="absolute w-full pr-[21px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent 
+                            className="absolute w-full pr-[22px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent 
                                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full 
                                 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:ring-1
                                 [&::-webkit-slider-thumb]:ring-gray-400 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:ring-1 [&::-moz-range-thumb]:ring-gray-400 
@@ -174,7 +174,7 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
                             " 
                         />
                         <input type="range" name="max" min={minValue} max={maxValue} value={max} step={0.01} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
-                            className="absolute w-full pl-[21px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent
+                            className="absolute w-full pl-[22px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent
                                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full 
                                 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:ring-1
                                 [&::-webkit-slider-thumb]:ring-gray-400 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:ring-1 [&::-moz-range-thumb]:ring-gray-400 
