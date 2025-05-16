@@ -22,6 +22,8 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
 
     useEffect(()=>{
         const getValues = async () => {
+            setError(false);
+
             let productQuery = postgres.from("product").select(`${column}.max(), ${column}.min()`);
 
             if (params.has("cat")) { 
