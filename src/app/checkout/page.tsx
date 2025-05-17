@@ -97,6 +97,9 @@ const CheckoutPage = () => {
                                 <span className="">{delivery ? "Shipping" : "Collection"}</span>
                                 <span className="">{shippingFee > 0 ? "£" + getPriceText(shippingFee) : "FREE"}</span>
                             </div>
+                            {delivery && (
+                                <div className="text-xs text-gray-400">Next day delivery</div>
+                            )}
                             <div className="flex items-center justify-between font-medium text-xl">
                                 <span className="">Total</span>
                                 <span className="">£{getPriceText(price)}</span>

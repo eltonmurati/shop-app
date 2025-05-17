@@ -50,5 +50,5 @@ const createPaymentIntent = async (price:number, items: {id: number, quantity: n
 }
 
 const calculateShipping = () => {
-    return 6.26;
+    return 5.99;
 }
