@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import DoubleRange from "./DoubleRange";
 import FilterTags from "./FilterTags";
 import FilterDropdown from "./FilterDropdown";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 const Filter = () => {
     const [categoryOpen, setCategoryOpen] = useState(false);
@@ -48,7 +48,9 @@ const Filter = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
                                     <path fillRule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clipRule="evenodd" />
                                 </svg>
-                                <FilterDropdown table={"category"} name={"cat"} open={categoryOpen} onClose={()=>setCategoryOpen(false)} />
+                                <Suspense fallback="Loading...">
+                                    <FilterDropdown table={"category"} name={"cat"} open={categoryOpen} onClose={()=>setCategoryOpen(false)} />
+                                </Suspense>
                             </>
                         ) : (
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
@@ -63,7 +65,9 @@ const Filter = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
                                     <path fillRule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clipRule="evenodd" />
                                 </svg>
-                                <FilterDropdown table={"brand"} name={"brand"} open={brandOpen} onClose={()=>setBrandOpen} />
+                                <Suspense fallback="Loading...">
+                                    <FilterDropdown table={"brand"} name={"brand"} open={brandOpen} onClose={()=>setBrandOpen} />
+                                </Suspense>
                             </>
                         ) : (
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
@@ -71,7 +75,9 @@ const Filter = () => {
                             </svg>
                         )}
                     </div>
-                    <DoubleRange title={"Price"} measurement={"£"} column="price" />
+                    <Suspense fallback="Loading...">
+                        <DoubleRange title={"Price"} measurement={"£"} column="price" />
+                    </Suspense>
                     <div className="flex gap-2 items-center bg-gray-100 rounded-full px-4 h-max py-2">
                         <input type="checkbox" id="stock" name="stock" className="accent-blue-700" checked={params.has("stock")} onChange={handleFilterChange} />
                         <label htmlFor="stock" className="text-xs font-medium">In Stock</label>
@@ -93,7 +99,9 @@ const Filter = () => {
                     </select>
                 </div>
             </div>
-            <FilterTags />
+            <Suspense fallback="Loading...">
+                <FilterTags />
+            </Suspense>
         </div>
     );
 }

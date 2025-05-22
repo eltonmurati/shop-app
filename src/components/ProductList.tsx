@@ -4,6 +4,7 @@ import Link from "next/link";
 import Pagination from "./Pagination";
 import QuickAdd from "./QuickAdd";
 import { getPriceText } from "@/lib/helpers";
+import { Suspense } from "react";
 
 const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:number;}) => {
 
@@ -95,7 +96,9 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                             </Link>
                         ))}
                     </div>
-                    <Pagination length={count!} limit={limit} page={page} />
+                    <Suspense fallback="Loading...">
+                        <Pagination length={count!} limit={limit} page={page} />
+                    </Suspense>
                 </>
             ) : (
                 <div className="text-gray-700 text-center text-xl font-medium">No products found</div>

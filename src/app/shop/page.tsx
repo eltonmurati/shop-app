@@ -26,10 +26,14 @@ const ShopPage = async ({searchParams}:{searchParams:any}) => {
             {/* TITLE */}
             <h1 className="font-medium text-2xl xl:pt-8">Shop</h1>
             <div className="md:hidden mt-6">
-                <SearchBar />
+                <Suspense fallback="Loading...">
+                    <SearchBar />
+                </Suspense>
             </div>
             {/* FILTER */}
-            <Filter />
+            <Suspense fallback="Loading...">
+                <Filter />
+            </Suspense>
             {/* PRODUCTS */}
             <Suspense fallback={"Loading..."}>
                 <ProductList searchParams={params} limit={20} />
