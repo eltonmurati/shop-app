@@ -82,7 +82,7 @@ const getItems = async(items:{id: number, quantity: number}[]) => {
   return products || null;
 }
   
-const generateId = async() => {
+const generateId = async() : Promise<string> => {
   const id = Date.now().toString(36).toUpperCase() + Math.random().toString(36).substring(2).toUpperCase();
   const {data: order} = await postgres.from("order").select("*").eq("id", id).limit(1).single();
 
