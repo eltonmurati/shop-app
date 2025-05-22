@@ -7,7 +7,7 @@ import Stripe from 'stripe'
 import { createClient } from "@supabase/supabase-js";
 import { Database } from "@/lib/types";
 
-export const postgres = createClient<Database> (
+const postgres = createClient<Database> (
   process.env.NEXT_PUBLIC_POSTGRES_URL!,
   process.env.POSTGRES_SECRET!,
 );
