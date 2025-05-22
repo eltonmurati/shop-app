@@ -3,8 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const FilterDropdown = ({table, name, open, onClose}:{table:"category"|"brand"; name:string; open: boolean; onClose: ()=>void;}) => {
-    if (!open) { return null; }
-
+    
     const [entries, setEntries] = useState([] as { id: number; name: string; }[]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -33,7 +32,9 @@ const FilterDropdown = ({table, name, open, onClose}:{table:"category"|"brand"; 
 
     useEffect(()=>{
         getTable();
-    },[]);
+    });
+
+    if (!open) { return null; }
 
     if (loading) {
         return(

@@ -37,7 +37,7 @@ const CheckoutPage = () => {
             });
         }
         setupCheckout();
-    },[delivery]);
+    },[delivery, getCart]);
 
     if (isLoading) {
         return(

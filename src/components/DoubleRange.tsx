@@ -71,7 +71,7 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
             });
         }
         getValues();
-    },[searchParams]);
+    },[searchParams, column, params]);
 
     const handleSlide = (e:React.ChangeEvent<HTMLInputElement>) => {
         const {name,valueAsNumber} = e.target;

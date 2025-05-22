@@ -25,7 +25,7 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
             });
         }
         getProduct();
-    },[]);
+    });
 
     if (isLoading) { return( <div className="">Loading...</div> ); }
     if (error) { return(<div className="">Error</div>); }

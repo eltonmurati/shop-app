@@ -8,10 +8,8 @@ import Link from "next/link";
 import { getPriceText } from "@/lib/helpers";
 
 const CartModel = ({open, onClose}:{open:boolean; onClose: ()=>void;}) => {
-    if (!open) { return null; }
-
+    
     const [subtotal, setSubtotal] = useState(0);
-
     const {cart, clearCart} = useCartStore();
 
     let cartItems = false;
@@ -31,6 +29,8 @@ const CartModel = ({open, onClose}:{open:boolean; onClose: ()=>void;}) => {
         }
         getSubtotal();
     },[cart]);
+
+    if (!open) { return null; }
 
     return (
         <>
