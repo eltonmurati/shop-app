@@ -5,7 +5,7 @@ import ProductImages from "@/components/ProductImages"
 import { notFound } from "next/navigation";
 import { getPriceText } from "@/lib/helpers";
 
-const SinglePage = async ({params}:{params:{slug:string}}) => {
+const SinglePage = async ({params}:{params:Promise<{slug:string}>}) => {
 
     const {slug} = await params;
 
