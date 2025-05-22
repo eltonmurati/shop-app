@@ -18,7 +18,7 @@ const Filter = () => {
         const {name,value} = e.target;
         
         if (e.target.type === "checkbox") {
-            if (e.target.checked) { params.set(name, "true"); }
+            if ((e.target as HTMLInputElement).checked) { params.set(name, "true"); }
             else { params.delete(name); }
         } else {
             if (value === "false") { params.delete(name); }
