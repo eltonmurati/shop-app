@@ -1,3 +1,5 @@
+"use client";
+
 import { postgres } from "@/lib/postgresClient";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
