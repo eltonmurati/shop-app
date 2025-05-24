@@ -15,7 +15,7 @@ const ProductImages = ({images}:{images:string[]}) => {
                     alt="" 
                     fill
                     sizes="50vw" 
-                    className="object-cover rounded-md"
+                    className="object-contain rounded-md"
                 />
             </div>
         );

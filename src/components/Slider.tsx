@@ -9,7 +9,7 @@ const slides = [
         id: 1,
         title: "£326.14",
         description: "Vaillant VR 940f + VRT 51f",
-        img: "/productImages/703/1.jpg",
+        img: "/sliderImages/1.png",
         url: "/product/703",
         bg: "bg-gradient-to-r from-yellow-50 to-pink-50",
     },
@@ -17,7 +17,7 @@ const slides = [
         id: 2,
         title: "£207.36",
         description: "Vaillant 22mm Filter Boiler Protection Kit",
-        img: "/productImages/1426/1.jpg",
+        img: "/sliderImages/2.png",
         url: "/product/1426",
         bg: "bg-gradient-to-r from-pink-50 to-blue-50",
     },
@@ -25,7 +25,7 @@ const slides = [
         id: 3,
         title: "£233.24",
         description: "2 PORT 22MM+AUX SWITCH",
-        img: "/productImages/765/1.jpg",
+        img: "/sliderImages/3.png",
         url: "/product/765",
         bg: "bg-gradient-to-r from-blue-50 to-yellow-50",
     },
@@ -58,7 +58,7 @@ const Slider = () => {
                         </div>
                         {/* IMAGE CONTAINER */}
                         <div className="h-1/2 xl:w-1/2 xl:h-full relative">
-                            <Image src={slide.img} alt="" fill sizes="100%" className="object-cover"/>
+                            <Image src={slide.img} alt="" fill sizes="100%" className="object-contain"/>
                         </div>
                     </div>
                 ))}
