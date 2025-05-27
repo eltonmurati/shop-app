@@ -16,6 +16,7 @@ const FilterDropdown = ({table, name, open, onClose}:{table:"category"|"brand"; 
 
     const handleClick = (value:string) => {
         if (!params.has(name, value)) { params.append(name, value); }
+        params.delete("page");
         replace(`/shop?${params}`);
     }
 

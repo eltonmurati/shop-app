@@ -113,6 +113,7 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
                 setMax(maxValue);
             }
         }
+        params.delete("page");
         replace(`shop?${params}`);
     }
 
@@ -138,6 +139,7 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
                     setMaxText(maxValue.toString());
                 }
             }
+            params.delete("page");
             replace(`shop?${params}`);
         }
     }
