@@ -34,7 +34,7 @@ const FilterDropdown = ({table, name, open, onClose}:{table:"category"|"brand"; 
 
     useEffect(()=>{
         getTable();
-    });
+    },[]);
 
     if (!open) { return null; }
 

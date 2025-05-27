@@ -165,7 +165,6 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
             {open && (
                 <div className="flex flex-col gap-4 cursor-default" onClick={(e)=>e.stopPropagation()}>
                     <div className="w-full bg-white h-1.5 relative rounded-full">
-                        {/* <span className={`h-full absolute bg-blue-700 max-w-full`} /> */}
                         <input type="range" name="min" min={minValue} max={maxValue} value={min} step={0.01} onChange={handleSlide} onPointerUp={handleRange} onTouchEnd={handleRange} 
                             className="absolute w-full pr-[22px] top-1/2 transform -translate-y-1/2 pointer-events-none appearance-none bg-transparent 
                                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full 
@@ -187,13 +186,13 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
                     </div>
                     <div className="flex justify-between gap-2">
                         <div className="flex w-20">
-                            <div className="bg-gray-100 rounded-l-full py-1 pl-2 pr-2 text-xs font-medium ring-1 ring-gray-400">{measurement}</div>
+                            <div className="bg-gray-100 rounded-l-full py-1 px-2 text-xs font-medium ring-1 ring-gray-400 min-w-6">{measurement}</div>
                             <input type="text" placeholder="min" name="min" value={minText} className="w-full rounded-r-full outline-none text-xs px-1 ring-1 ring-gray-400" 
                                 onChange={(e)=>setMinText(e.target.value)} onKeyDown={handleTextEnter}
                             />
                         </div>
                         <div className="flex w-20">
-                            <div className="bg-gray-100 rounded-l-full py-1 pl-2 pr-2 text-xs font-medium ring-1 ring-gray-400">{measurement}</div>
+                            <div className="bg-gray-100 rounded-l-full py-1 px-2 text-xs font-medium ring-1 ring-gray-400 min-w-6">{measurement}</div>
                             <input type="text" placeholder="max" name="max" value={maxText} className="w-full rounded-r-full outline-none text-xs px-1 ring-1 ring-gray-400" 
                                 onChange={(e)=>setMaxText(e.target.value)} onKeyDown={handleTextEnter}
                             />

@@ -10,7 +10,7 @@ const ShopPage = async ({searchParams}:{searchParams:any}) => {
     const params = await searchParams;
 
     return (
-        <div className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)]'>
+        <div className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative h-max min-h-[calc(100vh-80px)] xl:min-h-[calc(100vh-144px)]'>
             {/* CAMPAIGN */}
             {/* <div className="hidden bg-blue-50 px-4 sm:flex justify-between h-64">
                 <div className="w-2/3 flex flex-col items-center justify-center gap-8">
