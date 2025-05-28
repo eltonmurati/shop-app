@@ -11,7 +11,7 @@ const FilterTags = () => {
 
     let tags: string[] = [];
     const createTags = (value:string, key:string) => {
-        if (!(["stock","sale", "sort", "minprice", "maxprice", "minheight", "maxheight", "minwidth", "maxwidth", "mindepth", "maxdepth", "minweight", "maxweight", "page"].includes(key))) {
+        if (!(["stock","sale", "sort", "minprice", "maxprice", "page"].includes(key))) {
             tags.push(key + ": " + value);
         }
     }
@@ -34,6 +34,7 @@ const FilterTags = () => {
         const name = tag.split(": ")[0];
         const value = tag.split(": ")[1];
         params.delete(name, value);
+        params.delete("page");
         replace(`shop?${params}`);
     }
 
