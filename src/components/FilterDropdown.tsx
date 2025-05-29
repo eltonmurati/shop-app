@@ -1,5 +1,6 @@
 "use client";
 
+import { useDebounce } from "@/hooks/useDebounce";
 import { postgres } from "@/lib/postgresClient";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,6 +10,8 @@ const FilterDropdown = ({table, name, open, onClose}:{table:"category"|"brand"; 
     const [entries, setEntries] = useState([] as { id: number; name: string; }[]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [search, setSearch] = useState("");
+    const debouncedSearch = useDebounce(search);
 
     const searchParams = useSearchParams();
     const {replace} = useRouter();
@@ -20,7 +23,7 @@ const FilterDropdown = ({table, name, open, onClose}:{table:"category"|"brand"; 
         replace(`/shop?${params}`);
     }
 
-    const getTable = async (search?:string) => {
+    const getTable = async (search:string) => {
         setLoading(true);
         setError(false);
         let postgresQuery = postgres.from(table).select("*");
@@ -34,8 +37,8 @@ const FilterDropdown = ({table, name, open, onClose}:{table:"category"|"brand"; 
     }
 
     useEffect(()=>{
-        getTable();
-    },[]);
+        getTable(debouncedSearch);
+    },[debouncedSearch]);
 
     if (!open) { return null; }
 
@@ -49,7 +52,7 @@ const FilterDropdown = ({table, name, open, onClose}:{table:"category"|"brand"; 
                     onClick={(e)=>(e.stopPropagation())}
                 >
                     <div className="px-2 pb-1 pt-2 rounded-t-md">
-                        <input type="text" placeholder="Search" className="gap-4 bg-gray-100 p-2 rounded-md outline-none w-full" onChange={(e)=>getTable(e.target.value)}/>
+                        <input type="text" placeholder="Search" className="gap-4 bg-gray-100 p-2 rounded-md outline-none w-full" onChange={(e)=>setSearch(e.target.value)}/>
                     </div>
                     <div className="px-4 pt-1 pb-2 rounded-b-md text-start">
                         Loading...
@@ -69,7 +72,7 @@ const FilterDropdown = ({table, name, open, onClose}:{table:"category"|"brand"; 
                     onClick={(e)=>(e.stopPropagation())}
                 >
                     <div className="px-2 pb-1 pt-2 rounded-t-md">
-                        <input type="text" placeholder="Search" className="gap-4 bg-gray-100 p-2 rounded-md outline-none w-full" onChange={(e)=>getTable(e.target.value)}/>
+                        <input type="text" placeholder="Search" className="gap-4 bg-gray-100 p-2 rounded-md outline-none w-full" onChange={(e)=>setSearch(e.target.value)}/>
                     </div>
                     <div className="px-4 pt-1 pb-2 rounded-b-md text-start">
                         No results found
@@ -87,7 +90,7 @@ const FilterDropdown = ({table, name, open, onClose}:{table:"category"|"brand"; 
                     overflow-x-hidden max-w-96" 
             >
                 <div className="px-2 pb-1 pt-2 rounded-t-md" onClick={(e)=>(e.stopPropagation())}>
-                    <input type="text" placeholder="Search" className="gap-4 bg-gray-100 p-2 rounded-md outline-none w-full" onChange={(e)=>getTable(e.target.value)}/>
+                    <input type="text" placeholder="Search" className="gap-4 bg-gray-100 p-2 rounded-md outline-none w-full" onChange={(e)=>setSearch(e.target.value)}/>
                 </div>
                 {entries.map((entry, i)=>{
                     if (i === entries.length - 1) {
