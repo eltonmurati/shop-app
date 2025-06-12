@@ -1,12 +1,70 @@
+import Marquee from "@/components/Marquee"
 import ProductList from "@/components/ProductList"
 import Slider from "@/components/Slider"
 import Link from "next/link"
 import { Suspense } from "react"
 
+const partners = [
+  {
+    id: 1,
+    source: "/partnerImages/kartell.webp",
+    link: "https://kartelluk.com/",
+  },
+  {
+    id: 2,
+    source: "/partnerImages/barco.png",
+    link: "https://www.barco.net/",
+  },
+  {
+    id: 3,
+    source: "/partnerImages/primaflow.jpg",
+    link: "https://www.primaflowfandp.co.uk/",
+  },
+  {
+    id: 4,
+    source: "/partnerImages/navigator.png",
+    link: "https://navigatormsl.com/",
+  },
+  {
+    id: 5,
+    source: "/partnerImages/fwhipkin.png",
+    link: "https://fwhipkin.co.uk/",
+  },
+  {
+    id: 6,
+    source: "/partnerImages/tglynes.png",
+    link: "https://www.tglynes.co.uk/",
+  },
+  {
+    id: 7,
+    source: "/partnerImages/markvitow.png",
+    link: "https://markvitow.com/",
+  },
+  {
+    id: 8,
+    source: "/partnerImages/a10.png",
+    link: "https://www.a10boilerspares.co.uk/home",
+  },
+  {
+    id: 9,
+    source: "/partnerImages/boilerandheatingcare.png",
+    link: "https://boilerheatingcare.co.uk/",
+  },
+]
+
 const HomePage = () => {
   return (
     <div className='mb-16'>
       <Slider/>
+      <div className="flex flex-col items-center gap-8 mt-16 mx-4 md:mx-8 lg:mx-16 xl:mx-32 2xl:mx-64">
+        
+        <h1 className="text-2xl">Our Partners</h1>
+        <div className="h-[2px] bg-gray-100 w-full"></div>
+        <div className="w-full overflow-hidden">
+          <Marquee items={partners} />
+        </div>
+        <div className="h-[2px] bg-gray-100 w-full"></div>
+      </div>
       <div className="mt-16 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
         <Link href="/shop?cat=95" className="flex gap-2 mb-8 items-center">
           <h1 className="text-2xl">Featured Products</h1>

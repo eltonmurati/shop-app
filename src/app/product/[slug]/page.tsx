@@ -4,12 +4,13 @@ import CustomizeProducts from "@/components/CustomizeProducts"
 import ProductImages from "@/components/ProductImages"
 import { notFound } from "next/navigation";
 import { getPriceText } from "@/lib/helpers";
+import Link from "next/link";
 
 const SinglePage = async ({params}:{params:Promise<{slug:string}>}) => {
 
     const {slug} = await params;
 
-    let { data: product } = await postgres.from('product').select('*, brand(*)').eq('id', slug).limit(1).single();
+    let { data: product } = await postgres.from('product').select('*, brand(*), category(*)').eq('id', slug).limit(1).single();
 
     if (!product) {
         return notFound();
@@ -30,6 +31,14 @@ const SinglePage = async ({params}:{params:Promise<{slug:string}>}) => {
                     <div className="">
                         <h4 className="">Our Code: <span className="text-gray-400">{product.sku}</span></h4>
                         <h4 className="">Manufacturer Code: <span className="text-gray-400">{product.manufacturer_code}</span></h4>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                        <div className="">Categories:</div>
+                        <div className="flex text-sm flex-col text-gray-400">
+                            {product.category.map((cat)=>(
+                                <Link className="hover:text-blue-700 w-max" id={cat.id.toString()} href={"/shop?cat="+cat.id.toString()}>{cat.name}</Link>
+                            ))}
+                        </div>
                     </div>
                     <div className="h-[2px] bg-gray-100"/>
                     {product.on_sale ? (

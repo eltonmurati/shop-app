@@ -1,6 +1,9 @@
 import { postgres } from "@/lib/postgresClient";
+import { redirect } from "next/navigation";
 
 const AdminProductsPage = async () => {
+
+    redirect("/");
 
     const { data: products } = await postgres.from('product').select();
     
@@ -16,7 +19,7 @@ const AdminProductsPage = async () => {
                     Add a new product
                 </button>
             </div>
-            <div className="flex flex-col h-full rounded-md ring-1 ring-gray-200 h-[500px] w-full overflow-x-scroll overflow-y-auto">
+            <div className="flex flex-col rounded-md ring-1 ring-gray-200 h-[500px] w-full overflow-x-scroll overflow-y-scroll">
                 <div className="flex p-2 gap-4 font-medium sticky top-0 bg-white">
                     <div className="w-24 truncate">ID</div>
                     <div className="w-96 truncate">Name</div>

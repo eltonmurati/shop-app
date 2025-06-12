@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 const AdminPage = () => {
 
-    //redirect("/");
+    redirect("/");
 
     return(
         <div className="">AdminPage</div>
