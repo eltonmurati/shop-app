@@ -36,7 +36,7 @@ const SinglePage = async ({params}:{params:Promise<{slug:string}>}) => {
                         <div className="">Categories:</div>
                         <div className="flex text-sm flex-col text-gray-400">
                             {product.category.map((cat)=>(
-                                <Link className="hover:text-blue-700 w-max" id={cat.id.toString()} href={"/shop?cat="+cat.id.toString()}>{cat.name}</Link>
+                                <Link className="hover:text-blue-700 w-max" key={cat.id.toString()} href={"/shop?cat="+cat.id.toString()}>{cat.name}</Link>
                             ))}
                         </div>
                     </div>
