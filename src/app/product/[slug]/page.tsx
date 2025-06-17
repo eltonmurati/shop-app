@@ -10,7 +10,7 @@ const SinglePage = async ({params}:{params:Promise<{slug:string}>}) => {
 
     const {slug} = await params;
 
-    let { data: product } = await postgres.from('product').select('*, brand(*), category(*)').eq('id', slug).limit(1).single();
+    let { data: product } = await postgres.from('product').select('*, brand(*), category(*)').eq('id', parseInt(slug)).limit(1).single();
 
     if (!product) {
         return notFound();
