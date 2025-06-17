@@ -95,13 +95,13 @@ const FilterDropdown = ({table, name, open, onClose}:{table:"category"|"brand"; 
                 {entries.map((entry, i)=>{
                     if (i === entries.length - 1) {
                         return(
-                            <button className="px-4 pt-1 pb-2 rounded-b-md hover:bg-gray-100 text-start" key={i} onClick={()=>handleClick(entry.id.toString())}>
+                            <button className="px-4 pt-1.5 pb-2 rounded-b-md hover:bg-gray-100 text-start" key={i} onClick={()=>handleClick(entry.id.toString())}>
                                 <p className="truncate">{entry.name}</p>
                             </button>
                         );
                     } else { 
                         return(
-                            <button className="px-4 py-1 hover:bg-gray-100 text-start" key={i} onClick={()=>handleClick(entry.id.toString())}>
+                            <button className="px-4 py-1.5 hover:bg-gray-100 text-start" key={i} onClick={()=>handleClick(entry.id.toString())}>
                                 <p className="truncate">{entry.name}</p>
                             </button>
                         );

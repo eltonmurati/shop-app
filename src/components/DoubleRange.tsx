@@ -150,16 +150,16 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
     return (
         <div className="flex flex-col gap-3 bg-gray-100 rounded-2xl py-2 px-2 h-max cursor-pointer items-center" onClick={()=>setOpen(!open)}>
             {open ? (
-                <p className="text-xs font-medium px-2 w-max relative">
+                <p className="text-sm font-medium px-2 w-max relative">
                     {title}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4 absolute top-0 -right-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-5 absolute top-0 -right-4">
                         <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
                     </svg>
                 </p>
             ) : (
                 <div className="flex">
-                    <p className="text-xs font-medium px-2 w-max relative">{title}</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
+                    <p className="text-sm font-medium px-2 w-max relative">{title}</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-5">
                         <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
                     </svg>
                 </div>
