@@ -10,7 +10,7 @@ const AdminNav = () => {
         <div className="px-2 md:p-4 md:bg-gray-100 w-full overflow-auto md:w-max md:overflow-visible scrollbar-hide">
             <div className="w-max">
                 <h1 className="hidden md:block text-2xl pb-4 whitespace-nowrap font-medium">Admin Dashboard</h1>
-                <ul className="flex md:flex-col gap-4">
+                <ul className="flex md:flex-col gap-2">
                     <li><Link 
                         href={"/admin"} 
                         className={`${selected === "home" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700`} 
