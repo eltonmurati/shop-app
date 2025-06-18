@@ -30,13 +30,13 @@ const DoubleRange = ({title, measurement, column}:{title:string; measurement:str
                 const { data: productIds } = await postgres
                     .from("product_category")
                     .select("product_id")
-                    .in("category_id", params.getAll("cat"));
+                    .in("category_id", params.getAll("cat").map(id => Number(id)));
 
                 productQuery = productQuery.in('id', productIds?.map(item => item.product_id)!);
             }
 
             if (params.has("search")) { productQuery = productQuery.textSearch('name', params.get("search")!, {type: "websearch"}); }
-            if (params.has("brand")) { productQuery = productQuery.in("brand", params.getAll("brand") ); }
+            if (params.has("brand")) { productQuery = productQuery.in("brand", params.getAll("brand").map(id => Number(id)) ); }
             if (params.has("stock")) { productQuery = productQuery.gt("quantity", 0); }
             if (params.has("sale")) { productQuery = productQuery.eq("on_sale", true); }
 
