@@ -25,7 +25,11 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
         productQuery = productQuery.in('id', productIds?.map(item => item.product_id)!);
     }
 
-    if (searchParams["search"]) { productQuery = productQuery.textSearch('name', searchParams["search"], {type: "websearch"}); }
+    if (searchParams["search"]) { 
+        //productQuery = productQuery.textSearch('name', searchParams["search"], {type: "websearch"}); 
+        productQuery = productQuery.or(`sku.ilike.%${searchParams["search"]}%,manufacturer_code.ilike.%${searchParams["search"]}%,name.wfts.${searchParams["search"]}`);
+    }
+
     if (searchParams["brand"]) { productQuery = productQuery.in("brand", Array.isArray(searchParams["brand"]) ? searchParams["brand"] : [searchParams["brand"]] ); }
     if (searchParams["stock"]) { productQuery = productQuery.gt("quantity", 0); }
     if (searchParams["sale"]) { productQuery = productQuery.eq("on_sale", true); }
@@ -45,7 +49,9 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
 
     productQuery = productQuery.range(start, end);
 
-    let { data: products, count } = await productQuery;
+    let { data: products, count, error } = await productQuery;
+
+    if (error) {console.log(error);}
 
     let found = true;
     if (!products || products.length < 1) { found = false; }
