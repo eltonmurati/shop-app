@@ -102,9 +102,11 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                             </Link>
                         ))}
                     </div>
-                    <Suspense fallback="Loading...">
-                        <Pagination length={count!} limit={limit} page={page} />
-                    </Suspense>
+                    <div className="pb-12 pt-16">
+                        <Suspense fallback="Loading...">
+                            <Pagination length={count!} limit={limit} page={page} />
+                        </Suspense>
+                    </div>
                 </>
             ) : (
                 <div className="text-gray-700 text-center text-xl font-medium">No products found</div>

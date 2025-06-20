@@ -1,12 +1,12 @@
-import { postgres } from "@/lib/postgresClient";
+import AdminProductsList from "@/components/AdminProductsList";
 import { redirect } from "next/navigation";
 
-const AdminProductsPage = async () => {
+const AdminProductsPage = async ({searchParams}:{searchParams:any}) => {
 
     //redirect("/");
 
-    const { data: products } = (await postgres.from('product').select('*, brand(*), category(*)'));
-    
+    const params = await searchParams;
+
     return(
         <div className="p-4 flex flex-col gap-4 w-full h-[calc(100vh-120px)] md:h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] overflow-hidden">
             <h1 className="text-2xl font-medium">Products</h1>
@@ -19,37 +19,7 @@ const AdminProductsPage = async () => {
                     <div className="text-sm">Add a new product</div>
                 </button>
             </div>
-            <div className="rounded-md ring-1 ring-gray-200 h-full w-full overflow-auto">
-                <div className="w-max">
-                    {/* HEADER */}
-                    <div className="flex font-semibold sticky top-0 bg-white">
-                        <div className="p-2 w-24">ID</div>
-                        <div className="p-2 w-96">Name</div>
-                        <div className="p-2 w-24">Price</div>
-                        <div className="p-2 w-24">Stock</div>
-                        <div className="p-2 w-48">Brand</div>
-                        <div className="p-2 w-64">Our Code</div>
-                        <div className="p-2 w-64">Manufacturer Code</div>
-                        <div className="p-2 w-24">On Sale</div>
-                        <div className="p-2 w-96">Categories</div>
-                    </div>
-                    {/* ITEMS */}
-                    {products?.map(product=>(
-                        <div key={product.id} className="flex hover:bg-gray-100">
-                            <div className="p-2 w-24 line-clamp-1 truncate">{product.id}</div>
-                            <div className="p-2 w-96 line-clamp-1 truncate">{product.name}</div>
-                            <div className="p-2 w-24 line-clamp-1 truncate">£{product.price}</div>
-                            <div className={"p-2 w-24 line-clamp-1 truncate " + (product.quantity > 0 ? "text-green-500" : "text-red-500")}>{product.quantity}</div>
-                            <div className="p-2 w-48 line-clamp-1 truncate">{product.brand ? product.brand.name : (<span className="text-gray-400">Null</span>)}</div>
-                            <div className="p-2 w-64 line-clamp-1 truncate">{product.sku}</div>
-                            <div className="p-2 w-64 line-clamp-1 truncate">{product.manufacturer_code ? product.manufacturer_code : (<span className="text-gray-400">Null</span>)}</div>
-                            <div className={"p-2 w-24 line-clamp-1 truncate " + (product.on_sale ? "text-green-500" : "text-red-500")}>{product.on_sale ? "True" : "False"}</div>
-                            <div className="p-2 w-96 line-clamp-1 truncate">Categories</div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <div className="bg-green-200 h-20"></div>
+            <AdminProductsList searchParams={params}/>
         </div>
     );
 }

@@ -32,21 +32,11 @@ const partners = [
   },
   {
     id: 6,
-    source: "/partnerImages/tglynes.png",
-    link: "https://www.tglynes.co.uk/",
-  },
-  {
-    id: 7,
     source: "/partnerImages/markvitow.png",
     link: "https://markvitow.com/",
   },
   {
-    id: 8,
-    source: "/partnerImages/a10.png",
-    link: "https://www.a10boilerspares.co.uk/home",
-  },
-  {
-    id: 9,
+    id: 7,
     source: "/partnerImages/boilerandheatingcare.png",
     link: "https://boilerheatingcare.co.uk/",
   },

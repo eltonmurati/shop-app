@@ -36,14 +36,14 @@ const Pagination = ({length, limit, page}:{length:number; limit:number; page:num
     const changePage = (p:number) => {
         if (p > 0 && p <= pages) {
             params.set("page", p.toString());
-            replace(`/shop?${params}`);
+            replace(`${pathname}?${params}`);
         }
     }
 
-    if (!pathname.startsWith("/shop")) { return null; }
+    //if (!pathname.startsWith("/shop")) { return null; }
 
     return(
-        <div className="mt-16 flex justify-center w-full gap-8 text-blue-700 pb-12">
+        <div className="flex justify-center w-full gap-8 text-blue-700">
             <button className={Number(page) === 1 ? "text-indigo-200 cursor-not-allowed" : ""} onClick={()=>changePage(1)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
                     <path fillRule="evenodd" d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z" clipRule="evenodd" />
