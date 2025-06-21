@@ -26,8 +26,8 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
     }
 
     if (searchParams["search"]) {
-        //productQuery = productQuery.or(`sku.eq.${searchParams["search"]},manufacturer_code.eq.${searchParams["search"]},fts_name.wfts.${searchParams["search"]}`);
-        productQuery = productQuery.textSearch("fts_name", searchParams["search"], { type: "websearch" });
+        productQuery = productQuery.or(`sku.eq.${searchParams["search"]},manufacturer_code.eq.${searchParams["search"]},fts_name.wfts.${searchParams["search"]}`);
+        //productQuery = productQuery.textSearch("fts_name", searchParams["search"], { type: "websearch" });
     }
 
     if (searchParams["brand"]) { productQuery = productQuery.in("brand", Array.isArray(searchParams["brand"]) ? searchParams["brand"] : [searchParams["brand"]] ); }
