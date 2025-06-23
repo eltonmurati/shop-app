@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useCartStore } from "@/hooks/useCartStore";
 import CartCard from "@/components/CartCard";
 import { getPriceText } from "@/lib/helpers";
+import Link from "next/link";
 
 const CartPage = () => {
 
@@ -57,7 +58,7 @@ const CartPage = () => {
                             </p>
                             <div className="flex justify-between text-sm">
                                 <button className="rounded-md py-3 px-4 ring-1 ring-inset ring-red-500 text-red-500" onClick={()=>clearCart()}>Clear Cart</button>
-                                <button className="rounded-md py-3 px-4 bg-black text-white">Checkout</button>
+                                <Link href="/checkout" className="rounded-md py-3 px-4 bg-black text-white">Checkout</Link>
                             </div>
                         </div>
                     </>
