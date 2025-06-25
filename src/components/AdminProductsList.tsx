@@ -23,7 +23,7 @@ const AdminProductsList = async ({searchParams}:{searchParams?:any}) => {
 
     return(
         <>
-            <div className="rounded-md ring-1 ring-gray-200 h-full w-full overflow-auto">
+            <div className="rounded-md ring-1 ring-gray-300 h-full w-full overflow-auto">
                 <div className="w-max">
                     {/* HEADER */}
                     <div className="flex font-semibold sticky top-0 bg-white">

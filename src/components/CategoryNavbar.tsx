@@ -8,7 +8,7 @@ const CategoryNavbar = () => {
 
     const [tabId, setTabId] = useState(0);
 
-    const highlighted = "w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center bg-white text-blue-700 leading-tight z-20";
+    const highlighted = "w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center bg-white text-blue-700 leading-tight z-50";
     const notHighlighted = "w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight";
 
     return (
