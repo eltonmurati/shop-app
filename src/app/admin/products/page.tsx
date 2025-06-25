@@ -1,4 +1,4 @@
-import AddProductModal from "@/components/AddProductButton";
+import AddProductButton from "@/components/AddProductButton";
 import AdminProductsList from "@/components/AdminProductsList";
 import { redirect } from "next/navigation";
 
@@ -13,7 +13,7 @@ const AdminProductsPage = async ({searchParams}:{searchParams:any}) => {
             <h1 className="text-2xl font-medium">Products</h1>
             <div className="flex md:items-center flex-col-reverse md:flex-row gap-4 z-30">
                 <input placeholder="Search products" className="ring-2 ring-gray-300 ring-inset p-2 rounded-md outline-none" />
-                <AddProductModal />
+                <AddProductButton />
             </div>
             <AdminProductsList searchParams={params} />
         </div>
