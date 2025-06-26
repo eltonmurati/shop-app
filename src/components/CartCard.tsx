@@ -80,12 +80,12 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
                         <div className="flex justify-between text-sm">
                             <div className="flex gap-1">
                                 {!verified && <div className="flex items-center">
-                                    <button className="text-gray-400 hover:text-blue-700 w-4 h-4 flex items-center justify-center" onClick={removeOne}>
+                                    <button className="text-gray-400 transition-colors linear duration-200 hover:text-blue-700 w-4 h-4 flex items-center justify-center" onClick={removeOne}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-3">
                                             <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
                                         </svg>
                                     </button>
-                                    <button className="text-gray-400 hover:text-blue-700 w-4 h-4 flex items-center justify-center" onClick={addOne}>
+                                    <button className="text-gray-400 transition-colors linear duration-200 hover:text-blue-700 w-4 h-4 flex items-center justify-center" onClick={addOne}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-3">
                                             <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
                                         </svg>

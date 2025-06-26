@@ -62,19 +62,19 @@ const CheckoutPage = () => {
     }
 
     return(
-        <div className="min-h-max h-[calc(100vh-80px)] xl:h-[calc(100vh-144px)] px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 py-16 flex flex-col justify-center">
+        <div className="h-max min-h-[calc(100vh-80px)] xl:min-h-[calc(100vh-144px)] px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 py-16 flex flex-col justify-center">
             <div className="flex flex-col lg:flex-row gap-8 justify-center w-full">
                 <div className="flex flex-col gap-8 lg:w-1/3">
-                    <div className="flex">
+                    <div className="flex gap-8">
                         <button 
-                            className="rounded-l-md bg-blue-700 w-full p-2 text-white disabled:bg-indigo-200"
+                            className="rounded-md ring-1 ring-inset ring-blue-700 bg-white w-full p-3.5 text-blue-700 disabled:bg-blue-700 disabled:text-white"
                             disabled={delivery}
                             onClick={()=>setDelivery(true)}
                         >
                             Delivery
                         </button>
                         <button 
-                            className="rounded-r-md bg-blue-700 w-full p-2 text-white disabled:bg-indigo-200"
+                            className="rounded-md ring-1 ring-inset ring-blue-700 bg-white w-full p-3.5 text-blue-700 disabled:bg-blue-700 disabled:text-white"
                             disabled={!delivery}
                             onClick={()=>setDelivery(false)}
                         >

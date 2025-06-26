@@ -73,16 +73,16 @@ const LoginPage = () => {
                     </>
                 ) : (
                     <>
-                        <div className="flex flex-row">
+                        <div className="flex flex-row gap-8">
                             <button 
-                                className="rounded-l-md bg-blue-700 w-full p-2 text-white disabled:bg-indigo-200" 
+                                className="rounded-md ring-1 ring-inset ring-blue-700 bg-white w-full p-3.5 text-blue-700 disabled:bg-blue-700 disabled:text-white" 
                                 disabled={isCompany ? false : true}
                                 onClick={()=>setIsCompany(false)}
                             >
                                 Personal
                             </button>
                             <button 
-                                className="rounded-r-md bg-blue-700 w-full p-2 text-white disabled:bg-indigo-200" 
+                                className="rounded-md ring-1 ring-inset ring-blue-700 bg-white w-full p-3.5 text-blue-700 disabled:bg-blue-700 disabled:text-white" 
                                 disabled={isCompany ? true : false}
                                 onClick={()=>setIsCompany(true)}
                             >

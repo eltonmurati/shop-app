@@ -35,7 +35,7 @@ const CartModel = ({open, onClose}:{open:boolean; onClose: ()=>void;}) => {
     return (
         <>
             <div className="fixed top-0 left-0 right-0 bottom-0 z-50" onClick={onClose}></div>
-            <div className="max-w-[27rem] w-max absolute rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-30">
+            <div className="max-w-[27rem] w-max absolute rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-50">
                 {!cartItems ? (
                     <div className="p-4 font-medium flex flex-col items-center gap-4">
                         Cart is empty
@@ -64,7 +64,7 @@ const CartModel = ({open, onClose}:{open:boolean; onClose: ()=>void;}) => {
                                 All prices include VAT.
                             </p>
                             <div className="flex justify-between text-sm">
-                                <button className="rounded-md py-3 px-4 ring-1 ring-inset ring-red-500 text-red-500" onClick={()=>clearCart()}>Clear Cart</button>
+                                <button className="rounded-md py-3 px-4 ring-1 ring-inset ring-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors linear duration-200" onClick={()=>clearCart()}>Clear Cart</button>
                                 <Link className="rounded-md py-3 px-4 bg-black text-white" href="/checkout" onClick={onClose}>Checkout</Link>
                             </div>
                         </div>

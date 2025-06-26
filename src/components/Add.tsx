@@ -75,7 +75,7 @@ const Add = ({stock, productId}:{stock:number; productId:number;}) => {
                     </div>
                     <div className="relative">
                         <button 
-                            className="absolute right-0 w-36 text-sm rounded-3xl ring-1 ring-blue-700 bg-white text-blue-700 py-3 px-4 hover:bg-blue-700 hover:text-white 
+                            className="absolute transitions-colors linear duration-200 right-0 w-36 text-sm rounded-3xl ring-1 ring-blue-700 bg-white text-blue-700 py-3 px-4 hover:bg-blue-700 hover:text-white 
                                 disabled:cursor-not-allowed disabled:bg-indigo-200 disabled:text-white disabled:ring-indigo-200 z-20"
                             onClick={()=>{addItem(productId, quantity, stock); setAdded(true);}}
                         >
