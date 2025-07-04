@@ -2,7 +2,7 @@ import { postgres } from "@/lib/postgresClient";
 import Pagination from "./Pagination";
 import { getPriceText } from "@/lib/helpers";
 
-const AdminProductsList = async ({searchParams, searchTerm}:{searchParams?:any, searchTerm?:string}) => {
+const AdminProductsList = async ({searchParams}:{searchParams?:any}) => {
 
     let page = 1;
     if (searchParams["page"]) { page = searchParams["page"]; }
@@ -13,8 +13,9 @@ const AdminProductsList = async ({searchParams, searchTerm}:{searchParams?:any, 
 
     let productQuery = postgres.from('product').select('*, brand(*), category(*)', {count: "exact"});
 
-    if (searchTerm) {
-        productQuery = productQuery.or(`sku.eq.${searchTerm},manufacturer_code.eq.${searchTerm},fts_name.wfts.${searchTerm}`);
+    if (searchParams["search"]) {
+        productQuery = productQuery.or(`sku.eq.${searchParams["search"]},manufacturer_code.eq.${searchParams["search"]},fts_name.wfts.${searchParams["search"]}
+            ${Number.isInteger(Number(searchParams["search"])) && `,id.eq.${searchParams["search"]}`}`);
     }
 
     productQuery = productQuery.order("id", { ascending: true }).range(start, end);
