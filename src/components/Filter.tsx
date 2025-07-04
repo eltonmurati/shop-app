@@ -88,7 +88,12 @@ const Filter = () => {
                     </div>
                     {params.size > 0 && !(params.size === 1 && params.get("sort")) && !(params.size === 1 && params.get("page")) && 
                         !(params.size === 2 && params.get("sort") && params.get("page")) && (
-                        <button className="rounded-full px-4 py-2 text-sm font-medium bg-blue-700 h-max text-white" onClick={clearFilters}>Clear Filters</button>
+                        <button 
+                            className="rounded-full px-4 py-2 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700 transition-colors linear duration-200 hover:bg-blue-700 h-max hover:text-white" 
+                            onClick={clearFilters}
+                        >
+                            Clear Filters
+                        </button>
                     )}
                 </div>
                 <div className="">

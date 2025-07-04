@@ -67,14 +67,14 @@ const CheckoutPage = () => {
                 <div className="flex flex-col gap-8 lg:w-1/3">
                     <div className="flex gap-8">
                         <button 
-                            className="rounded-md ring-1 ring-inset ring-blue-700 bg-white w-full p-3.5 text-blue-700 disabled:bg-blue-700 disabled:text-white"
+                            className="rounded-md ring-1 ring-inset ring-blue-700 bg-white w-full p-3.5 text-blue-700 disabled:bg-blue-700 disabled:text-white hover:bg-blue-700 hover:text-white transition-colors linear duration-200"
                             disabled={delivery}
                             onClick={()=>setDelivery(true)}
                         >
                             Delivery
                         </button>
                         <button 
-                            className="rounded-md ring-1 ring-inset ring-blue-700 bg-white w-full p-3.5 text-blue-700 disabled:bg-blue-700 disabled:text-white"
+                            className="rounded-md ring-1 ring-inset ring-blue-700 bg-white w-full p-3.5 text-blue-700 disabled:bg-blue-700 disabled:text-white hover:bg-blue-700 hover:text-white transition-colors linear duration-200"
                             disabled={!delivery}
                             onClick={()=>setDelivery(false)}
                         >

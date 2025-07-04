@@ -8,8 +8,8 @@ const CategoryNavbar = () => {
 
     const [tabId, setTabId] = useState(0);
 
-    const highlighted = "w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center bg-white text-blue-700 leading-tight z-50";
-    const notHighlighted = "w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight";
+    const highlighted = "w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center bg-white text-blue-700 leading-tight z-50 transition-colors linear duration-200";
+    const notHighlighted = "w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight transition-colors linear duration-200";
 
     return (
         <div className="relative" onMouseLeave={()=>setTabId(0)}>
@@ -20,7 +20,7 @@ const CategoryNavbar = () => {
                 </Link>
                 <Link
                     href="/shop?cat=101&stock=true" 
-                    className="w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight hover:text-blue-700 hover:bg-white" 
+                    className="w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight hover:text-blue-700 hover:bg-white transition-colors linear duration-200" 
                     onMouseEnter={()=>setTabId(0)}
                 >
                     <div className="inline text-ellipsis overflow-hidden">Boiler Spares</div>
@@ -57,14 +57,14 @@ const CategoryNavbar = () => {
                 </Link>
                 <Link 
                     href="/shop?cat=100&stock=true" 
-                    className="w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight hover:text-blue-700 hover:bg-white" 
+                    className="w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight hover:text-blue-700 hover:bg-white transition-colors linear duration-200" 
                     onMouseEnter={()=>setTabId(0)}
                 >
                     <div className="inline text-ellipsis overflow-hidden">Refurbished</div>
                 </Link>
                 <Link 
                     href="/shop?cat=104&stock=true" 
-                    className="w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight hover:text-blue-700 hover:bg-white" 
+                    className="w-[7.14285714286%] h-full px-2 flex items-center justify-center text-center leading-tight hover:text-blue-700 hover:bg-white transition-colors linear duration-200" 
                     onMouseEnter={()=>setTabId(0)}
                 >
                     <div className="inline text-ellipsis overflow-hidden">Used & Tested</div>

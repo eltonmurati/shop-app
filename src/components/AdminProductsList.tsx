@@ -2,7 +2,7 @@ import { postgres } from "@/lib/postgresClient";
 import Pagination from "./Pagination";
 import { getPriceText } from "@/lib/helpers";
 
-const AdminProductsList = async ({searchParams}:{searchParams?:any}) => {
+const AdminProductsList = async ({searchParams, searchTerm}:{searchParams?:any, searchTerm?:string}) => {
 
     let page = 1;
     if (searchParams["page"]) { page = searchParams["page"]; }
@@ -13,8 +13,8 @@ const AdminProductsList = async ({searchParams}:{searchParams?:any}) => {
 
     let productQuery = postgres.from('product').select('*, brand(*), category(*)', {count: "exact"});
 
-    if (searchParams["search"]) {
-        productQuery = productQuery.or(`sku.ilike.%${searchParams["search"]}%,manufacturer_code.ilike.%${searchParams["search"]}%,id.ilike.%${searchParams["search"]}%,name.wfts.${searchParams["search"]}`);
+    if (searchTerm) {
+        productQuery = productQuery.or(`sku.eq.${searchTerm},manufacturer_code.eq.${searchTerm},fts_name.wfts.${searchTerm}`);
     }
 
     productQuery = productQuery.order("id", { ascending: true }).range(start, end);
@@ -26,7 +26,7 @@ const AdminProductsList = async ({searchParams}:{searchParams?:any}) => {
             <div className="rounded-md ring-1 ring-gray-300 h-full w-full overflow-auto">
                 <div className="w-max">
                     {/* HEADER */}
-                    <div className="flex font-semibold sticky top-0 bg-white">
+                    <div className="flex font-semibold sticky top-0 bg-white/80 backdrop-blur-sm">
                         <div className="p-2 w-24">ID</div>
                         <div className="p-2 w-96">Name</div>
                         <div className="p-2 w-24">Price</div>
@@ -39,7 +39,7 @@ const AdminProductsList = async ({searchParams}:{searchParams?:any}) => {
                     </div>
                     {/* ITEMS */}
                     {products?.map((product, i)=>(
-                        <div key={product.id} className={"flex hover:bg-gray-100 " + (i % 2 === 0 && "bg-gray-50")}>
+                        <div key={product.id} className={"flex hover:bg-blue-100 " + (i % 2 === 0 && "bg-gray-50")}>
                             <div className="p-2 w-24 line-clamp-1 truncate">{product.id}</div>
                             <div className="p-2 w-96 line-clamp-1 truncate">{product.name}</div>
                             <div className="p-2 w-24 line-clamp-1 truncate">£{getPriceText(product.price)}</div>

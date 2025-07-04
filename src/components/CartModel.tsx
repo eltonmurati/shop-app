@@ -64,8 +64,19 @@ const CartModel = ({open, onClose}:{open:boolean; onClose: ()=>void;}) => {
                                 All prices include VAT.
                             </p>
                             <div className="flex justify-between text-sm">
-                                <button className="rounded-md py-3 px-4 ring-1 ring-inset ring-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors linear duration-200" onClick={()=>clearCart()}>Clear Cart</button>
-                                <Link className="rounded-md py-3 px-4 bg-black text-white" href="/checkout" onClick={onClose}>Checkout</Link>
+                                <button 
+                                    className="rounded-md py-3 px-4 ring-1 ring-inset ring-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors linear duration-200" 
+                                    onClick={()=>{clearCart(); onClose();}}
+                                >
+                                    Clear Cart
+                                </button>
+                                <Link 
+                                    className="rounded-md py-3 px-4 ring-1 ring-inset ring-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white transition-colors linear duration-200" 
+                                    href="/checkout" 
+                                    onClick={onClose}
+                                >
+                                    Checkout
+                                </Link>
                             </div>
                         </div>
                     </>

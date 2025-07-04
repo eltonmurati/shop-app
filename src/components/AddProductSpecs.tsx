@@ -2,21 +2,47 @@
 
 import { useState } from "react";
 
-const AddProductSpecs = () => {
+const AddProductSpecs = ({updateSpecs}:{updateSpecs: React.Dispatch<React.SetStateAction<{[k:string]: {key:string, value:string}} | undefined>>;}) => {
     const [count, setCount] = useState(0);
     const [specs, setSpecs] = useState([] as number[]);
+
+    const [final, setFinal] = useState<{ [k:number]: { key:string, value:string } } | undefined>();
 
     const removeSpec = (spec:number) => {
         const i = specs.indexOf(spec);
         const newSpecs = [...specs];
         newSpecs.splice(i, 1);
         setSpecs(newSpecs);
+
+        let newFinal = {...final};
+        delete newFinal[spec as keyof typeof newFinal];
+        setFinal(newFinal);
+        updateSpecs(newFinal);
     }
 
     const addSpec = (spec:number) => {
         const newSpecs = [...specs];
         newSpecs.push(spec);
         setSpecs(newSpecs);
+
+        let newFinal = {...final};
+        newFinal[spec as keyof typeof newFinal] = { key: "", value: "" };
+        setFinal(newFinal);
+        updateSpecs(newFinal);
+    }
+
+    const changeKey = (e:React.ChangeEvent<HTMLInputElement>, spec:number) => {
+        let newFinal = {...final};
+        newFinal[spec].key = e.target.value;
+        setFinal(newFinal);
+        updateSpecs(newFinal);
+    }
+
+    const changeValue = (e:React.ChangeEvent<HTMLInputElement>, spec:number) => {
+        let newFinal = {...final};
+        newFinal[spec].value = e.target.value;
+        setFinal(newFinal);
+        updateSpecs(newFinal);
     }
     
     return(
@@ -27,8 +53,8 @@ const AddProductSpecs = () => {
                     {specs.map((spec)=>(
                         <div key={spec} className="flex gap-1">
                             <div className="flex gap-2">
-                                <input required type="text" name={"speckey"+spec} placeholder="Type" className="text-sm h-6 w-1/2 ring-2 ring-inset ring-gray-300 rounded-md px-2 outline-none"></input>
-                                <input required type="text" name={"specvalue"+spec} placeholder="Value" className="text-sm h-6 w-1/2 ring-2 ring-inset ring-gray-300 rounded-md px-2 outline-none"></input>
+                                <input required onChange={(e)=>changeKey(e, spec)} type="text" placeholder="Type" className="text-sm h-6 w-1/2 ring-2 ring-inset ring-gray-300 rounded-md px-2 outline-none"></input>
+                                <input required onChange={(e)=>changeValue(e, spec)} type="text" placeholder="Value" className="text-sm h-6 w-1/2 ring-2 ring-inset ring-gray-300 rounded-md px-2 outline-none"></input>
                             </div>
                             <button type="button" className="text-gray-400 hover:text-red-500 transition-colors linear duration-200" onClick={()=>removeSpec(spec)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
@@ -46,8 +72,8 @@ const AddProductSpecs = () => {
                     </svg>
                     Add Specification
                 </button>
-                {specs.length > 1 && (
-                    <button type="button" className="text-red-200 flex gap-1 items-center hover:text-red-500 transition-colors linear duration-200" onClick={()=>setSpecs([])}>
+                {specs.length > 3 && (
+                    <button type="button" className="text-red-200 flex gap-1 items-center hover:text-red-500 transition-colors linear duration-200" onClick={()=>{setSpecs([]); updateSpecs(undefined);}}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
                             <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
                         </svg>

@@ -48,7 +48,7 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
     return(
         <>
             {product && (
-                <Link href={`/product/${product.id}`} className={`flex gap-4`}>
+                <Link href={`/product/${product.id}`} className={`flex gap-4 group`}>
                     <Image 
                         src={product.image_urls?.at(0) || "/noImage.jpg"} 
                         alt="" 
@@ -61,7 +61,7 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
                         <div className="">
                             {/* TITLE */}
                             <div className="flex justify-between gap-4">
-                                <h3 className="font-medium line-clamp-2">{product.name}</h3>
+                                <h3 className="font-medium line-clamp-2 group-hover:text-blue-700 transition-colors linear duration-200">{product.name}</h3>
                                 {product.on_sale ? (
                                     <div className="flex flex-col gap-1 text-end">
                                         <div className="text-gray-400 line-through text-sm">£{getPriceText(product.original_price)}</div>
@@ -93,7 +93,7 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
                                 </div>}
                                 <span className="text-gray-400">Qty. {quantity}</span>
                             </div>
-                            {!verified && <button className="text-red-500" onClick={deleteCard}>Remove</button>}
+                            {!verified && <button className="text-red-200 hover:text-red-500 transition-colors linear duration-200" onClick={deleteCard}>Remove</button>}
                         </div>
                     </div>
                 </Link>
