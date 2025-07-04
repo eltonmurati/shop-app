@@ -142,7 +142,7 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
                     </div>
                     <div className="flex gap-8 md:justify-end">
                         <button 
-                            className="disabled:bg-indigo-200 disabled:text-white py-4 px-8 ring-1 ring-inset ring-blue-700 text-blue-700 rounded-md hover:bg-blue-700 hover:text-white w-full md:w-max transition-colors linear duration-200"
+                            className="disabled:bg-indigo-200 disabled:ring-indigo-200 disabled:text-white py-4 px-8 ring-1 ring-inset ring-blue-700 text-blue-700 rounded-md hover:bg-blue-700 hover:text-white w-full md:w-max transition-colors linear duration-200"
                             disabled={loadingSubmit}
                         >
                             {loadingSubmit ? "Loading..." : "Submit"}

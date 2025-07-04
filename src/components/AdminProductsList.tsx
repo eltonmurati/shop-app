@@ -14,7 +14,8 @@ const AdminProductsList = async ({searchParams}:{searchParams?:any}) => {
     let productQuery = postgres.from('product').select('*, brand(*), category(*)', {count: "exact"});
 
     if (searchParams["search"]) {
-        productQuery = productQuery.or(`sku.eq.${searchParams["search"]},manufacturer_code.eq.${searchParams["search"]},fts_name.wfts.${searchParams["search"]}`);
+        productQuery = productQuery.or(`sku.eq.${searchParams["search"]},manufacturer_code.eq.${searchParams["search"]},fts_name.wfts.${searchParams["search"]}
+            ${Number.isInteger(Number(searchParams["search"])) && `,id.eq.${searchParams["search"]}`}`);
     }
 
     productQuery = productQuery.order("id", { ascending: true }).range(start, end);

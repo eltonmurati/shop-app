@@ -26,7 +26,8 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
     }
 
     if (searchParams["search"]) {
-        productQuery = productQuery.or(`sku.eq.${searchParams["search"]},manufacturer_code.eq.${searchParams["search"]},fts_name.wfts.${searchParams["search"]}`);
+        productQuery = productQuery.or(`sku.eq.${searchParams["search"]},manufacturer_code.eq.${searchParams["search"]},fts_name.wfts.${searchParams["search"]}
+            ${Number.isInteger(Number(searchParams["search"])) && `,id.eq.${searchParams["search"]}`}`);
     }
 
     if (searchParams["brand"]) { productQuery = productQuery.in("brand", Array.isArray(searchParams["brand"]) ? searchParams["brand"] : [searchParams["brand"]] ); }
