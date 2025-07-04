@@ -28,7 +28,7 @@ const FilterTagValue = ({tag}:{tag:string}) => {
             }
         }
         getValue();
-    });
+    },[]);
 
     if (loading) { return(<p>Loading...</p>); }
 

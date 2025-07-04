@@ -11,7 +11,7 @@ const ClearCart = ({status}:{status:string}) => {
         if (status === "succeeded") {
             clearCart();
         }
-    });
+    },[]);
 
     return(null);
 }

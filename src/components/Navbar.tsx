@@ -22,10 +22,10 @@ const Navbar = () => {
                         <div className="text-2xl tracking-wide whitespace-nowrap">BWC Merchants</div>
                     </Link>
                     <div className="hidden xl:flex gap-4">
-                        <Link href="/">Homepage</Link>
-                        <Link href="/shop?stock=true">Shop</Link>
-                        <Link href="/about">About</Link>
-                        <Link href="/contact">Contact</Link>
+                        <Link href="/" className="hover:text-blue-700 transition-colors linear duration-200">Homepage</Link>
+                        <Link href="/shop?stock=true" className="hover:text-blue-700 transition-colors linear duration-200">Shop</Link>
+                        <Link href="/about" className="hover:text-blue-700 transition-colors linear duration-200">About</Link>
+                        <Link href="/contact" className="hover:text-blue-700 transition-colors linear duration-200">Contact</Link>
                     </div>
                 </div>
                 {/* RIGHT */}
