@@ -3,14 +3,16 @@
 import { postgres } from "@/lib/postgresClient";
 import { useEffect, useState } from "react";
 
-const AddProductCategories = () => {
+const AddProductCategories = ({updateCategories}:{updateCategories:React.Dispatch<React.SetStateAction<{ [k:number]: number } | undefined>>;}) => {
     const [count, setCount] = useState(0);
     const [categories, setCategories] = useState([] as number[]);
     const [cats, setCats] = useState([] as {id:number, name:string}[]);
 
+    const [final, setFinal] = useState<{ [k:number]: number} | undefined>();
+
     const getCategories = async () => {
         const { data } = await postgres.from("category").select().order("name", {ascending:true});
-        if (data) {setCats(data);}
+        if (data) { setCats(data); }
     }
 
     useEffect(()=>{
@@ -22,12 +24,29 @@ const AddProductCategories = () => {
         const newCategories = [...categories];
         newCategories.splice(i, 1);
         setCategories(newCategories);
+
+        let newFinal = {...final};
+        delete newFinal[category];
+        setFinal(newFinal);
+        updateCategories(newFinal);
     }
 
     const addCategory = (category:number) => {
         const newCategories = [...categories];
         newCategories.push(category);
         setCategories(newCategories);
+
+        let newFinal = {...final};
+        newFinal[category] = 62;
+        setFinal(newFinal);
+        updateCategories(newFinal);
+    }
+
+    const changeCategory = (e:React.ChangeEvent<HTMLSelectElement>, category:number) => {
+        let newFinal = {...final};
+        newFinal[category] = Number(e.target.value);
+        setFinal(newFinal);
+        updateCategories(newFinal);
     }
 
     return(
@@ -37,7 +56,11 @@ const AddProductCategories = () => {
                 <div className="flex flex-col gap-2 max-h-[5.5rem] overflow-y-auto">
                     {categories.map((category)=>(
                         <div key={category} className="flex gap-1">
-                            <select name="category" className="text-sm h-6 ring-2 ring-inset ring-gray-300 rounded-md px-2 outline-none cursor-pointer w-full">
+                            <select 
+                                name="category" 
+                                className="text-sm h-6 ring-2 ring-inset ring-gray-300 rounded-md px-2 outline-none cursor-pointer w-full" 
+                                onChange={e=>changeCategory(e, category)}
+                            >
                                 {cats.map(cat=>(
                                     <option key={cat.id} value={cat.id}>{cat.name}</option>
                                 ))}

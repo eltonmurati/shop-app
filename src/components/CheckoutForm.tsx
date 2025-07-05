@@ -74,7 +74,7 @@ const PaymentForm = ({delivery}:{delivery:boolean}) => {
                 <div className={`w-full ${delivery && "md:w-1/2"} h-max`}>
                     <h1 className="pb-8 text-xl">Payment Details</h1>
                     <PaymentElement id="payment-element" options={paymentElementOptions} />
-                    <button disabled={isLoading || !stripe || !elements} id="submit" className="text-blue-700 ring-1 ring-inset ring-blue-700 transition-colors linear duration-200 hover:bg-blue-700 hover:text-white p-3.5 rounded-md mt-8 disabled:bg-indigo-200 w-full">
+                    <button disabled={isLoading || !stripe || !elements} id="submit" className="text-blue-700 ring-1 ring-inset ring-blue-700 transition-colors linear duration-200 hover:bg-blue-700 hover:text-white p-3.5 rounded-md mt-8 disabled:ring-indigo-200 disabled:bg-indigo-200 w-full">
                         <span id="button-text">
                             {isLoading ? "Loading..." : "Pay now"}
                         </span>

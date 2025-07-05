@@ -15,7 +15,7 @@ const AddProductSpecs = ({updateSpecs}:{updateSpecs: React.Dispatch<React.SetSta
         setSpecs(newSpecs);
 
         let newFinal = {...final};
-        delete newFinal[spec as keyof typeof newFinal];
+        delete newFinal[spec];
         setFinal(newFinal);
         updateSpecs(newFinal);
     }
@@ -26,7 +26,7 @@ const AddProductSpecs = ({updateSpecs}:{updateSpecs: React.Dispatch<React.SetSta
         setSpecs(newSpecs);
 
         let newFinal = {...final};
-        newFinal[spec as keyof typeof newFinal] = { key: "", value: "" };
+        newFinal[spec] = { key: "", value: "" };
         setFinal(newFinal);
         updateSpecs(newFinal);
     }

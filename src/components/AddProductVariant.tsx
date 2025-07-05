@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const AddProductVariant = ({variantId, onDelete, updateVariants}:{variantId:number; onDelete:()=>void; updateVariants:(type:string, obj:{ key:string, value:number|undefined} | undefined, variant:number)=>void;}) => {
+const AddProductVariant = ({variantId, onDelete, updateVariants}:{variantId:number; onDelete:()=>void; updateVariants:(type:string, obj:{ [k:number]: { key:string, value:number | undefined } } | undefined, variant:number)=>void;}) => {
     const [count, setCount] = useState(0);
     const [variants, setVariants] = useState([] as number[]);
 
@@ -15,9 +15,9 @@ const AddProductVariant = ({variantId, onDelete, updateVariants}:{variantId:numb
         setVariants(newVariants);
 
         let newFinal = {...final};
-        newFinal[variant as keyof typeof newFinal] = { key: "", value: undefined };
+        newFinal[variant] = { key: "ex", value: undefined };
         setFinal(newFinal);
-        updateVariants(varType, newFinal[variant], variantId);
+        updateVariants(varType, newFinal, variantId);
     }
 
     const removeVariant = (variant:number) => {
@@ -27,23 +27,23 @@ const AddProductVariant = ({variantId, onDelete, updateVariants}:{variantId:numb
         setVariants(newVariants);
 
         let newFinal = {...final};
-        delete newFinal[variant as keyof typeof newFinal];
+        delete newFinal[variant];
         setFinal(newFinal);
-        updateVariants(varType, newFinal[variant], variantId);
+        updateVariants(varType, newFinal, variantId);
     }
 
     const changeKey = (e:React.ChangeEvent<HTMLInputElement>, variant:number) => {
         let newFinal = {...final};
         newFinal[variant].key = e.target.value;
         setFinal(newFinal);
-        updateVariants(varType, newFinal[variant], variantId);
+        updateVariants(varType, newFinal, variantId);
     }
 
     const changeValue = (e:React.ChangeEvent<HTMLInputElement>, variant:number) => {
         let newFinal = {...final};
         newFinal[variant].value = e.target.valueAsNumber;
         setFinal(newFinal);
-        updateVariants(varType, newFinal[variant], variantId);
+        updateVariants(varType, newFinal, variantId);
     }
 
     return(

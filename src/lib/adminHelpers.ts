@@ -17,15 +17,14 @@ export async function AddProductToDB(
     mpn?:string, 
     brand?:number, 
     ogprice?:number, 
-    specs?:{[k:string]: {key:string, value:string}}, 
-    vars?:{ [k:number]: { [type:string]: { [key:string]: number|undefined} } }, 
-    cats?:[]
+    specs?:{[k:string]: { key:string, value:string } }, 
+    vars?:{ [k:number]: { [type:string]: { [key:string]: number | undefined | null } } }, 
+    cats?:{ [k:number]: number }
 ) {
     let err = false;
     let id = 0;
 
     const {data, error } = await postgres.from('product').select('id').order('id', { ascending: false }).limit(1).single();
-
     if (error) { err = true; console.log(error); } 
     else if (data) { id = data.id + 1; } 
     else { err = true; }
@@ -38,17 +37,47 @@ export async function AddProductToDB(
     let specifications: {key:string, value:string}[];
     let finalSpecs: {[key:string]: string} | undefined = undefined;
 
-    if (specs && Object.keys(specs).length > 0) { 
-        specifications = Object.values(specs);
-        finalSpecs = {};
-        specifications.forEach(s => {
-            finalSpecs![s.key as keyof typeof finalSpecs] = s.value;
-        });
+    if (specs && Object.keys(specs).length > 0 && !err) { 
+        try {
+            specifications = Object.values(specs);
+            finalSpecs = {};
+            specifications.forEach(s => {
+                finalSpecs![s.key as keyof typeof finalSpecs] = s.value;
+            });
+        } catch (e) {
+            err = true;
+        }
+    }
+
+    let variants: { [type:string]: { [key:string]: number | undefined | null } }[];
+    let finalVars: { [type:string]: { [key:string]: number | undefined | null } } | undefined = undefined;
+
+    if (vars && Object.keys(vars).length > 0 && !err) {
+        try {
+            variants = Object.values(vars);
+            finalVars = {};
+            variants.forEach(v=>{
+                for (const type in v) {
+                    finalVars![type] = v[type];
+                }
+            });
+        } catch (e) {
+            err = true;
+        }
+    }
+
+    let categories: number[] | undefined = undefined;
+    
+    if (!err && cats && Object.keys(cats).length > 0) {
+        try {
+            categories = [...new Set(Object.values(cats))];
+        } catch (e) {
+            err = true;
+        }
     }
 
     if (!err) {
         const { data, error } = await postgres.from('product').select('sku').eq("sku", sku);
-
         if (error) { err = true; console.log(error); } 
         else if (data) { if (data.length > 0) { err = true; } } 
         else { err = true; }
@@ -56,7 +85,6 @@ export async function AddProductToDB(
 
     if (!err && mpn) {
         const { data, error } = await postgres.from('product').select('manufacturer_code').eq("manufacturer_code", mpn);
-
         if (error) { err = true; console.log(error); } 
         else if (data) { if (data.length > 0) { err = true; } } 
         else { err = true; }
@@ -88,11 +116,19 @@ export async function AddProductToDB(
         if (mpn) { newProduct["manufacturer_code"] = mpn; }
         if (brand) { newProduct["brand"] = brand; }
         if (finalSpecs) { newProduct["specifications"] = finalSpecs; }
+        if (finalVars) { newProduct["variants"] = finalVars; }
 
         const { error } = await postgres.from("product").insert(newProduct);
+        if (error) { err = true; }
 
-        if (error) { err = true; console.log(error); }
-        else { return false; }
+        if (categories && !err) {
+            categories.forEach(async c=>{
+                const { error } = await postgres.from("product_category").insert({ "product_id": id, "category_id": c });
+                if (error) { err = true; }
+            })
+        }
+
+        if (!err) return false;
     }
 
     return true;

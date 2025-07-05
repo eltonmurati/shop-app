@@ -8,7 +8,8 @@ import AddProductCategories from "./AddProductCategories";
 import { AddProductToDB } from "@/lib/adminHelpers";
 
 const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
-    const [brands, setBrands] = useState([] as { id: number; name: string; }[])
+    const [brands, setBrands] = useState([] as { id: number; name: string; }[]);
+    
     const [fadeout, setFadeout] = useState(false);
     const [error, setError] = useState(false);
     const [loadingBrands, setLoadingBrands] = useState(true);
@@ -23,8 +24,8 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
     const [brand, setBrand] = useState<number|undefined>();
     const [sale, setSale] = useState(false);
     const [ogprice, setOgprice] = useState<number|undefined>();
-    const [categories, setCategories] = useState();
-    const [variants, setVariants] = useState<{ [k:number]: { [type:string]: { [key:string]: number | undefined } } } | undefined>();
+    const [categories, setCategories] = useState<{ [k:number]: number } | undefined>();
+    const [variants, setVariants] = useState<{ [k:number]: { [type:string]: { [key:string]: number | undefined | null } } } | undefined>();
     const [specs, setSpecs] = useState<{[k:string]: {key:string, value:string}} | undefined>();
 
     const getBrands = async () => {
@@ -39,13 +40,13 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
     }
 
     useEffect(()=>{
-        getBrands();
-    },[]);
+        if (open) getBrands();
+    },[open]);
 
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoadingSubmit(true);
-        const err = await AddProductToDB(name, price, stock, sku, sale, mpn, brand, ogprice, specs, variants);
+        const err = await AddProductToDB(name, price, stock, sku, sale, mpn, brand, ogprice, specs, variants, categories);
         setLoadingSubmit(false);
         setError(err);
         if (!err) { 
@@ -58,9 +59,18 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
         setFadeout(true);
         setTimeout(()=>{
             onClose();
+
             setFadeout(false);
             setError(false);
             setSuccess(false);
+            setLoadingSubmit(false);
+            setLoadingBrands(true);
+            setCategories(undefined);
+            setVariants(undefined);
+            setSpecs(undefined);
+            setBrand(undefined);
+            setSale(false);
+            setMpn(undefined);
         }, 200);
     }
 
@@ -136,7 +146,7 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
                                 </div>
                             )}
                         </div>
-                        <AddProductCategories />
+                        <AddProductCategories updateCategories={setCategories} />
                         <AddProductSpecs updateSpecs={setSpecs} />
                         <AddProductVariants updateVariants={setVariants} />
                     </div>

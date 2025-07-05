@@ -3,11 +3,11 @@
 import { useState } from "react";
 import AddProductVariant from "./AddProductVariant";
 
-const AddProductVariants = ({updateVariants}:{updateVariants: React.Dispatch<React.SetStateAction<{ [k:number]: { [type:string]: { [key:string]: number | undefined } } } | undefined>>;}) => {
+const AddProductVariants = ({updateVariants}:{updateVariants: React.Dispatch<React.SetStateAction<{ [k:number]: { [type:string]: { [key:string]: number | undefined | null } } } | undefined>>;}) => {
     const [count, setCount] = useState(0);
     const [variants, setVariants] = useState([] as number[]);
 
-    const [final, setFinal] = useState<{ [k:number]: { [type:string]: { [key:string]: number | undefined } } } | undefined>();
+    const [final, setFinal] = useState<{ [k:number]: { [type:string]: { [key:string]: number | undefined | null } } } | undefined>();
 
     const addVariant = (variant:number) => {
         const newVariants = [...variants];
@@ -15,7 +15,7 @@ const AddProductVariants = ({updateVariants}:{updateVariants: React.Dispatch<Rea
         setVariants(newVariants);
 
         let newFinal = {...final};
-        newFinal[variant as keyof typeof newFinal] = { "type": { "key": undefined } };
+        newFinal[variant] = { "type": { "key": undefined } };
         setFinal(newFinal);
         updateVariants(newFinal);
     }
@@ -27,14 +27,27 @@ const AddProductVariants = ({updateVariants}:{updateVariants: React.Dispatch<Rea
         setVariants(newVariants);
 
         let newFinal = {...final};
-        delete newFinal[variant as keyof typeof newFinal];
+        delete newFinal[variant];
         setFinal(newFinal);
         updateVariants(newFinal);
     }
 
-    const changeVariant = (type:string, obj:{ key:string, value:number | undefined } | undefined, variant:number) => {
+    const changeVariant = (type:string, obj:{ [k:number]: { key:string, value:number | undefined } } | undefined, variant:number) => {
         let newFinal = {...final};
-        obj ? newFinal[variant] = { [type]: { [obj.key]: obj.value } } : delete newFinal[variant];
+
+        if (obj) {
+            const values = Object.values(obj);
+            let newObj: { [key:string]: number | undefined | null } = {};
+
+            values.forEach(v=>{
+                newObj[v.key] = v.value === undefined ? null : v.value;
+            });
+
+            newFinal[variant] = { [type]: newObj }
+        } else {
+            delete newFinal[variant];
+        }
+
         setFinal(newFinal);
         updateVariants(newFinal);
     }
