@@ -2,12 +2,9 @@
 const nextConfig = {
     images:{
         remotePatterns:[
-            {
-                protocol:"https",
-                hostname:"images.pexels.com",
-            }
-        ]
-    }
+            new URL(process.env.NEXT_PUBLIC_POSTGRES_URL+"/**")
+        ],
+    },
 };
 
 export default nextConfig;

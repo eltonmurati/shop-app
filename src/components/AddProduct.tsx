@@ -16,6 +16,7 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
     const [loadingSubmit, setLoadingSubmit] = useState(false);
     const [success, setSuccess] = useState(false);
 
+    const [image, setImage] = useState<File | undefined>();
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
@@ -46,7 +47,7 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoadingSubmit(true);
-        const err = await AddProductToDB(name, price, stock, sku, sale, mpn, brand, ogprice, specs, variants, categories);
+        const err = await AddProductToDB(name, price, stock, sku, sale, mpn, brand, ogprice, specs, variants, categories, image);
         setLoadingSubmit(false);
         setError(err);
         if (!err) { 
@@ -71,6 +72,7 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
             setBrand(undefined);
             setSale(false);
             setMpn(undefined);
+            setImage(undefined);
         }, 200);
     }
 
@@ -100,6 +102,10 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
                 <h1 className="text-2xl">Add a Product</h1>
                 <form className="flex flex-col gap-8 justify-between max-h-full overflow-hidden" onSubmit={handleSubmit}>
                     <div className="flex flex-wrap gap-8 max-h-full overflow-auto">
+                        <div className="flex flex-col gap-2 w-full max-w-[20rem]">
+                            <label htmlFor="image" className="text-sm text-gray-700">Image</label>
+                            <input type="file" name="image" className="" onChange={e=>setImage(e.target.files ? e.target.files[0] : undefined)} />
+                        </div>
                         <div className="flex flex-col gap-2 w-full max-w-[20rem]">
                             <label htmlFor="name" className="text-sm text-gray-700">Name</label>
                             <input required type="text" name="name" className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none" onChange={e=>setName(e.target.value)} />

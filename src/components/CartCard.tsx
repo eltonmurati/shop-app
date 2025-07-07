@@ -50,7 +50,7 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
             {product && (
                 <Link href={`/product/${product.id}`} className={`flex gap-4 group`}>
                     <Image 
-                        src={product.image_urls?.at(0) || "/noImage.jpg"} 
+                        src={process.env.NEXT_PUBLIC_POSTGRES_URL + "/storage/v1/object/public/product-images" + product.image_urls?.at(0) || "/noImage.jpg"} 
                         alt="" 
                         width={72} 
                         height={96} 
@@ -77,7 +77,7 @@ const CartCard = ({id, quantity, verified}:{id:number; quantity:number; verified
                             </div>
                         </div>
                         {/* BOTTOM */}
-                        <div className="flex justify-between text-sm">
+                        <div className="flex justify-between gap-8 text-sm">
                             <div className="flex gap-1">
                                 {!verified && <div className="flex items-center">
                                     <button className="text-gray-400 transition-colors linear duration-200 hover:text-blue-700 w-4 h-4 flex items-center justify-center" onClick={removeOne}>

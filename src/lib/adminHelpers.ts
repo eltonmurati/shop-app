@@ -19,7 +19,8 @@ export async function AddProductToDB(
     ogprice?:number, 
     specs?:{[k:string]: { key:string, value:string } }, 
     vars?:{ [k:number]: { [type:string]: { [key:string]: number | undefined | null } } }, 
-    cats?:{ [k:number]: number }
+    cats?:{ [k:number]: number },
+    image?:File,
 ) {
     let err = false;
     let id = 0;
@@ -102,7 +103,8 @@ export async function AddProductToDB(
             manufacturer_code?:string, 
             brand?:number, 
             specifications?:{}, 
-            variants?:{}
+            variants?:{},
+            image_urls?:string[],
         } = { 
             id: id, 
             name: name, 
@@ -118,9 +120,17 @@ export async function AddProductToDB(
         if (finalSpecs) { newProduct["specifications"] = finalSpecs; }
         if (finalVars) { newProduct["variants"] = finalVars; }
 
-        const { error } = await postgres.from("product").insert(newProduct);
-        if (error) { err = true; }
+        if (image) { 
+            const { error } = await postgres.storage.from("product-images").upload("/productImages/" + id.toString() + "/" + image.name, image);
+            if (error) { err = true; console.log(error); }
+            else { newProduct["image_urls"] = ["/productImages/" + id.toString() + "/" + image.name]; }
+        }
 
+        if (!err) {
+            const { error } = await postgres.from("product").insert(newProduct);
+            if (error) { err = true; }
+        }
+        
         if (categories && !err) {
             categories.forEach(async c=>{
                 const { error } = await postgres.from("product_category").insert({ "product_id": id, "category_id": c });
