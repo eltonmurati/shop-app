@@ -20,20 +20,20 @@ export async function AddProductToDB(
     specs?:{[k:string]: { key:string, value:string } }, 
     vars?:{ [k:number]: { [type:string]: { [key:string]: number | undefined | null } } }, 
     cats?:{ [k:number]: number },
-    image?:File,
+    images?:{ [k:number]: File },
 ) {
     let err = false;
     let id = 0;
 
     const {data, error } = await postgres.from('product').select('id').order('id', { ascending: false }).limit(1).single();
-    if (error) { err = true; console.log(error); } 
+    if (error) { err = true; } 
     else if (data) { id = data.id + 1; } 
     else { err = true; }
 
     if (price < 0.01) { err = true; }
     if (!Number.isInteger(stock)) { err = true; }
     if (ogprice && ogprice < 0.01) { err = true;}
-    if (!ogprice) { ogprice = price; }
+    if (!ogprice || !sale) { ogprice = price; }
 
     let specifications: {key:string, value:string}[];
     let finalSpecs: {[key:string]: string} | undefined = undefined;
@@ -79,14 +79,14 @@ export async function AddProductToDB(
 
     if (!err) {
         const { data, error } = await postgres.from('product').select('sku').eq("sku", sku);
-        if (error) { err = true; console.log(error); } 
+        if (error) { err = true; } 
         else if (data) { if (data.length > 0) { err = true; } } 
         else { err = true; }
     }
 
     if (!err && mpn) {
         const { data, error } = await postgres.from('product').select('manufacturer_code').eq("manufacturer_code", mpn);
-        if (error) { err = true; console.log(error); } 
+        if (error) { err = true; } 
         else if (data) { if (data.length > 0) { err = true; } } 
         else { err = true; }
     }
@@ -120,10 +120,21 @@ export async function AddProductToDB(
         if (finalSpecs) { newProduct["specifications"] = finalSpecs; }
         if (finalVars) { newProduct["variants"] = finalVars; }
 
-        if (image) { 
-            const { error } = await postgres.storage.from("product-images").upload("/productImages/" + id.toString() + "/" + image.name, image);
-            if (error) { err = true; console.log(error); }
-            else { newProduct["image_urls"] = ["/productImages/" + id.toString() + "/" + image.name]; }
+        if (images && Object.keys(images).length > 0) { 
+            const imageList = Object.values(images);
+            let imageUrls = [] as string[];
+
+            for (let i = 0; i < imageList.length; i++) {
+                if (err) { break; }
+
+                const { error } = await postgres.storage.from("product-images").upload("/productImages/" + id.toString() + "/" + (i+1).toString() + "." + imageList[i].name.split(".").at(-1), imageList[i]);
+                if (error) { err = true; }
+                else { imageUrls.push("/productImages/" + id.toString() + "/" + (i+1).toString() + "." + imageList[i].name.split(".").at(-1)); }
+            }
+
+            if (!err) {
+                newProduct["image_urls"] = imageUrls;
+            }
         }
 
         if (!err) {

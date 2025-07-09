@@ -68,7 +68,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                             >
                                 <div className="relative w-full h-80">
                                     <Image 
-                                        src={process.env.NEXT_PUBLIC_POSTGRES_URL + "/storage/v1/object/public/product-images" + product.image_urls?.at(0) || "/noImage.jpg"} 
+                                        src={product.image_urls ? (process.env.NEXT_PUBLIC_POSTGRES_URL + "/storage/v1/object/public/product-images" + product.image_urls.at(0)) : "/noImage.jpg"} 
                                         alt="" 
                                         fill 
                                         sizes="25vw" 
