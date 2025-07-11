@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import ScaleInOut from "./ScaleInOut";
 
 const AddProductSpecs = ({updateSpecs}:{updateSpecs: React.Dispatch<React.SetStateAction<{[k:string]: {key:string, value:string}} | undefined>>;}) => {
     const [count, setCount] = useState(0);

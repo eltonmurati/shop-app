@@ -26,8 +26,8 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
     }
 
     if (searchParams["search"]) {
-        productQuery = productQuery.or(`sku.eq.${searchParams["search"]},manufacturer_code.eq.${searchParams["search"]},fts_name.wfts.${searchParams["search"]}
-            ${Number.isInteger(Number(searchParams["search"])) && `,id.eq.${searchParams["search"]}`}`);
+        productQuery = productQuery.or(`sku.eq.${searchParams["search"]},manufacturer_code.eq.${searchParams["search"]},fts_name.wfts.${searchParams["search"]}` 
+            + (Number.isInteger(Number(searchParams["search"])) ? `,id.eq.${searchParams["search"]}` : ""));
     }
 
     if (searchParams["brand"]) { productQuery = productQuery.in("brand", Array.isArray(searchParams["brand"]) ? searchParams["brand"] : [searchParams["brand"]] ); }
@@ -51,7 +51,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
 
     let { data: products, count, error } = await productQuery;
 
-    if (error) {console.log(error);}
+    if (error) console.log(error)
 
     let found = true;
     if (!products || products.length < 1) { found = false; }
@@ -60,10 +60,10 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
         <>
             {found ? (
                 <>
-                    <div className="flex gap-x-8 gap-y-16 flex-wrap">
+                    <div className="flex gap-16 flex-wrap">
                         {products!.map((product)=>(
                             <Link href={"/product/"+product.id} 
-                                className="w-full flex flex-col gap-4 sm:w-[calc(50%-1rem)] lg:w-[calc(25%-1.5rem)] relative group" 
+                                className="w-full flex flex-col gap-4 sm:w-[calc(50%-2rem)] lg:w-[calc(25%-3rem)] relative group" 
                                 key={product.id}
                             >
                                 <div className="relative w-full h-80">

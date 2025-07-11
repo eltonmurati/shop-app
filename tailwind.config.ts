@@ -22,14 +22,6 @@ const config: Config = {
           "0%": { transform: "translateX(100%)" },
           "100%": { transform: "translate(0%)" },
         },
-        fadein: {
-          "0%": { opacity: "0%" },
-          "100%": { opacity: "100%" },
-        },
-        fadeout: {
-          "0%": { opacity: "100%" },
-          "100%": { opacity: "0%" },
-        },
       },
       animation: {
         marquee: "marquee 40s linear infinite",

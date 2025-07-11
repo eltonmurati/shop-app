@@ -2,6 +2,7 @@
 
 import { postgres } from "@/lib/postgresClient";
 import { useEffect, useState } from "react";
+import ScaleInOut from "./ScaleInOut";
 
 const AddProductCategories = ({updateCategories}:{updateCategories:React.Dispatch<React.SetStateAction<{ [k:number]: number } | undefined>>;}) => {
     const [count, setCount] = useState(0);
@@ -51,7 +52,7 @@ const AddProductCategories = ({updateCategories}:{updateCategories:React.Dispatc
 
     return(
         <div className="flex flex-col gap-2 sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.3334rem)] w-full">
-            <label className="text-sm text-gray-700 ">Categories</label>
+            <label className="text-sm text-gray-700">Categories</label>
             {categories.length > 0 && (
                 <div className="flex flex-col gap-2 max-h-[5.5rem] overflow-y-auto">
                     {categories.map((category)=>(
