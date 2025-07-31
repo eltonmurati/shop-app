@@ -63,7 +63,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                     <div className="flex gap-16 flex-wrap">
                         {products!.map((product)=>(
                             <Link href={"/product/"+product.id} 
-                                className="w-full flex flex-col gap-4 sm:w-[calc(50%-2rem)] lg:w-[calc(25%-3rem)] relative group" 
+                                className="w-full flex flex-col gap-4 sm:w-[calc(50%-2rem)] lg:w-[calc(25%-3rem)] relative" 
                                 key={product.id}
                             >
                                 <div className="relative w-full h-80">
@@ -71,12 +71,11 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                                         src={product.image_urls ? (process.env.NEXT_PUBLIC_POSTGRES_URL + "/storage/v1/object/public/product-images" + product.image_urls.at(0)) : "/noImage.jpg"} 
                                         alt="" 
                                         fill 
-                                        sizes="25vw" 
                                         className="absolute object-contain rounded-md z-10"
                                     />
                                 </div>
                                 <div className="flex justify-between min-h-12 gap-4">
-                                    <h2 className="font-medium line-clamp-2 group-hover:text-blue-700 transition-colors linear duration-200">{product.name}</h2>
+                                    <h2 className="font-medium line-clamp-2">{product.name}</h2>
                                     {product.on_sale ? (
                                         <div className="flex flex-col text-end">
                                             <div className="text-gray-400 line-through">£{getPriceText(product.original_price)}</div>
@@ -101,7 +100,7 @@ const ProductList = async ({searchParams, limit}:{searchParams?:any; limit?:numb
                             </Link>
                         ))}
                     </div>
-                    <div className="pb-12 pt-16">
+                    <div className="pb-16 pt-24">
                         <Suspense fallback="Loading...">
                             <Pagination length={count!} limit={limit} page={page} />
                         </Suspense>

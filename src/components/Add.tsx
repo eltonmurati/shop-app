@@ -63,11 +63,11 @@ const Add = ({stock, productId}:{stock:number; productId:number;}) => {
                 <div className="flex justify-between">
                     <div className="flex items-center gap-4">
                         <div className="bg-gray-100 py-2 px-4 rounded-3xl flex items-center justify-between w-32">
-                            <button className="text-xl hover:text-blue-700 transition-colors linear duration-200" onClick={()=>incramentQuantity("d")}>-</button>
-                            <input type="text" placeholder="Qty." name="quantity" value={qty} className="w-12 text-center bg-gray-100 hover:text-blue-700 transition-colors linear duration-200 cursor-pointer focus:cursor-text" 
+                            <button className="text-xl hover:text-blue-700 transition-colors duration-200" onClick={()=>incramentQuantity("d")}>-</button>
+                            <input type="text" placeholder="Qty." name="quantity" value={qty} className="w-12 text-center bg-gray-100 hover:text-blue-700 transition-colors duration-200 cursor-pointer focus:cursor-text" 
                                 onChange={(e)=>setQty(e.target.value)} onBlur={handleFocus} onKeyDown={handleKeyDown}
                             />
-                            <button className="text-xl hover:text-blue-700 transition-colors linear duration-200" onClick={()=>incramentQuantity("i")}>+</button>
+                            <button className="text-xl hover:text-blue-700 transition-colors duration-200" onClick={()=>incramentQuantity("i")}>+</button>
                         </div>
                         <div className="text-sm text-green-500 font-medium">
                             {stock} In Stock
@@ -75,7 +75,7 @@ const Add = ({stock, productId}:{stock:number; productId:number;}) => {
                     </div>
                     <div className="relative">
                         <button 
-                            className="absolute transitions-colors linear duration-200 right-0 w-36 text-sm rounded-3xl ring-1 ring-blue-700 bg-white text-blue-700 py-3 px-4 hover:bg-blue-700 hover:text-white 
+                            className="absolute transitions-colors duration-200 right-0 w-36 text-sm rounded-3xl ring-1 ring-blue-700 bg-white text-blue-700 py-3 px-4 hover:bg-blue-700 hover:text-white 
                                 disabled:cursor-not-allowed disabled:bg-indigo-200 disabled:text-white disabled:ring-indigo-200 z-20"
                             onClick={()=>{addItem(productId, quantity, stock); setAdded(true);}}
                         >

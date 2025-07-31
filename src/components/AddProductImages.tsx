@@ -69,7 +69,7 @@ const AddProductImages = ({updateImages}:{updateImages: React.Dispatch<React.Set
                                 />
                                 <button 
                                     type="button" 
-                                    className="absolute w-6 h-6 top-1 right-1 rounded-full bg-white flex items-center justify-center text-red-500 opacity-50 hover:opacity-100 transition-opacity linear duration-200"
+                                    className="absolute w-6 h-6 top-1 right-1 rounded-full bg-white flex items-center justify-center text-red-500 opacity-50 hover:opacity-100 transition-opacity duration-200"
                                     onClick={()=>removeImage(imageId)}
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="size-4">
@@ -80,7 +80,7 @@ const AddProductImages = ({updateImages}:{updateImages: React.Dispatch<React.Set
                         ))}
                     </div>
                 )}
-                <div {...getRootProps()} className={"flex-1 min-w-28 ring-2 ring-inset ring-gray-300 flex items-center justify-center rounded-md h-28 p-2 text-gray-400 transition-colors linear duration-200 " + (!maximum && "cursor-pointer hover:text-blue-700")}>
+                <div {...getRootProps()} className={"flex-1 min-w-28 ring-2 ring-inset ring-gray-300 flex items-center justify-center rounded-md h-28 p-2 text-gray-400 transition-colors duration-200 " + (!maximum && "cursor-pointer hover:text-blue-700")}>
                     <input {...getInputProps({disabled:maximum})} />
                     {maximum ? (
                         <p>Maximum 4 images</p>
@@ -99,7 +99,7 @@ const AddProductImages = ({updateImages}:{updateImages: React.Dispatch<React.Set
                 <p className="text-red-500 text-sm">Maximum image size 1MB</p>
             )}
             {imageIds.length > 3 && (
-                <button type="button" className="w-max text-red-200 flex gap-1 items-center hover:text-red-500 transition-all linear duration-200" onClick={()=>{setImageIds([]); setMaximum(false); setImages(undefined); updateImages(undefined);}}>
+                <button type="button" className="w-max text-red-200 flex gap-1 items-center hover:text-red-500 transition-all duration-200" onClick={()=>{setImageIds([]); setMaximum(false); setImages(undefined); updateImages(undefined);}}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
                         <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clipRule="evenodd" />
                     </svg>

@@ -14,7 +14,6 @@ const ProductImages = ({images}:{images:string[]}) => {
                     src={"/noImage.jpg"}
                     alt="" 
                     fill
-                    sizes="50vw" 
                     className="object-contain rounded-md"
                 />
             </div>
@@ -32,19 +31,20 @@ const ProductImages = ({images}:{images:string[]}) => {
                     className="object-contain rounded-md"
                 />
             </div>
-            <div className="flex gap-4 mt-4">
-                {images.map((img,i)=>(
-                    <div className="w-1/4 h-32 relative gap-4 cursor-pointer" key={i} onClick={()=>setIndex(i)}>
-                        <Image 
-                            src={process.env.NEXT_PUBLIC_POSTGRES_URL + "/storage/v1/object/public/product-images" + img}
-                            alt="" 
-                            fill 
-                            sizes="30vw" 
-                            className="object-contain rounded-md"
-                        />
-                    </div>
-                ))}
-            </div>
+            {images.length > 1 && (
+                <div className="flex gap-4 mt-4">
+                    {images.map((img,i)=>(
+                        <div className="w-1/4 h-32 relative gap-4 cursor-pointer" key={i} onClick={()=>setIndex(i)}>
+                            <Image 
+                                src={process.env.NEXT_PUBLIC_POSTGRES_URL + "/storage/v1/object/public/product-images" + img}
+                                alt="" 
+                                fill
+                                className="object-contain rounded-md"
+                            />
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

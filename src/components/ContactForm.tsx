@@ -47,7 +47,7 @@ const ContactForm = () => {
                 <label className="text-sm text-gray-700">Inquiry</label>
                 <textarea required name="inquiry" rows={5} onChange={(e)=>setInquiry(e.target.value)} className="ring-2 ring-inset ring-gray-300 rounded-md p-4 outline-none resize-none" />
             </div>
-            <button className="p-2 bg-blue-700 text-white rounded-md relative disabled:bg-indigo-200" disabled={loading}>
+            <button className="p-2 ring-1 ring-inset hover:bg-blue-700 hover:text-white transition-colors duration-200 ring-blue-700 text-blue-700 rounded-md relative disabled:bg-indigo-200" disabled={loading}>
                 {loading ? "Loading..." : "Submit"}
                 {message && (
                     <div className="hidden md:block absolute text-gray-400 left-0 top-16 flex justify-center w-full hover:cursor-default" onClick={(e)=>e.stopPropagation()}>

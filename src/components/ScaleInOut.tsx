@@ -28,7 +28,7 @@ const ScaleInOut = ({children, mount, initialState}:{children: ReactNode; mount:
     if (!mounted) return null;
 
     return(
-        <div className={"transition-all linear duration-200 "  + (visible ? "opacity-100 max-h-[9999px]" : "opacity-0 max-h-0")}>
+        <div className={"transition-all duration-200 "  + (visible ? "opacity-100 max-h-[9999px]" : "opacity-0 max-h-0")}>
             {children}
         </div>
     );

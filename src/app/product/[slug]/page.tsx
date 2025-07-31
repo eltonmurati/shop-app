@@ -5,6 +5,7 @@ import ProductImages from "@/components/ProductImages"
 import { notFound } from "next/navigation";
 import { getPriceText } from "@/lib/helpers";
 import Link from "next/link";
+import { Json } from "@/lib/types";
 
 const SinglePage = async ({params}:{params:Promise<{slug:string}>}) => {
 
@@ -36,7 +37,7 @@ const SinglePage = async ({params}:{params:Promise<{slug:string}>}) => {
                         <div className="">Categories:</div>
                         <div className="flex text-sm flex-col text-gray-400">
                             {product.category.map((cat)=>(
-                                <Link className="hover:text-blue-700 transition-colors linear duration-200 w-max" key={cat.id.toString()} href={"/shop?cat="+cat.id.toString()}>{cat.name}</Link>
+                                <Link className="hover:text-blue-700 transition-colors duration-200 w-max" key={cat.id.toString()} href={"/shop?cat="+cat.id.toString()}>{cat.name}</Link>
                             ))}
                         </div>
                     </div>
@@ -52,7 +53,7 @@ const SinglePage = async ({params}:{params:Promise<{slug:string}>}) => {
                     )}
                     <div className="h-[2px] bg-gray-100"/>
                     {product.variants && (
-                        <CustomizeProducts variants={product.variants} productId={product.id} />
+                        <CustomizeProducts variants={product.variants as Json[]} productId={product.id} />
                     )}
                     <Add stock={product.quantity} productId={product.id}/>
                     {/* SPECIFICATIONS */}

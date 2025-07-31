@@ -31,7 +31,7 @@ const Footer = () => {
                         <span className="font-medium">Terms & Conditions</span>
                         <p className="">
                             By purchasing any product from our website, you acknowledge and agree to abide by our Terms and Conditions.
-                            <span className="text-gray-400 hover:text-blue-700 transition-colors linear duration-200"><Link href="/terms" target="_blank"> Read our T&Cs here.</Link></span>
+                            <span className="text-gray-400 hover:text-blue-700 transition-colors duration-200"><Link href="/terms" target="_blank"> Read our T&Cs here.</Link></span>
                         </p>
                     </div>
                 </div>

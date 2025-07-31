@@ -79,17 +79,17 @@ const Filter = () => {
                         <DoubleRange title={"Price"} measurement={"£"} column="price" />
                     </Suspense>
                     <div className="flex gap-2 items-center bg-gray-100 rounded-full px-4 h-max py-2">
-                        <input type="checkbox" id="stock" name="stock" className="accent-blue-700" checked={params.has("stock")} onChange={handleFilterChange} />
-                        <label htmlFor="stock" className="text-sm font-medium">In Stock</label>
+                        <input type="checkbox" id="stock" name="stock" className="accent-blue-700 cursor-pointer" checked={params.has("stock")} onChange={handleFilterChange} />
+                        <label htmlFor="stock" className="text-sm font-medium cursor-pointer">In Stock</label>
                     </div>
                     <div className="flex gap-2 items-center bg-gray-100 rounded-full px-4 h-max py-2">
-                        <input type="checkbox" id="sale" name="sale" className="accent-blue-700" checked={params.has("sale")} onChange={handleFilterChange} />
-                        <label htmlFor="sale" className="text-sm font-medium">On Sale</label>
+                        <input type="checkbox" id="sale" name="sale" className="accent-blue-700 cursor-pointer" checked={params.has("sale")} onChange={handleFilterChange} />
+                        <label htmlFor="sale" className="text-sm font-medium cursor-pointer">On Sale</label>
                     </div>
                     {params.size > 0 && !(params.size === 1 && params.get("sort")) && !(params.size === 1 && params.get("page")) && 
                         !(params.size === 2 && params.get("sort") && params.get("page")) && (
                         <button 
-                            className="rounded-full px-4 py-2 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700 transition-colors linear duration-200 hover:bg-blue-700 h-max hover:text-white" 
+                            className="rounded-full px-4 py-2 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-700 transition-colors duration-200 hover:bg-blue-700 h-max hover:text-white" 
                             onClick={clearFilters}
                         >
                             Clear Filters

@@ -13,7 +13,7 @@ const AdminNav = () => {
                 <ul className="flex md:flex-col gap-2">
                     <li><Link 
                         href={"/admin"} 
-                        className={`${selected === "home" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors linear duration-200`} 
+                        className={`${selected === "home" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors duration-200`} 
                         onClick={()=>setSelected("home")}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -23,7 +23,7 @@ const AdminNav = () => {
                     </Link></li>
                     <li><Link 
                         href={"/admin/products"} 
-                        className={`${selected === "products" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors linear duration-200`} 
+                        className={`${selected === "products" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors duration-200`} 
                         onClick={()=>setSelected("products")}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -33,7 +33,7 @@ const AdminNav = () => {
                     </Link></li>
                     <li><Link 
                         href={"/admin/orders"} 
-                        className={`${selected === "orders" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors linear duration-200`} 
+                        className={`${selected === "orders" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors duration-200`} 
                         onClick={()=>setSelected("orders")}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -43,7 +43,7 @@ const AdminNav = () => {
                     </Link></li>
                     <li><Link 
                         href={"/admin/categories"} 
-                        className={`${selected === "categories" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors linear duration-200`} 
+                        className={`${selected === "categories" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors duration-200`} 
                         onClick={()=>setSelected("categories")}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -53,7 +53,7 @@ const AdminNav = () => {
                     </Link></li>
                     <li><Link 
                         href={"/admin/brands"} 
-                        className={`${selected === "brands" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors linear duration-200`} 
+                        className={`${selected === "brands" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors duration-200`} 
                         onClick={()=>setSelected("brands")}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -64,7 +64,7 @@ const AdminNav = () => {
                     </Link></li>
                     <li><Link 
                         href={"/admin/users"} 
-                        className={`${selected === "users" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors linear duration-200`} 
+                        className={`${selected === "users" && "bg-gray-100 md:bg-gray-200"} flex gap-2 p-2 font-medium rounded-md hover:text-blue-700 transition-colors duration-200`} 
                         onClick={()=>setSelected("users")}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

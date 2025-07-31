@@ -25,7 +25,7 @@ const QuickAdd = ({product}:{product:Tables<"product">}) => {
     return(
         <div className="relative">
             <button 
-                className="absolute transition-colors linear duration-200 rounded-2xl ring-1 ring-blue-700 text-blue-700 bg-white w-max py-2 px-4 text-xs whitespace-nowrap hover:bg-blue-700 hover:text-white 
+                className="absolute transition-colors duration-200 rounded-2xl ring-1 ring-blue-700 text-blue-700 bg-white w-max py-2 px-4 text-xs whitespace-nowrap hover:bg-blue-700 hover:text-white 
                     disabled:text-white disabled:bg-indigo-200 disabled:ring-indigo-200 disabled:cursor-not-allowed z-20" 
                 disabled={!(product.quantity > 0)}
                 onClick={(e)=>{addToCart(e); setAdded(true)}}

@@ -28,7 +28,7 @@ const FadeInOut = ({children, mount, initialState}:{children: ReactNode; mount: 
     if (!mounted) return null;
 
     return(
-        <div className={"transition-opacity linear duration-200 "  + (visible ? "opacity-100" : "opacity-0")}>
+        <div className={"transition-opacity duration-200 "  + (visible ? "opacity-100" : "opacity-0")}>
             {children}
         </div>
     );

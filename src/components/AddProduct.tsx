@@ -93,7 +93,7 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 16.318A4.486 4.486 0 0 0 12.016 15a4.486 4.486 0 0 0-3.198 1.318M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
                     </svg>
                     <button 
-                        className="py-4 px-8 ring-1 ring-inset ring-red-500 text-red-500 rounded-md hover:bg-red-500 hover:text-white w-full transition-colors linear duration-200"
+                        className="py-4 px-8 ring-1 ring-inset ring-red-500 text-red-500 rounded-md hover:bg-red-500 hover:text-white w-full transition-colors duration-200"
                         onClick={handleCancel}
                         type="button"
                     >
@@ -151,7 +151,7 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
                             <div className="flex gap-8 sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.3334rem)] w-full">
                                 <div className="flex flex-col gap-2 relative">
                                     <label className="text-sm text-gray-700 whitespace-nowrap">On Sale</label>
-                                    <input type="checkbox" id="sale" className="transition-colors linear duration-200 appearance-none checked:bg-blue-700 h-14 w-14 cursor-pointer ring-2 ring-inset ring-gray-300 rounded-md accent-blue-700" onChange={e=>setSale(e.target.checked)} />
+                                    <input type="checkbox" id="sale" className="transition-colors duration-200 appearance-none checked:bg-blue-700 h-14 w-14 cursor-pointer ring-2 ring-inset ring-gray-300 rounded-md accent-blue-700" onChange={e=>setSale(e.target.checked)} />
                                     <label htmlFor="sale" className="text-white absolute top-8 left-1 cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-12">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -171,13 +171,13 @@ const AddProduct = ({open, onClose}:{open:boolean; onClose:()=>void;}) => {
                         </div>
                         <div className="flex gap-8 md:justify-end">
                             <button 
-                                className="disabled:bg-indigo-200 disabled:ring-indigo-200 disabled:text-white py-4 px-8 ring-1 ring-inset ring-blue-700 text-blue-700 rounded-md hover:bg-blue-700 hover:text-white w-full md:w-max transition-colors linear duration-200"
+                                className="disabled:bg-indigo-200 disabled:ring-indigo-200 disabled:text-white py-4 px-8 ring-1 ring-inset ring-blue-700 text-blue-700 rounded-md hover:bg-blue-700 hover:text-white w-full md:w-max transition-colors duration-200"
                                 disabled={loadingSubmit}
                             >
                                 {loadingSubmit ? "Loading..." : "Submit"}
                             </button>
                             <button 
-                                className="py-4 px-8 ring-1 ring-inset ring-red-500 text-red-500 rounded-md hover:bg-red-500 hover:text-white w-full md:w-max transition-colors linear duration-200"
+                                className="py-4 px-8 ring-1 ring-inset ring-red-500 text-red-500 rounded-md hover:bg-red-500 hover:text-white w-full md:w-max transition-colors duration-200"
                                 onClick={handleCancel}
                                 type="button"
                             >
