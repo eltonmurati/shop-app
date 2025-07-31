@@ -44,12 +44,12 @@ const menus = [
         {title: "FloPlast", link: "/shop?&cat=41&brand=17", id: 10}, {title: "Plasson", link: "/shop?&cat=41&brand=18", id: 11}, {title: "Polypipe", link: "/shop?&cat=41&brand=19", id: 12}
     ],
     [
-        {title: "Bathroom", link: "/shop?&cat=59", id: 1}, {title: "Kitchen", link: "/shop?&cat=60", id: 2}, {title: "Baths", link: "/shop?&cat=61", id: 3}, 
-        {title: "Bath Panels & Screens", link: "/shop?&cat=62", id: 4}, {title: "Shower Enclosures", link: "/shop?&cat=63", id: 5}, {title: "Furniture", link: "/shop?&cat=64", id: 6},
-        {title: "Macerators", link: "/shop?&cat=65", id: 7}, {title: "Sanitaryware", link: "/shop?&cat=66", id: 8}, {title: "Showers", link: "/shop?&cat=67", id: 9}, 
-        {title: "Shower Trays", link: "/shop?&cat=68", id: 10}, {title: "Taps", link: "/shop?&cat=69", id: 11}, {title: "Towel Rails & Decorative Heating", link: "/shop?&cat=70", id: 12}, 
-        {title: "Wastes, Traps & Connectors", link: "/shop?&cat=71", id: 13}, {title: "Spares & Accessories", link: "/shop?&cat=103", id: 14}, {title: "Grohe", link: "/shop?&cat=58&brand=24", id: 15}, 
-        {title: "Mira", link: "/shop?&cat=58&brand=25", id: 16}, {title: "Roca", link: "/shop?&cat=58&brand=26", id: 17}
+        {title: "All", link: "/shop?&cat=58", id: 1}, {title: "Bathroom", link: "/shop?&cat=59", id: 2}, {title: "Kitchen", link: "/shop?&cat=60", id: 3}, {title: "Baths", link: "/shop?&cat=61", id: 4}, 
+        {title: "Bath Panels & Screens", link: "/shop?&cat=62", id: 5}, {title: "Shower Enclosures", link: "/shop?&cat=63", id: 6}, {title: "Furniture", link: "/shop?&cat=64", id: 7},
+        {title: "Macerators", link: "/shop?&cat=65", id: 8}, {title: "Sanitaryware", link: "/shop?&cat=66", id: 9}, {title: "Showers", link: "/shop?&cat=67", id: 10}, 
+        {title: "Shower Trays", link: "/shop?&cat=68", id: 11}, {title: "Taps", link: "/shop?&cat=69", id: 12}, {title: "Towel Rails & Decorative Heating", link: "/shop?&cat=70", id: 13}, 
+        {title: "Wastes, Traps & Connectors", link: "/shop?&cat=71", id: 14}, {title: "Spares & Accessories", link: "/shop?&cat=103", id: 15}, {title: "Grohe", link: "/shop?&cat=58&brand=24", id: 16}, 
+        {title: "Mira", link: "/shop?&cat=58&brand=25", id: 17}, {title: "Roca", link: "/shop?&cat=58&brand=26", id: 18}
     ],
     [
         {title: "All", link: "/shop?&cat=77", id: 1}, {title: "Tools", link: "/shop?&cat=78", id: 2}, {title: "Sealants & Additives", link: "/shop?&cat=79", id: 3}, 

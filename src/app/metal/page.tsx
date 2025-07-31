@@ -8,27 +8,27 @@ const categories = [
     },
     {
         name: "Brass Fittings & Accessories",
-        link: "",
+        link: "/shop?cat=30",
         css: "bg-red-500 hover:bg-red-600",
     },
     {
         name: "Brassware",
-        link: "",
+        link: "/shop?cat=31",
         css: "bg-sky-500 hover:bg-sky-600",
     },
     {
         name: "Clips & Fixings",
-        link: "",
+        link: "/shop?cat=32",
         css: "bg-yellow-500 hover:bg-yellow-600",
     },
     {
         name: "Compression",
-        link: "",
+        link: "/shop?cat=33",
         css: "bg-blue-500 hover:bg-blue-600",
     },
     {
         name: "Copper Tube",
-        link: "",
+        link: "/shop?cat=34",
         css: "bg-purple-500 hover:bg-purple-600",
     },
     {
@@ -38,32 +38,32 @@ const categories = [
     },
     {
         name: "Gas Fittings & Accessroies",
-        link: "",
+        link: "/shop?cat=36",
         css: "bg-emerald-500 hover:bg-emerald-600",
     },
     {
         name: "Malleable Iron",
-        link: "",
+        link: "/shop?cat=37",
         css: "bg-fuchsia-500 hover:bg-fuchsia-600",
     },
     {
         name: "Oil Line Components",
-        link: "",
+        link: "/shop?cat=38",
         css: "bg-teal-500 hover:bg-teal-600",
     },
     {
         name: "Press Fit",
-        link: "",
+        link: "/shop?cat=39",
         css: "bg-indigo-500 hover:bg-indigo-600",
     },
     {
         name: "Solder Ring",
-        link: "",
+        link: "/shop?cat=40",
         css: "bg-pink-500 hover:bg-pink-600",
     },
     {
         name: "Push Fit",
-        link: "",
+        link: "/shop?cat=102",
         css: "bg-lime-500 hover:bg-lime-600",
     },
 ]
