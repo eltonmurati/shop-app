@@ -40,7 +40,7 @@ const menus = [
     [
         {title: "All", link: "/shop?&cat=41", id: 1}, {title: "Pipe", link: "/shop?&cat=42", id: 2}, {title: "Fittings", link: "/shop?&cat=43", id: 3}, 
         {title: "MDPE Fittings", link: "/shop?&cat=44", id: 4}, {title: "Rainwater Fittings", link: "/shop?&cat=45", id: 5}, {title: "Wastes & Traps", link: "/shop?&cat=46", id: 6}, 
-        {title: "McAlpine", link: "/shop?&cat=41&brand=14", id: 7}, {title: "JG Speedfit", link: "/shop?&cat=41&brand=15", id: 8}, {title: "Hep20", link: "/shop?&cat=41&brand=16", id: 9}, 
+        {title: "McAlpine", link: "/shop?&cat=41&brand=14", id: 7}, {title: "JG Speedfit", link: "/shop?&cat=41&brand=15", id: 8}, {title: "Hep2O", link: "/shop?&cat=41&brand=16", id: 9}, 
         {title: "FloPlast", link: "/shop?&cat=41&brand=17", id: 10}, {title: "Plasson", link: "/shop?&cat=41&brand=18", id: 11}, {title: "Polypipe", link: "/shop?&cat=41&brand=19", id: 12}
     ],
     [

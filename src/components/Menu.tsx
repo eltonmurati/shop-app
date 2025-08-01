@@ -14,7 +14,7 @@ const Menu = () => {
             {open && (
                 <div className="absolute bg-white left-0 top-20 w-full h-[calc(100vh-80px)] flex flex-col items-center justify-center gap-8 text-xl z-50 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
                     <Link href="/" onClick={()=>setOpen(false)}>Homepage</Link>
-                    <Link href="/shop" onClick={()=>setOpen(false)}>Shop</Link>
+                    <Link href="/categories" onClick={()=>setOpen(false)}>Shop</Link>
                     <Link href="/about" onClick={()=>setOpen(false)}>About</Link>
                     <Link href="/contact" onClick={()=>setOpen(false)}>Contact</Link>
                     <Link href="/" className="md:hidden" onClick={()=>setOpen(false)}>Profile</Link>
